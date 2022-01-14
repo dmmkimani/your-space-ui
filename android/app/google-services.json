@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "302517888620",
+    "firebase_url": "https://wall-mounted-room-calendar-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "wall-mounted-room-calendar",
+    "storage_bucket": "wall-mounted-room-calendar.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:302517888620:android:2249c977f05799fabd5a49",
+        "android_client_info": {
+          "package_name": "com.dmmk.SU850302"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "302517888620-8r0n78gvbmrgfrnjib8v6i6ctg3u32mc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dmmk.SU850302",
+            "certificate_hash": "7c0ef3c72251fc74fe59f5e9617661cf95ba1221"
+          }
+        },
+        {
+          "client_id": "302517888620-qr8ipddspjf5685trjoq4rllcobq95f5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTj3GN_08k7sU18opeTV_6XzuSoXy-LbU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "302517888620-qr8ipddspjf5685trjoq4rllcobq95f5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
