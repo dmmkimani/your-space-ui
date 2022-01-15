@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:project/screens/login/functions/functions.dart';
+import 'package:project/screens/login/widgets/create_an_account.dart';
 import 'package:project/screens/login/widgets/forgot_password.dart';
 import 'package:project/screens/login/widgets/inputs.dart';
 import 'package:project/screens/login/widgets/logo.dart';
@@ -105,7 +106,8 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       )
-                  )
+                  ),
+                  const CreateAnAccount()
                 ],
               ),
             ),
