@@ -3,8 +3,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
+import 'package:project/screens/login/widgets/forgot_password.dart';
+import 'package:project/screens/login/widgets/inputs.dart';
+import 'package:project/screens/login/widgets/logo.dart';
 
 import 'package:project/server/localhost.dart';
 
@@ -19,13 +21,14 @@ class _LoginPageState extends State<LoginPage> {
   final LocalHost server = LocalHost();
   static FirebaseAuth? auth;
   User? user;
-  static final email = TextEditingController();
-  static final password = TextEditingController();
-  static bool _isHidden = true;
+  final Inputs inputs = const Inputs();
+  late InputsState inputsState;
 
   @override
   void initState() {
     super.initState();
+    inputsState = inputs.createState();
+
     Firebase.initializeApp().whenComplete(() {
       auth = FirebaseAuth.instance;
       user = auth?.currentUser;
@@ -35,111 +38,77 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-  Widget logo = Container(
-    padding: const EdgeInsets.only(bottom: 30.0),
-    child: Image.asset(
-      'images/su-logo.png',
-      width: 300,
-      height: 150,
-      fit: BoxFit.fill,
-    ),
+  Widget appBar = Positioned(
+      top: 0.0,
+      left: 0.0,
+      right: 0.0,
+      child: AppBar(
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: Colors.white,
+        shape: const Border(
+            bottom: BorderSide(color: Colors.grey, width: 0.2)),
+        title: const Text(
+          'Login',
+          style: TextStyle(color: Colors.black),
+        ),
+      )
   );
-
-  Widget emailInput = Container(
-    padding: const EdgeInsets.only(bottom: 10.0),
-    child: TextField(
-      controller: email,
-      textAlign: TextAlign.start,
-      decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-        hintText: 'Email',
-      ),
-    ),
-  );
-
-  Widget forgotPassword = Container(
-    alignment: Alignment.center,
-    padding: const EdgeInsets.symmetric(vertical: 10),
-    child: GestureDetector(
-      onTap: () {
-        // Forgot Password
-      },
-      child: const Text(
-        'Forgot Your Password?',
-        style: TextStyle(color: Colors.blue),
-      ),
-    ),
-  );
-
-  void _togglePasswordView() {
-    setState(() {
-      _isHidden = !_isHidden;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      child: SizedBox(
-        width: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            logo,
-            emailInput,
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: TextField(
-                controller: password,
-                textAlign: TextAlign.start,
-                decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
-                  hintText: 'Password',
-                  suffixIcon: InkWell(
-                      onTap: _togglePasswordView,
-                      child: _isHidden
-                          ? const Icon(Icons.visibility)
-                          : const Icon(Icons.visibility_off)),
-                ),
-                obscureText: _isHidden,
-                enableSuggestions: false,
-                autocorrect: false,
+    return Scaffold(
+      body: Stack(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(20),
+            child: SizedBox(
+              width: double.infinity,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Logo(),
+                  inputs,
+                  const ForgotPassword(),
+                  Container(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: SizedBox(
+                        width: double.infinity,
+                        height: 50.0,
+                        child: ElevatedButton(
+                          child: const Text('Login',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.normal, fontSize: 18.0)),
+                          onPressed: () {
+                            FocusManager.instance.primaryFocus?.unfocus();
+                            login();
+                          },
+                          style: ButtonStyle(
+                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0),
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                  )
+                ],
               ),
             ),
-            forgotPassword,
-            Container(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: SizedBox(
-                  width: double.infinity,
-                  height: 50.0,
-                  child: ElevatedButton(
-                    child: const Text('Login',
-                        style: TextStyle(
-                            fontWeight: FontWeight.normal, fontSize: 18.0)),
-                    onPressed: () {
-                      login();
-                    },
-                    style: ButtonStyle(
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0),
-                        ),
-                      ),
-                    ),
-                  ),
-                )
-            ),
-          ],
-        ),
-      ),
+          ),
+          appBar
+        ],
+      )
     );
   }
 
   void login() async {
-    String userEmail = email.text.toString();
-    String userPassword = password.text.toString();
+    Map<String,String> userInputs = inputsState.getInputs();
+
+    String userEmail = userInputs['email'].toString();
+    String userPassword = userInputs['password'].toString();
 
     auth?.authStateChanges().listen((User? user) {
       if (user != null) {
@@ -153,58 +122,48 @@ class _LoginPageState extends State<LoginPage> {
       }
     });
 
-    if (filledIn(userEmail, userPassword)) {
+    if (filledIn(context, userEmail, userPassword)) {
       Map<String, String> body = {'email': userEmail, 'password': userPassword};
       final credentials = json.encode(body);
 
       Response response =
           await post(Uri.parse(server.localhost() + "/login"), body: credentials);
 
-      String token = response.body.toString();
+      switch(response.statusCode) {
+        case 200:
+          String token = response.body.toString();
+          await auth?.signInWithCustomToken(token);
+          break;
 
-      try {
-        await auth?.signInWithCustomToken(token);
-      } on FirebaseAuthException catch (e) {
-        // User will always be found... need to change this!
-        if (e.code == 'user-not-found') {
-          userNotFound();
-        }
+        case 404:
+          String errorMessage = response.body.toString();
+          userNotFound(context, errorMessage);
+          return;
       }
     }
   }
 
-  bool filledIn(String username, String password) {
+  bool filledIn(BuildContext context, String username, String password) {
     if (username.isNotEmpty && password.isNotEmpty) {
       return true;
     }
 
-    Fluttertoast.showToast(
-        msg: 'Please enter a username and password',
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.SNACKBAR,
-        timeInSecForIosWeb: 3,
-        backgroundColor: Colors.grey,
-        textColor: Colors.white,
-        fontSize: 16.0);
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+        const SnackBar(
+            content: Text('Please enter a username and password')
+        )
+    );
 
     return false;
   }
 
-  void userNotFound() {
-    Fluttertoast.showToast(
-        msg: 'Incorrect email address or password',
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.SNACKBAR,
-        timeInSecForIosWeb: 3,
-        backgroundColor: Colors.grey,
-        textColor: Colors.white,
-        fontSize: 16.0);
-  }
-
-  @override
-  void dispose() {
-    email.dispose();
-    password.dispose();
-    super.dispose();
+  void userNotFound(BuildContext context, String message) {
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+          content: Text(message)
+      )
+    );
   }
 }
