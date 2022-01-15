@@ -1,9 +1,9 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:http/http.dart';
+
+import 'package:project/screens/login/functions/functions.dart';
 import 'package:project/screens/login/widgets/forgot_password.dart';
 import 'package:project/screens/login/widgets/inputs.dart';
 import 'package:project/screens/login/widgets/logo.dart';
@@ -34,6 +34,18 @@ class _LoginPageState extends State<LoginPage> {
       user = auth?.currentUser;
       if (user != null) {
         // Go To Next Page
+      } else {
+        auth?.authStateChanges().listen((User? user) {
+          if (user != null) {
+            setState(() {
+              // User is logged in
+            });
+          } else {
+            setState(() {
+              // User is not logged in
+            });
+          }
+        });
       }
     });
   }
@@ -82,7 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                                   fontWeight: FontWeight.normal, fontSize: 18.0)),
                           onPressed: () {
                             FocusManager.instance.primaryFocus?.unfocus();
-                            login();
+                            LoginFunctions(context, server).login(auth, inputsState);
                           },
                           style: ButtonStyle(
                             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -100,69 +112,6 @@ class _LoginPageState extends State<LoginPage> {
           ),
           appBar
         ],
-      )
-    );
-  }
-
-  void login() async {
-    Map<String,String> userInputs = inputsState.getInputs();
-
-    String userEmail = userInputs['email'].toString();
-    String userPassword = userInputs['password'].toString();
-
-    auth?.authStateChanges().listen((User? user) {
-      if (user != null) {
-        setState(() {
-          // User is logged in
-        });
-      } else {
-        setState(() {
-          // User is not logged in
-        });
-      }
-    });
-
-    if (filledIn(context, userEmail, userPassword)) {
-      Map<String, String> body = {'email': userEmail, 'password': userPassword};
-      final credentials = json.encode(body);
-
-      Response response =
-          await post(Uri.parse(server.localhost() + "/login"), body: credentials);
-
-      switch(response.statusCode) {
-        case 200:
-          String token = response.body.toString();
-          await auth?.signInWithCustomToken(token);
-          break;
-
-        case 404:
-          String errorMessage = response.body.toString();
-          userNotFound(context, errorMessage);
-          return;
-      }
-    }
-  }
-
-  bool filledIn(BuildContext context, String username, String password) {
-    if (username.isNotEmpty && password.isNotEmpty) {
-      return true;
-    }
-
-    final scaffold = ScaffoldMessenger.of(context);
-    scaffold.showSnackBar(
-        const SnackBar(
-            content: Text('Please enter a username and password')
-        )
-    );
-
-    return false;
-  }
-
-  void userNotFound(BuildContext context, String message) {
-    final scaffold = ScaffoldMessenger.of(context);
-    scaffold.showSnackBar(
-      SnackBar(
-          content: Text(message)
       )
     );
   }
