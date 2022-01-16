@@ -36,14 +36,18 @@ class LocalHost {
     final credentials = json.encode(body);
 
     Response response =
-    await post(Uri.parse(localhost() + "/create_an_account"), body: credentials);
+    await post(Uri.parse(localhost() + "/create_account"), body: credentials);
 
     switch (response.statusCode) {
       case 200:
-
+        String token = response.body.toString();
+        functionResponse = {'success' : true, 'token' : token};
+        return functionResponse;
 
       case 404:
-
+        String errorMessage = response.body.toString();
+        functionResponse = {'success' : false, 'message' : errorMessage};
+        return functionResponse;
     }
 
     return functionResponse;

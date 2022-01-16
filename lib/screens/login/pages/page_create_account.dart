@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:project/screens/login/widgets/widget_login.dart';
-
-import 'package:project/server/localhost.dart';
 
 import 'package:project/screens/login/functions/functions_login.dart';
 
-import 'package:project/screens/login/widgets/widget_inputs.dart';
+import 'package:project/screens/login/widgets/widget_login.dart';
+import 'package:project/screens/login/widgets/widget_email_input.dart';
+import 'package:project/screens/login/widgets/widget_password_input.dart';
 import 'package:project/screens/login/widgets/widget_logo.dart';
 import 'package:project/widgets/widget_bottom_nav_bar.dart';
 
@@ -21,15 +20,14 @@ class CreateAccountPage extends StatefulWidget {
 }
 
 class _CreateAccountPageState extends State<CreateAccountPage> {
-  final LocalHost _server = LocalHost();
-  late InputsWidgetState inputsState;
+  late EmailInputWidgetState inputsState;
 
-  final InputsWidget inputs = const InputsWidget();
+  final EmailInputWidget _emailInput = const EmailInputWidget();
+  final PasswordInputWidget _passwordInput = const PasswordInputWidget();
 
   @override
   void initState() {
     super.initState();
-    inputsState = inputs.createState();
 
     widget.auth?.authStateChanges().listen((User? user) {
       if (user != null) {
@@ -73,7 +71,8 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const LogoWidget(),
-                  inputs,
+                  _emailInput,
+                  _passwordInput,
                   Container(
                     padding: const EdgeInsets.symmetric(vertical: 10.0),
                     child: SizedBox(
@@ -87,8 +86,8 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                         ),
                         onPressed: () {
                           FocusManager.instance.primaryFocus?.unfocus();
-                          LoginFunctions(context, _server)
-                              .createAccount(widget.auth, inputsState);
+                          LoginFunctions(context)
+                              .createAccount(widget.auth);
                         },
                         style: ButtonStyle(
                             shape: MaterialStateProperty.all<

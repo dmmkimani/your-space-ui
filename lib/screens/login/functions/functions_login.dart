@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:project/screens/login/widgets/widget_inputs.dart';
+import 'package:project/screens/login/functions/functions_input.dart';
 import 'package:project/server/localhost.dart';
 
 class LoginFunctions {
   BuildContext context;
-  LocalHost server;
+  LocalHost server = LocalHost();
 
-  LoginFunctions(this.context, this.server);
+  LoginFunctions(this.context);
 
-  void login(FirebaseAuth? auth, InputsWidgetState state) async {
-    Map<String,String> userInputs = state.getInputs();
+  void login(FirebaseAuth? auth) async {
+    Map<String,String> userInputs = InputFunctions().getInputs();
 
     String email = userInputs['email'].toString();
     String password = userInputs['password'].toString();
@@ -26,7 +26,7 @@ class LoginFunctions {
 
         case false:
           String errorMessage = response['message'];
-          userNotFound(context, errorMessage);
+          showErrorMessage(context, errorMessage);
           return;
       }
     } else {
@@ -34,14 +34,25 @@ class LoginFunctions {
     }
   }
 
-  void createAccount(FirebaseAuth? auth, InputsWidgetState state) async {
-    Map<String,String> userInputs = state.getInputs();
+  void createAccount(FirebaseAuth? auth) async {
+    Map<String,String> userInputs = InputFunctions().getInputs();
 
     String email = userInputs['email'].toString();
     String password = userInputs['password'].toString();
 
     if (email.isNotEmpty && password.isNotEmpty) {
+      Map<String,dynamic> response = await server.createAccount(auth, email, password);
+      switch(response['success']) {
+        case true:
+          String token = response['token'];
+          await auth?.signInWithCustomToken(token);
+          return;
 
+        case false:
+          String errorMessage = response['message'];
+          showErrorMessage(context, errorMessage);
+          return;
+      }
     } else {
       noInput(context);
     }
@@ -56,7 +67,7 @@ class LoginFunctions {
     );
   }
 
-  void userNotFound(BuildContext context, String message) {
+  void showErrorMessage(BuildContext context, String message) {
     final scaffold = ScaffoldMessenger.of(context);
     scaffold.showSnackBar(
         SnackBar(

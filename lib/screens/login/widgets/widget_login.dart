@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/screens/login/functions/functions_input.dart';
 
 class LoginWidget extends StatelessWidget {
   const LoginWidget({Key? key}) : super(key: key);
@@ -10,10 +11,11 @@ class LoginWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: GestureDetector(
         onTap: () {
+          InputFunctions().clearInputs();
           Navigator.pop(context);
         },
         child: const Text(
-          'Already Have an Account?',
+          'Already have an account?',
           style: TextStyle(color: Colors.blue),
         ),
       ),

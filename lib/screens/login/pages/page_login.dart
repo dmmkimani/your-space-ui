@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-import 'package:project/server/localhost.dart';
+import 'package:project/screens/login/widgets/widget_password_input.dart';
 
 import 'package:project/screens/login/functions/functions_login.dart';
 
 import 'package:project/screens/login/widgets/widget_create_account.dart';
 import 'package:project/screens/login/widgets/widget_forgot_password.dart';
-import 'package:project/screens/login/widgets/widget_inputs.dart';
+import 'package:project/screens/login/widgets/widget_email_input.dart';
 import 'package:project/screens/login/widgets/widget_logo.dart';
 import 'package:project/widgets/widget_bottom_nav_bar.dart';
 
@@ -21,16 +20,14 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final LocalHost _server = LocalHost();
   static FirebaseAuth? _auth;
-  late InputsWidgetState inputsState;
 
-  final InputsWidget inputs = const InputsWidget();
+  final EmailInputWidget _emailInput = const EmailInputWidget();
+  final PasswordInputWidget _passwordInput = const PasswordInputWidget();
 
   @override
   void initState() {
     super.initState();
-    inputsState = inputs.createState();
 
     Firebase.initializeApp().whenComplete(() {
       _auth = FirebaseAuth.instance;
@@ -75,7 +72,8 @@ class _LoginPageState extends State<LoginPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const LogoWidget(),
-                  inputs,
+                  _emailInput,
+                  _passwordInput,
                   const ForgotPasswordWidget(),
                   Container(
                     padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -90,8 +88,8 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         onPressed: () {
                           FocusManager.instance.primaryFocus?.unfocus();
-                          LoginFunctions(context, _server)
-                              .login(_auth, inputsState);
+                          LoginFunctions(context)
+                              .login(_auth);
                         },
                         style: ButtonStyle(
                             shape: MaterialStateProperty.all<

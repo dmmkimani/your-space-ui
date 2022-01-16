@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'package:project/screens/login/functions/functions_input.dart';
+
 import 'package:project/screens/login/pages/page_create_account.dart';
 
 class CreateAccountWidget extends StatelessWidget {
@@ -17,6 +19,7 @@ class CreateAccountWidget extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           FocusManager.instance.primaryFocus?.unfocus();
+          InputFunctions().clearInputs();
           Navigator.push(
               context, 
               MaterialPageRoute(
@@ -25,7 +28,7 @@ class CreateAccountWidget extends StatelessWidget {
           );
         },
         child: const Text(
-          'Create an Account',
+          'Create an account',
           style: TextStyle(color: Colors.blue),
         ),
       ),
