@@ -29,6 +29,26 @@ class LocalHost {
     return functionResponse;
   }
 
+  Future<Map<String,dynamic>> createAccount(FirebaseAuth? auth, String email, String password) async {
+    Map<String,dynamic> functionResponse = {'success' : false};
+
+    Map<String,String> body = {'email': email, 'password': password};
+    final credentials = json.encode(body);
+
+    Response response =
+    await post(Uri.parse(localhost() + "/create_an_account"), body: credentials);
+
+    switch (response.statusCode) {
+      case 200:
+
+
+      case 404:
+
+    }
+
+    return functionResponse;
+  }
+
   Future<String> getCapacity(String building, String room) async {
     Map<String, String> query = {'building': building, 'room': room};
 

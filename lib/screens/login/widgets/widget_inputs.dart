@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Inputs extends StatefulWidget {
-  const Inputs({Key? key}) : super(key: key);
+class InputsWidget extends StatefulWidget {
+  const InputsWidget({Key? key}) : super(key: key);
 
   @override
-  InputsState createState() => InputsState();
+  InputsWidgetState createState() => InputsWidgetState();
 }
 
-class InputsState extends State<Inputs> {
+class InputsWidgetState extends State<InputsWidget> {
   static final email = TextEditingController();
   static final password = TextEditingController();
   static bool _isHidden = true;
@@ -64,10 +64,12 @@ class InputsState extends State<Inputs> {
     };
   }
 
+  /*
   @override
   void dispose() {
     email.dispose();
     password.dispose();
     super.dispose();
   }
+   */
 }

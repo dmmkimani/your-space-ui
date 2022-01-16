@@ -1,6 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:project/screens/login/widgets/inputs.dart';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:project/screens/login/widgets/widget_inputs.dart';
 import 'package:project/server/localhost.dart';
 
 class LoginFunctions {
@@ -9,7 +10,7 @@ class LoginFunctions {
 
   LoginFunctions(this.context, this.server);
 
-  void login(FirebaseAuth? auth, InputsState state) async {
+  void login(FirebaseAuth? auth, InputsWidgetState state) async {
     Map<String,String> userInputs = state.getInputs();
 
     String email = userInputs['email'].toString();
@@ -29,13 +30,30 @@ class LoginFunctions {
           return;
       }
     } else {
-      final scaffold = ScaffoldMessenger.of(context);
-      scaffold.showSnackBar(
-          const SnackBar(
-              content: Text('Please enter a username and password')
-          )
-      );
+      noInput(context);
     }
+  }
+
+  void createAccount(FirebaseAuth? auth, InputsWidgetState state) async {
+    Map<String,String> userInputs = state.getInputs();
+
+    String email = userInputs['email'].toString();
+    String password = userInputs['password'].toString();
+
+    if (email.isNotEmpty && password.isNotEmpty) {
+
+    } else {
+      noInput(context);
+    }
+  }
+
+  void noInput(BuildContext context) {
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+        const SnackBar(
+            content: Text('Please enter a username and a password')
+        )
+    );
   }
 
   void userNotFound(BuildContext context, String message) {

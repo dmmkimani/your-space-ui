@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project/screens/gh001/gh001.dart';
 
-import 'package:project/screens/login/login_page.dart';
-import 'package:project/screens/home/home_page.dart';
+import 'package:project/screens/login/pages/page_login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,8 +14,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _HomePageState extends State<MyApp> {
-  int _selectedIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,30 +21,7 @@ class _HomePageState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Scaffold(
-        body: const LoginPage(),
-        bottomNavigationBar: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'Home',
-                backgroundColor: Colors.white),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle),
-                label: 'Account',
-                backgroundColor: Colors.white),
-          ],
-          currentIndex: _selectedIndex,
-          selectedItemColor: Colors.blue,
-          onTap: _onItemTapped,
-        ),
-      ),
+      home: const LoginPage(),
     );
-  }
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
   }
 }
