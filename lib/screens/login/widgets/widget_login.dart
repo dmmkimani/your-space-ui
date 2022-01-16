@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CreateAnAccount extends StatelessWidget {
-  const CreateAnAccount({Key? key}) : super(key: key);
+class LoginWidget extends StatelessWidget {
+  const LoginWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -10,10 +10,10 @@ class CreateAnAccount extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: GestureDetector(
         onTap: () {
-          // Create an Account
+          Navigator.pop(context);
         },
         child: const Text(
-          'Create an Account',
+          'Already Have an Account?',
           style: TextStyle(color: Colors.blue),
         ),
       ),
