@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
-
-import 'package:project/screens/login/functions/functions_login.dart';
+import 'package:project/screens/login/widgets/widget_create_account_btn.dart';
 
 import 'package:project/screens/login/widgets/widget_login.dart';
 import 'package:project/screens/login/widgets/widget_email_input.dart';
 import 'package:project/screens/login/widgets/widget_password_input.dart';
 import 'package:project/screens/login/widgets/widget_logo.dart';
+import 'package:project/widgets/widget_app_bar.dart';
 import 'package:project/widgets/widget_bottom_nav_bar.dart';
 
 class CreateAccountPage extends StatefulWidget {
-  final FirebaseAuth? auth;
+  final FirebaseAuth? _auth;
 
-  const CreateAccountPage(this.auth, {Key? key}) : super(key: key);
+  const CreateAccountPage(this._auth, {Key? key}) : super(key: key);
 
   @override
   _CreateAccountPageState createState() => _CreateAccountPageState();
@@ -29,7 +29,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
   void initState() {
     super.initState();
 
-    widget.auth?.authStateChanges().listen((User? user) {
+    widget._auth?.authStateChanges().listen((User? user) {
       if (user != null) {
         setState(() {
           // User is logged in
@@ -41,21 +41,6 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
       }
     });
   }
-
-  Widget appBar = Positioned(
-      top: 0.0,
-      left: 0.0,
-      right: 0.0,
-      child: AppBar(
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.white,
-        shape: const Border(bottom: BorderSide(color: Colors.grey, width: 0.2)),
-        title: const Text(
-          'Create an Account',
-          style: TextStyle(color: Colors.black),
-        ),
-      ));
 
   @override
   Widget build(BuildContext context) {
@@ -73,36 +58,13 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                   const LogoWidget(),
                   _emailInput,
                   _passwordInput,
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: 10.0),
-                    child: SizedBox(
-                      width: double.infinity,
-                      height: 50.0,
-                      child: ElevatedButton(
-                        child: const Text(
-                          'Create Account',
-                          style: TextStyle(
-                              fontWeight: FontWeight.normal, fontSize: 18.0),
-                        ),
-                        onPressed: () {
-                          FocusManager.instance.primaryFocus?.unfocus();
-                          LoginFunctions(context)
-                              .createAccount(widget.auth);
-                        },
-                        style: ButtonStyle(
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0),
-                        ))),
-                      ),
-                    ),
-                  ),
+                  CreateAccountBtn(widget._auth),
                   const LoginWidget(),
                 ],
               ),
             ),
           ),
-          appBar
+          const CustomAppBar('Create an Account')
         ],
       ),
       bottomNavigationBar: BottomNavBar(1),

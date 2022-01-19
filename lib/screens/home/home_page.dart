@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/widgets/widget_bottom_nav_bar.dart';
 
 import 'widgets/college_of_engineering.dart';
 import 'widgets/esri.dart';
@@ -65,6 +66,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
+      bottomNavigationBar: BottomNavBar(1),
     );
   }
 

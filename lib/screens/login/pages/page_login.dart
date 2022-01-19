@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:project/screens/login/widgets/widget_login_btn.dart';
 import 'package:project/screens/login/widgets/widget_password_input.dart';
-
-import 'package:project/screens/login/functions/functions_login.dart';
 
 import 'package:project/screens/login/widgets/widget_create_account.dart';
 import 'package:project/screens/login/widgets/widget_forgot_password.dart';
 import 'package:project/screens/login/widgets/widget_email_input.dart';
 import 'package:project/screens/login/widgets/widget_logo.dart';
+import 'package:project/widgets/widget_app_bar.dart';
 import 'package:project/widgets/widget_bottom_nav_bar.dart';
 
 class LoginPage extends StatefulWidget {
@@ -21,14 +21,12 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   static FirebaseAuth? _auth;
-
   final EmailInputWidget _emailInput = const EmailInputWidget();
   final PasswordInputWidget _passwordInput = const PasswordInputWidget();
 
   @override
   void initState() {
     super.initState();
-
     Firebase.initializeApp().whenComplete(() {
       _auth = FirebaseAuth.instance;
     });
@@ -42,21 +40,6 @@ class _LoginPageState extends State<LoginPage> {
       });
     }
   }
-
-  Widget appBar = Positioned(
-      top: 0.0,
-      left: 0.0,
-      right: 0.0,
-      child: AppBar(
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.white,
-        shape: const Border(bottom: BorderSide(color: Colors.grey, width: 0.2)),
-        title: const Text(
-          'Login',
-          style: TextStyle(color: Colors.black),
-        ),
-      ));
 
   @override
   Widget build(BuildContext context) {
@@ -75,36 +58,13 @@ class _LoginPageState extends State<LoginPage> {
                   _emailInput,
                   _passwordInput,
                   const ForgotPasswordWidget(),
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: 10.0),
-                    child: SizedBox(
-                      width: double.infinity,
-                      height: 50.0,
-                      child: ElevatedButton(
-                        child: const Text(
-                          'Login',
-                          style: TextStyle(
-                              fontWeight: FontWeight.normal, fontSize: 18.0),
-                        ),
-                        onPressed: () {
-                          FocusManager.instance.primaryFocus?.unfocus();
-                          LoginFunctions(context)
-                              .login(_auth);
-                        },
-                        style: ButtonStyle(
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0),
-                        ))),
-                      ),
-                    ),
-                  ),
+                  LoginBtn(_auth),
                   CreateAccountWidget(_auth),
                 ],
               ),
             ),
           ),
-          appBar
+          const CustomAppBar('Login')
         ],
       ),
       bottomNavigationBar: BottomNavBar(1),
