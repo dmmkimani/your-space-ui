@@ -6,15 +6,16 @@ import 'package:project/widgets/widget_app_bar.dart';
 import 'package:project/widgets/widget_bottom_nav_bar.dart';
 
 class Room extends StatefulWidget {
-  const Room({Key? key}) : super(key: key);
+  final String building;
+  final String room;
+
+  const Room(this.building, this.room, {Key? key}) : super(key: key);
 
   @override
   _RoomState createState() => _RoomState();
 }
 
 class _RoomState extends State<Room> {
-  static const String currentBuilding = "the_great_hall";
-  static const String currentRoom = "gh001";
   static final LocalHost server = LocalHost();
 
   Widget title = Container(
@@ -34,7 +35,7 @@ class _RoomState extends State<Room> {
           Container(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: FutureBuilder(
-                  future: server.getRoomDetails(currentBuilding, currentRoom),
+                  future: server.getRoomDetails(widget.building, widget.room),
                   builder: (BuildContext context,
                       AsyncSnapshot<Map<String, dynamic>> snapshot) {
                     if (snapshot.data == null) {

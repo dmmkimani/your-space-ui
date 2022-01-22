@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:project/tabs/account/pages/page_account.dart';
 import 'package:project/tabs/home/pages/home_page.dart';
 import 'package:project/tabs/account/pages/page_login.dart';
 import 'package:project/tabs/home/pages/room.dart';
@@ -24,7 +23,7 @@ class _HomePageState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Room(),
+      home: const HomePage(),
     );
   }
 }

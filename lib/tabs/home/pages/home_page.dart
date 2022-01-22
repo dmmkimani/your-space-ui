@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/widgets/widget_app_bar.dart';
 import 'package:project/widgets/widget_bottom_nav_bar.dart';
 
 import '../widgets/college_of_engineering.dart';
@@ -51,21 +52,7 @@ class _HomePageState extends State<HomePage> {
                   );
                 }),
           ),
-          Positioned(
-              top: 0.0,
-              left: 0.0,
-              right: 0.0,
-              child: AppBar(
-                centerTitle: true,
-                elevation: 0,
-                backgroundColor: Colors.white,
-                shape: const Border(
-                    bottom: BorderSide(color: Colors.grey, width: 0.2)),
-                title: const Text(
-                  'Home',
-                  style: TextStyle(color: Colors.black),
-                ),
-              )),
+          const DefaultAppBar('Home')
         ],
       ),
       bottomNavigationBar: BottomNavBar(1),
