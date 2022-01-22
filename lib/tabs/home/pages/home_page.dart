@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
           const DefaultAppBar('Home')
         ],
       ),
-      bottomNavigationBar: BottomNavBar(1),
+      bottomNavigationBar: BottomNavBar(0),
     );
   }
 
