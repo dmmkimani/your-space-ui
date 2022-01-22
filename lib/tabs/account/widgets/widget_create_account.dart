@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 
-import 'package:project/screens/login/functions/functions_input.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:project/screens/login/pages/page_forgot_password.dart';
+import 'package:project/tabs/account/functions/functions_input.dart';
 
-class ForgotPasswordWidget extends StatelessWidget {
-  const ForgotPasswordWidget({Key? key}) : super(key: key);
+import 'package:project/tabs/account/pages/page_create_account.dart';
+
+class CreateAccountWidget extends StatelessWidget {
+  final FirebaseAuth? auth;
+
+  const CreateAccountWidget(this.auth, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +21,14 @@ class ForgotPasswordWidget extends StatelessWidget {
           FocusManager.instance.primaryFocus?.unfocus();
           InputFunctions().clearInputs();
           Navigator.push(
-              context,
+              context, 
               MaterialPageRoute(
-                  builder: (context) => const ForgotPasswordPage()
+                  builder: (context) => CreateAccountPage(auth)
               )
           );
         },
         child: const Text(
-          'Forgot your password?',
+          'Create an account',
           style: TextStyle(color: Colors.blue),
         ),
       ),

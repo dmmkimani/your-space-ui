@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:project/screens/the_great_hall/the_great_hall.dart'as route;
+import 'package:project/tabs/the_great_hall/the_great_hall.dart'as route;
 
 class TheGreatHall extends StatelessWidget {
   const TheGreatHall({Key? key}) : super(key: key);

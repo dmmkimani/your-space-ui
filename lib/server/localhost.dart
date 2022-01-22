@@ -53,17 +53,17 @@ class LocalHost {
     return functionResponse;
   }
 
-  Future<String> getCapacity(String building, String room) async {
+  Future<Map<String,dynamic>> getRoomDetails(String building, String room) async {
     Map<String, String> query = {'building': building, 'room': room};
 
     final body = json.encode(query);
 
     Response response =
-        await post(Uri.parse(localhost() + '/capacity'), body: body);
+        await post(Uri.parse(localhost() + '/room_details'), body: body);
 
-    String capacity = response.body.toString();
+    Map<String,dynamic> details = json.decode(response.body);
 
-    return capacity;
+    return details;
   }
 
   String localhost() {

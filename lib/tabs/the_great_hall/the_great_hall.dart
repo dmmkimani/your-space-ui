@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/screens/the_great_hall/nav_bar/nav_bar.dart';
+import 'package:project/tabs/the_great_hall/nav_bar/nav_bar.dart';
 
 class TheGreatHall extends StatefulWidget {
   const TheGreatHall({Key? key}) : super(key: key);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:project/screens/login/functions/functions_input.dart';
+import 'package:project/tabs/account/functions/functions_input.dart';
 import 'package:project/server/localhost.dart';
 
 class LoginFunctions {

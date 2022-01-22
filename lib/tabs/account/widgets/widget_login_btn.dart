@@ -1,18 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'package:project/screens/login/functions/functions_login.dart';
+import 'package:project/tabs/account/functions/functions_login.dart';
 
-class CreateAccountBtn extends StatefulWidget {
+class LoginBtn extends StatefulWidget {
   final FirebaseAuth? _auth;
 
-  const CreateAccountBtn(this._auth, {Key? key}) : super(key: key);
+  const LoginBtn(this._auth, {Key? key}) : super(key: key);
 
   @override
-  _CreateAccountBtnState createState() => _CreateAccountBtnState();
+  _LoginBtnState createState() => _LoginBtnState();
 }
 
-class _CreateAccountBtnState extends State<CreateAccountBtn> {
+class _LoginBtnState extends State<LoginBtn> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,14 +22,14 @@ class _CreateAccountBtnState extends State<CreateAccountBtn> {
         height: 50.0,
         child: ElevatedButton(
           child: const Text(
-            'Create Account',
+            'Login',
             style: TextStyle(
                 fontWeight: FontWeight.normal, fontSize: 18.0),
           ),
           onPressed: () {
             FocusManager.instance.primaryFocus?.unfocus();
             LoginFunctions(context)
-                .createAccount(widget._auth);
+                .login(widget._auth);
           },
           style: ButtonStyle(
               shape: MaterialStateProperty.all<

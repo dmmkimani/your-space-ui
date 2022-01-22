@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:project/screens/home/home_page.dart';
 
-import 'package:project/screens/login/pages/page_login.dart';
+import 'package:project/tabs/account/pages/page_account.dart';
+import 'package:project/tabs/home/pages/home_page.dart';
+import 'package:project/tabs/account/pages/page_login.dart';
+import 'package:project/tabs/home/pages/room.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,7 +24,7 @@ class _HomePageState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const LoginPage(),
+      home: const Room(),
     );
   }
 }

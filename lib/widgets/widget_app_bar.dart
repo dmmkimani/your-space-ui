@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class CustomAppBar extends StatefulWidget {
+class DefaultAppBar extends StatefulWidget {
   final String title;
 
-  const CustomAppBar(this.title, {Key? key}) : super(key: key);
+  const DefaultAppBar(this.title, {Key? key}) : super(key: key);
 
   @override
-  _CustomAppBarState createState() => _CustomAppBarState();
+  _DefaultAppBarState createState() => _DefaultAppBarState();
 }
 
-class _CustomAppBarState extends State<CustomAppBar> {
+class _DefaultAppBarState extends State<DefaultAppBar> {
   @override
   Widget build(BuildContext context) {
     return Positioned(

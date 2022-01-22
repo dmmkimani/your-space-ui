@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:project/screens/login/widgets/widget_login_btn.dart';
-import 'package:project/screens/login/widgets/widget_password_input.dart';
+import 'package:project/tabs/account/widgets/widget_login_btn.dart';
+import 'package:project/tabs/account/widgets/widget_password_input.dart';
 
-import 'package:project/screens/login/widgets/widget_create_account.dart';
-import 'package:project/screens/login/widgets/widget_forgot_password.dart';
-import 'package:project/screens/login/widgets/widget_email_input.dart';
-import 'package:project/screens/login/widgets/widget_logo.dart';
+import 'package:project/tabs/account/widgets/widget_create_account.dart';
+import 'package:project/tabs/account/widgets/widget_forgot_password.dart';
+import 'package:project/tabs/account/widgets/widget_email_input.dart';
+import 'package:project/tabs/account/widgets/widget_logo.dart';
 import 'package:project/widgets/widget_app_bar.dart';
 import 'package:project/widgets/widget_bottom_nav_bar.dart';
 
@@ -64,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-          const CustomAppBar('Login')
+          const DefaultAppBar('Login')
         ],
       ),
       bottomNavigationBar: BottomNavBar(1),

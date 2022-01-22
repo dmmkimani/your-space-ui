@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class CustomAppBarWithPop extends StatefulWidget {
+class AppBarWithPop extends StatefulWidget {
   final BuildContext context;
   final String title;
 
-  const CustomAppBarWithPop(this.context, this.title, {Key? key}) : super(key: key);
+  const AppBarWithPop(this.context, this.title, {Key? key}) : super(key: key);
 
   @override
-  _CustomAppBarWithPopState createState() => _CustomAppBarWithPopState();
+  _AppBarWithPopState createState() => _AppBarWithPopState();
 }
 
-class _CustomAppBarWithPopState extends State<CustomAppBarWithPop> {
+class _AppBarWithPopState extends State<AppBarWithPop> {
   @override
   Widget build(BuildContext context) {
     return Positioned(

@@ -1,5 +1,5 @@
-import 'package:project/screens/login/widgets/widget_email_input.dart';
-import 'package:project/screens/login/widgets/widget_password_input.dart';
+import 'package:project/tabs/account/widgets/widget_email_input.dart';
+import 'package:project/tabs/account/widgets/widget_password_input.dart';
 
 class InputFunctions {
 

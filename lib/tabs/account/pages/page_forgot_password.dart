@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:project/screens/login/widgets/widget_email_input.dart';
-import 'package:project/screens/login/widgets/widget_forgot_password_text.dart';
-import 'package:project/screens/login/widgets/widget_lock_icon.dart';
-import 'package:project/screens/login/widgets/widget_reset_password_btn.dart';
-import 'package:project/widgets/widget_app_bar_with_pop.dart';
+import 'package:project/tabs/account/widgets/widget_email_input.dart';
+import 'package:project/tabs/account/widgets/widget_forgot_password_text.dart';
+import 'package:project/tabs/account/widgets/widget_lock_icon.dart';
+import 'package:project/tabs/account/widgets/widget_reset_password_btn.dart';
+import 'package:project/widgets/widget_app_bar_w_pop.dart';
 import 'package:project/widgets/widget_bottom_nav_bar.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
@@ -35,7 +35,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               ),
             ),
           ),
-          CustomAppBarWithPop(context, 'Forgot Your Password?')
+          AppBarWithPop(context, 'Forgot Your Password?')
         ],
       ),
       bottomNavigationBar: BottomNavBar(1),

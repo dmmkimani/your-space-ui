@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:project/screens/login/widgets/widget_create_account_btn.dart';
+import 'package:project/tabs/account/widgets/widget_create_account_btn.dart';
 
-import 'package:project/screens/login/widgets/widget_login.dart';
-import 'package:project/screens/login/widgets/widget_email_input.dart';
-import 'package:project/screens/login/widgets/widget_password_input.dart';
-import 'package:project/screens/login/widgets/widget_logo.dart';
+import 'package:project/tabs/account/widgets/widget_login.dart';
+import 'package:project/tabs/account/widgets/widget_email_input.dart';
+import 'package:project/tabs/account/widgets/widget_password_input.dart';
+import 'package:project/tabs/account/widgets/widget_logo.dart';
 import 'package:project/widgets/widget_app_bar.dart';
 import 'package:project/widgets/widget_bottom_nav_bar.dart';
 
@@ -64,7 +64,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
               ),
             ),
           ),
-          const CustomAppBar('Create an Account')
+          const DefaultAppBar('Create an Account')
         ],
       ),
       bottomNavigationBar: BottomNavBar(1),
