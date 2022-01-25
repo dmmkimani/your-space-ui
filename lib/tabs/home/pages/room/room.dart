@@ -19,7 +19,14 @@ class Room extends StatefulWidget {
 }
 
 class _RoomState extends State<Room> {
-  DateTime selectedDate = DateTime.now();
+  DateTime currentDate = DateTime.now();
+  late DateTime selectedDate;
+
+  @override
+  void initState() {
+    selectedDate = currentDate;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +34,7 @@ class _RoomState extends State<Room> {
       body: Container(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: FutureBuilder(
-              future: LocalHost().getRoomDetails(widget.building, widget.room),
+              future: loadWidgets(),
               builder: (BuildContext context,
                   AsyncSnapshot<Map<String, dynamic>> snapshot) {
                 if (snapshot.data == null) {
@@ -35,21 +42,40 @@ class _RoomState extends State<Room> {
                     child: CircularProgressIndicator(),
                   );
                 } else {
+                  Map<String, dynamic> details =
+                      snapshot.requireData['roomDetails'];
+                  Map<String, dynamic> bookings =
+                      snapshot.requireData['roomBookings'];
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      CapacityWidget(snapshot.requireData['capacity']),
-                      AmenitiesTable(snapshot.requireData['amenities']),
-                      Calendar(widget.building, widget.room, selectedDate),
-                      Bookings(widget.building, widget.room,
-                          formatDate(selectedDate))
+                      CapacityWidget(details['capacity']),
+                      AmenitiesTable(details['amenities']),
+                      Calendar(widget.building, widget.room, currentDate,
+                          changeDate),
+                      Expanded(child: Bookings(bookings))
                     ],
                   );
                 }
               })),
       bottomNavigationBar: BottomNavBar(0),
     );
+  }
+
+  Future<Map<String, dynamic>> loadWidgets() async {
+    return {
+      'roomDetails':
+          await LocalHost().getRoomDetails(widget.building, widget.room),
+      'roomBookings': await LocalHost()
+          .getBookings(widget.building, widget.room, formatDate(selectedDate))
+    };
+  }
+
+  void changeDate(DateTime date) {
+    setState(() {
+      selectedDate = date;
+    });
   }
 
   String formatDate(DateTime date) {

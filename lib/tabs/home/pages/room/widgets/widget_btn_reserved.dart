@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-class BookedBtn extends StatefulWidget {
-  const BookedBtn({Key? key}) : super(key: key);
+class ReservedBtn extends StatefulWidget {
+  const ReservedBtn({Key? key}) : super(key: key);
 
   @override
-  _BookedBtnState createState() => _BookedBtnState();
+  _ReservedBtnState createState() => _ReservedBtnState();
 }
 
-class _BookedBtnState extends State<BookedBtn> {
+class _ReservedBtnState extends State<ReservedBtn> {
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return OutlinedButton(
       onPressed: null,
-      child: const Text('Booked', style: TextStyle(color: Colors.white)),
+      child: const Text('Reserved', style: TextStyle(color: Colors.white)),
       style: ButtonStyle(
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(

@@ -5,9 +5,11 @@ import 'package:date_picker_timeline/date_picker_timeline.dart';
 class Calendar extends StatefulWidget {
   final String building;
   final String room;
-  DateTime selectedDate;
+  final DateTime selectedDate;
+  final Function changeDate;
 
-  Calendar(this.building, this.room, this.selectedDate, {Key? key})
+  const Calendar(this.building, this.room, this.selectedDate, this.changeDate,
+      {Key? key})
       : super(key: key);
 
   @override
@@ -17,12 +19,17 @@ class Calendar extends StatefulWidget {
 class _CalendarState extends State<Calendar> {
   @override
   Widget build(BuildContext context) {
-    return DatePicker(
-          widget.selectedDate,
-          initialSelectedDate: DateTime.now(),
-          selectionColor: Colors.lightBlue,
-          selectedTextColor: Colors.white,
-          onDateChange: (date) {},
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 7.0),
+      child: DatePicker(
+        widget.selectedDate,
+        initialSelectedDate: DateTime.now(),
+        selectionColor: Colors.lightBlue,
+        selectedTextColor: Colors.white,
+        onDateChange: (date) {
+          widget.changeDate(date);
+        },
+      ),
     );
   }
 }
