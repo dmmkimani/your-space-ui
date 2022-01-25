@@ -17,7 +17,7 @@ class CapacityWidget extends StatelessWidget {
           Text(capacity,
               style: const TextStyle(
                   fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.normal,
                   color: Colors.black))
         ],
       ),

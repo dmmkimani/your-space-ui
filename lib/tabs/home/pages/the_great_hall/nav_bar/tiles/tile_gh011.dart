@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/tabs/home/pages/room.dart';
+import 'package:project/tabs/home/pages/room/room.dart';
 
 class GH011 extends StatelessWidget {
   final BuildContext _buildContext;

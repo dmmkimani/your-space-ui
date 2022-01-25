@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/tabs/home/pages/room.dart';
+import 'package:project/tabs/home/pages/room/room.dart';
 
 class GH018Tile extends StatelessWidget {
   final BuildContext _buildContext;

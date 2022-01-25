@@ -20,7 +20,7 @@ class _TheGreatHallState extends State<TheGreatHall> {
       body: Stack(
         children: [
           Container(
-            padding: const EdgeInsets.only(top: 65),
+            padding: const EdgeInsets.only(top: 90),
             child: body,
           ),
           AppBarWithPop(context, 'The Great Hall')

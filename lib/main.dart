@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:project/tabs/home/pages/home_page.dart';
 import 'package:project/tabs/account/pages/page_login.dart';
-import 'package:project/tabs/home/pages/room.dart';
+import 'package:project/tabs/home/pages/room/room.dart';
+import 'package:project/tabs/home/pages/room/widgets/widget_calendar.dart';
 
 void main() {
   runApp(const MyApp());

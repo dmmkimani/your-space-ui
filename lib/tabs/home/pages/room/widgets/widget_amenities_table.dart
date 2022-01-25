@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:project/server/localhost.dart';
-import 'package:project/tabs/home/widgets/widget_microphone.dart';
-import 'package:project/tabs/home/widgets/widget_pc.dart';
-import 'package:project/tabs/home/widgets/widget_projector.dart';
-import 'package:project/tabs/home/widgets/widget_speakers.dart';
+import 'package:project/tabs/home/pages/room/widgets/widget_microphone.dart';
+import 'package:project/tabs/home/pages/room/widgets/widget_pc.dart';
+import 'package:project/tabs/home/pages/room/widgets/widget_projector.dart';
+import 'package:project/tabs/home/pages/room/widgets/widget_speakers.dart';
 
 class AmenitiesTable extends StatefulWidget {
   final Map<String,dynamic> amenities;
@@ -39,7 +39,6 @@ class _AmenitiesTableState extends State<AmenitiesTable> {
   Future<bool> getAmenities() async {
     Map<String, dynamic> details =
         await server.getRoomDetails(currentBuilding, currentRoom);
-    Map<String, dynamic> amenities = await details['amenities'];
 
     return true;
   }

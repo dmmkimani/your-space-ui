@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:project/server/localhost.dart';
 
-import 'package:project/tabs/home/widgets/widget_amenities_table.dart';
-import 'package:project/tabs/home/widgets/widget_capacity.dart';
+import 'package:project/tabs/home/pages/room/widgets/widget_amenities_table.dart';
+import 'package:project/tabs/home/pages/room/widgets/widget_bookings.dart';
+import 'package:project/tabs/home/pages/room/widgets/widget_calendar.dart';
+import 'package:project/tabs/home/pages/room/widgets/widget_capacity.dart';
 import 'package:project/widgets/widget_bottom_nav_bar.dart';
 
 class Room extends StatefulWidget {
@@ -17,7 +19,7 @@ class Room extends StatefulWidget {
 }
 
 class _RoomState extends State<Room> {
-  static final LocalHost server = LocalHost();
+  DateTime selectedDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class _RoomState extends State<Room> {
       body: Container(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: FutureBuilder(
-              future: server.getRoomDetails(widget.building, widget.room),
+              future: LocalHost().getRoomDetails(widget.building, widget.room),
               builder: (BuildContext context,
                   AsyncSnapshot<Map<String, dynamic>> snapshot) {
                 if (snapshot.data == null) {
@@ -38,12 +40,23 @@ class _RoomState extends State<Room> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       CapacityWidget(snapshot.requireData['capacity']),
-                      AmenitiesTable(snapshot.requireData['amenities'])
+                      AmenitiesTable(snapshot.requireData['amenities']),
+                      Calendar(widget.building, widget.room, selectedDate),
+                      Bookings(widget.building, widget.room,
+                          formatDate(selectedDate))
                     ],
                   );
                 }
               })),
       bottomNavigationBar: BottomNavBar(0),
     );
+  }
+
+  String formatDate(DateTime date) {
+    return date.day.toString() +
+        '.' +
+        date.month.toString() +
+        '.' +
+        date.year.toString();
   }
 }
