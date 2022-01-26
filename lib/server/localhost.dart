@@ -87,6 +87,37 @@ class LocalHost {
     return bookings;
   }
 
+  Future<Map<String, dynamic>> book(String building, String room, String date,
+      String timeSlot, int duration) async {
+    Map<String, dynamic> functionResponse = {'success': false, 'message': 'An error occurred!'};
+
+    Map<String, dynamic> query = {
+      'building': building,
+      'room': room,
+      'date': date,
+      'timeSlot': timeSlot,
+      'duration': duration
+    };
+
+    final body = json.encode(query);
+
+    Response response = await post(Uri.parse(localhost() + '/book'), body: body);
+
+    switch (response.statusCode) {
+      case 200:
+        String errorMessage = response.body.toString();
+        functionResponse = {'success': true, 'message': errorMessage};
+        return functionResponse;
+
+      case 403:
+        String errorMessage = response.body.toString();
+        functionResponse = {'success': false, 'message': errorMessage};
+        return functionResponse;
+    }
+
+    return functionResponse;
+  }
+
   String localhost() {
     if (Platform.isAndroid) {
       return 'http://10.0.2.2:3000';

@@ -18,6 +18,7 @@ class EmailInputWidgetState extends State<EmailInputWidget> {
         Container(
           padding: const EdgeInsets.only(bottom: 10.0),
           child: TextField(
+            keyboardType: TextInputType.emailAddress,
             controller: email,
             textAlign: TextAlign.start,
             decoration: const InputDecoration(

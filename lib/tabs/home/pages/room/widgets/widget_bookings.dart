@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:project/tabs/home/pages/room/widgets/widget_btn_reserved.dart';
-import 'package:project/tabs/home/pages/room/widgets/widget_btn_book.dart';
+import 'package:project/tabs/home/pages/room/widgets/widget_btn_book_slot.dart';
 import 'package:project/tabs/home/pages/room/widgets/widget_btn_unavailable.dart';
 
 class Bookings extends StatefulWidget {
+  final DateTime date;
   final Map<String, dynamic> bookings;
 
-  const Bookings(this.bookings, {Key? key}) : super(key: key);
+  const Bookings(this.date, this.bookings, {Key? key})
+      : super(key: key);
 
   @override
   _BookingsState createState() => _BookingsState();
@@ -45,7 +47,7 @@ class _BookingsState extends State<Bookings> {
                       child: isAvailable(widget.bookings, timeSlots[position])
                           ? isBooked(widget.bookings, timeSlots[position])
                               ? const ReservedBtn()
-                              : const BookBtn()
+                              : BookSlotBtn(widget.date, timeSlots, timeSlots[position])
                           : const UnavailableBtn())
                 ],
               ),

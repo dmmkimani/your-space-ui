@@ -54,7 +54,7 @@ class _RoomState extends State<Room> {
                       AmenitiesTable(details['amenities']),
                       Calendar(widget.building, widget.room, currentDate,
                           changeDate),
-                      Expanded(child: Bookings(bookings))
+                      Expanded(child: Bookings(selectedDate, bookings))
                     ],
                   );
                 }
@@ -71,7 +71,6 @@ class _RoomState extends State<Room> {
           .getBookings(widget.building, widget.room, formatDate(selectedDate))
     };
   }
-
   void changeDate(DateTime date) {
     setState(() {
       selectedDate = date;
