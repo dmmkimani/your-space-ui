@@ -20,7 +20,7 @@ class _CalendarState extends State<Calendar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 7.0),
+      padding: const EdgeInsets.symmetric(horizontal: 14.0),
       child: DatePicker(
         widget.selectedDate,
         initialSelectedDate: DateTime.now(),

@@ -10,7 +10,7 @@ class ReservedBtn extends StatefulWidget {
 class _ReservedBtnState extends State<ReservedBtn> {
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton(
+    return ElevatedButton(
       onPressed: null,
       child: const Text('Reserved', style: TextStyle(color: Colors.white)),
       style: ButtonStyle(
