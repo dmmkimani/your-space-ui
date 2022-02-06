@@ -4,10 +4,10 @@ class DescriptionInput extends StatefulWidget {
   const DescriptionInput({Key? key}) : super(key: key);
 
   @override
-  _DescriptionInputState createState() => _DescriptionInputState();
+  DescriptionInputState createState() => DescriptionInputState();
 }
 
-class _DescriptionInputState extends State<DescriptionInput> {
+class DescriptionInputState extends State<DescriptionInput> {
   static final description = TextEditingController();
 
   @override
@@ -21,7 +21,7 @@ class _DescriptionInputState extends State<DescriptionInput> {
       textAlign: TextAlign.start,
       decoration: const InputDecoration(
         border: OutlineInputBorder(),
-        hintText: 'Please tell us the reason for your booking...',
+        hintText: 'Briefly describe the purpose of your booking...',
       ),
     );
   }

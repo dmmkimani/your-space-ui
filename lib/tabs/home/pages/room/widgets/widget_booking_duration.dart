@@ -13,8 +13,13 @@ class BookingDuration extends StatefulWidget {
 }
 
 class _BookingDurationState extends State<BookingDuration> {
+  late TimeSlotsDropDown from;
+  late TimeSlotsDropDown to;
+
   @override
   Widget build(BuildContext context) {
+    from = TimeSlotsDropDown(widget.timeSlots, widget.selectedTimeSlot);
+    to = TimeSlotsDropDown(widget.timeSlots, widget.selectedTimeSlot);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -22,13 +27,28 @@ class _BookingDurationState extends State<BookingDuration> {
           'From:',
           style: TextStyle(fontSize: 16.0, fontStyle: FontStyle.normal),
         ),
-        TimeSlotsDropDown(widget.timeSlots, widget.selectedTimeSlot),
+        from,
         const Text(
           'To:',
           style: TextStyle(fontSize: 16.0, fontStyle: FontStyle.normal),
         ),
-        TimeSlotsDropDown(widget.timeSlots, widget.selectedTimeSlot),
+        to,
       ],
     );
+  }
+
+  List<String> get timeSlots {
+    return widget.timeSlots;
+  }
+
+  String get startTime {
+    return from.selectedTimeSlot.toString();
+  }
+
+  int get duration {
+    int fromTimeSlot =
+        int.parse(from.selectedTimeSlot.toString().split(':')[0]);
+    int toTimeSlot = int.parse(to.selectedTimeSlot.toString().split(':')[0]);
+    return (toTimeSlot - fromTimeSlot);
   }
 }

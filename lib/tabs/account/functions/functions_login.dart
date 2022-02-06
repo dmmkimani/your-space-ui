@@ -17,7 +17,7 @@ class LoginFunctions {
     String password = userInputs['password'].toString();
 
     if (email.isNotEmpty && password.isNotEmpty) {
-      Map<String,dynamic> response = await server.login(auth, email, password);
+      Map<String,dynamic> response = await server.login(email, password);
       switch(response['success']) {
         case true:
           String token = response['token'];
@@ -41,7 +41,7 @@ class LoginFunctions {
     String password = userInputs['password'].toString();
 
     if (email.isNotEmpty && password.isNotEmpty) {
-      Map<String,dynamic> response = await server.createAccount(auth, email, password);
+      Map<String,dynamic> response = await server.createAccount(email, password);
       switch(response['success']) {
         case true:
           String token = response['token'];

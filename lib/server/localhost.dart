@@ -1,19 +1,17 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart';
 
 class LocalHost {
-  Future<Map<String, dynamic>> login(
-      FirebaseAuth? auth, String email, String password) async {
+  Future<Map<String, dynamic>> login(String email, String password) async {
     Map<String, dynamic> functionResponse = {'success': false};
 
     Map<String, String> body = {'email': email, 'password': password};
     final credentials = json.encode(body);
 
     Response response =
-        await post(Uri.parse(localhost() + "/login"), body: credentials);
+        await post(Uri.parse(localhost() + '/login'), body: credentials);
 
     switch (response.statusCode) {
       case 200:
@@ -30,14 +28,13 @@ class LocalHost {
     return functionResponse;
   }
 
-  Future<Map<String, dynamic>> createAccount(
-      FirebaseAuth? auth, String email, String password) async {
+  Future<Map<String, dynamic>> createAccount(String email, String password) async {
     Map<String, dynamic> functionResponse = {'success': false};
 
     Map<String, String> body = {'email': email, 'password': password};
     final credentials = json.encode(body);
 
-    Response response = await post(Uri.parse(localhost() + "/create_account"),
+    Response response = await post(Uri.parse(localhost() + '/create_account'),
         body: credentials);
 
     switch (response.statusCode) {
@@ -87,26 +84,16 @@ class LocalHost {
     return bookings;
   }
 
-  Future<Map<String, dynamic>> book(String building, String room, String date,
-      String timeSlot, int duration) async {
-    Map<String, dynamic> functionResponse = {'success': false, 'message': 'An error occurred!'};
+  Future<Map<String, dynamic>> book(Map<String, dynamic> booking) async {
+    Map<String, dynamic> functionResponse = {'success': false, 'message': 'An error has occurred!'};
 
-    Map<String, dynamic> query = {
-      'building': building,
-      'room': room,
-      'date': date,
-      'timeSlot': timeSlot,
-      'duration': duration
-    };
-
-    final body = json.encode(query);
+    final body = json.encode(booking);
 
     Response response = await post(Uri.parse(localhost() + '/book'), body: body);
 
     switch (response.statusCode) {
       case 200:
-        String errorMessage = response.body.toString();
-        functionResponse = {'success': true, 'message': errorMessage};
+        functionResponse = {'success': true, 'message': 'Booking successful!'};
         return functionResponse;
 
       case 403:

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:project/server/localhost.dart';
+import 'package:project/tabs/helpers.dart';
+import 'package:project/tabs/home/pages/room/functions/helpers_room.dart';
 
 import 'package:project/tabs/home/pages/room/widgets/widget_amenities_table.dart';
 import 'package:project/tabs/home/pages/room/widgets/widget_bookings.dart';
@@ -50,11 +52,22 @@ class _RoomState extends State<Room> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      Container(
+                        padding: const EdgeInsets.only(top: 15.0, bottom: 10.0),
+                        child: Text(
+                          widget.room.toUpperCase(),
+                          style: const TextStyle(
+                              fontSize: 22.0,
+                              fontWeight: FontWeight.normal
+                          ),
+                        ),
+                      ),
                       CapacityWidget(details['capacity']),
                       AmenitiesTable(details['amenities']),
-                      Calendar(widget.building, widget.room, currentDate,
-                          changeDate),
-                      Expanded(child: Bookings(selectedDate, bookings))
+                      Calendar(widget.building, widget.room, currentDate, changeDate),
+                      Expanded(
+                          child:
+                              Bookings(reload, widget.building, widget.room, selectedDate, bookings))
                     ],
                   );
                 }
@@ -67,21 +80,19 @@ class _RoomState extends State<Room> {
     return {
       'roomDetails':
           await LocalHost().getRoomDetails(widget.building, widget.room),
-      'roomBookings': await LocalHost()
-          .getBookings(widget.building, widget.room, formatDate(selectedDate))
+      'roomBookings': await LocalHost().getBookings(
+          widget.building, widget.room, RoomHelpers().formatDate(selectedDate))
     };
   }
+
+  void reload(Map<String, dynamic> response) {
+    setState(() {});
+    Helpers().showSnackBar(context, response['message'].toString());
+  }
+
   void changeDate(DateTime date) {
     setState(() {
       selectedDate = date;
     });
-  }
-
-  String formatDate(DateTime date) {
-    return date.day.toString() +
-        '.' +
-        date.month.toString() +
-        '.' +
-        date.year.toString();
   }
 }

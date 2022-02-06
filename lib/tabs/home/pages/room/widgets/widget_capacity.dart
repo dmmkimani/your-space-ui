@@ -13,7 +13,7 @@ class CapacityWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Icon(Icons.event_seat, size: 35.0, color: Colors.deepPurple),
-          const SizedBox(width: 10),
+          const SizedBox(width: 5),
           Text(capacity,
               style: const TextStyle(
                   fontSize: 20.0,
