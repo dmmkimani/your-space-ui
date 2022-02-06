@@ -18,7 +18,10 @@ class _MicrophoneState extends State<Microphone> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Icon(Icons.mic, color: Colors.deepPurple),
+          const SizedBox(
+            height: 30.0,
+            child: Icon(Icons.mic, color: Colors.deepPurple),
+          ),
           const Divider(thickness: 2.0),
           Icon(widget.hasMic ? Icons.check : Icons.clear,
               color: widget.hasMic ? Colors.green : Colors.red)

@@ -7,8 +7,8 @@ import 'package:project/tabs/account/widgets/widget_login.dart';
 import 'package:project/tabs/account/widgets/widget_email_input.dart';
 import 'package:project/tabs/account/widgets/widget_password_input.dart';
 import 'package:project/tabs/account/widgets/widget_logo.dart';
-import 'package:project/widgets/widget_app_bar.dart';
-import 'package:project/widgets/widget_bottom_nav_bar.dart';
+import 'package:project/tabs/widgets/widget_app_bar.dart';
+import 'package:project/tabs/widgets/widget_bottom_nav_bar.dart';
 
 class CreateAccountPage extends StatefulWidget {
   final FirebaseAuth? _auth;

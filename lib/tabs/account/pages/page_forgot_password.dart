@@ -3,8 +3,8 @@ import 'package:project/tabs/account/widgets/widget_email_input.dart';
 import 'package:project/tabs/account/widgets/widget_forgot_password_text.dart';
 import 'package:project/tabs/account/widgets/widget_lock_icon.dart';
 import 'package:project/tabs/account/widgets/widget_reset_password_btn.dart';
-import 'package:project/widgets/widget_app_bar_w_pop.dart';
-import 'package:project/widgets/widget_bottom_nav_bar.dart';
+import 'package:project/tabs/widgets/widget_app_bar_building.dart';
+import 'package:project/tabs/widgets/widget_bottom_nav_bar.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({Key? key}) : super(key: key);
@@ -35,7 +35,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               ),
             ),
           ),
-          AppBarWithPop(context, 'Forgot Your Password?')
+          BuildingAppBar(context, 'Forgot Your Password?')
         ],
       ),
       bottomNavigationBar: BottomNavBar(1),

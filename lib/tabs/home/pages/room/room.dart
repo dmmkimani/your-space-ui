@@ -8,7 +8,7 @@ import 'package:project/tabs/home/pages/room/widgets/widget_amenities_table.dart
 import 'package:project/tabs/home/pages/room/widgets/widget_bookings.dart';
 import 'package:project/tabs/home/pages/room/widgets/widget_calendar.dart';
 import 'package:project/tabs/home/pages/room/widgets/widget_capacity.dart';
-import 'package:project/widgets/widget_bottom_nav_bar.dart';
+import 'package:project/tabs/widgets/widget_bottom_nav_bar.dart';
 
 class Room extends StatefulWidget {
   final String building;
@@ -85,9 +85,9 @@ class _RoomState extends State<Room> {
     };
   }
 
-  void reload(Map<String, dynamic> response) {
+  void reload(String message) {
     setState(() {});
-    Helpers().showSnackBar(context, response['message'].toString());
+    Helpers().showSnackBar(context, message);
   }
 
   void changeDate(DateTime date) {

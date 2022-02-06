@@ -77,6 +77,11 @@ flutter:
     - images/buildings/esri.jpg
     - images/buildings/college_of_engineering.jpg
 
+  fonts:
+    - family: CustomIcons
+      fonts:
+        - asset: images/icons/ProjectorIcon.ttf
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

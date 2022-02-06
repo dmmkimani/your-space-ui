@@ -18,7 +18,10 @@ class _SpeakersState extends State<Speakers> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Icon(Icons.speaker, color: Colors.deepPurple),
+          const SizedBox(
+            height: 30.0,
+            child: Icon(Icons.speaker, color: Colors.deepPurple),
+          ),
           const Divider(thickness: 2.0),
           Icon(widget.hasSpeakers ? Icons.check : Icons.clear,
               color: widget.hasSpeakers ? Colors.green : Colors.red)

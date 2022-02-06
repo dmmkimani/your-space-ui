@@ -9,8 +9,8 @@ import 'package:project/tabs/account/widgets/widget_create_account.dart';
 import 'package:project/tabs/account/widgets/widget_forgot_password.dart';
 import 'package:project/tabs/account/widgets/widget_email_input.dart';
 import 'package:project/tabs/account/widgets/widget_logo.dart';
-import 'package:project/widgets/widget_app_bar.dart';
-import 'package:project/widgets/widget_bottom_nav_bar.dart';
+import 'package:project/tabs/widgets/widget_app_bar.dart';
+import 'package:project/tabs/widgets/widget_bottom_nav_bar.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);

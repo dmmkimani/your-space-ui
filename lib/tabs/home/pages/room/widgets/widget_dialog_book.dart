@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:project/server/localhost.dart';
+import 'package:project/tabs/helpers.dart';
 import 'package:project/tabs/home/pages/room/functions/helpers_room.dart';
 import 'package:project/tabs/home/pages/room/widgets/widget_btn_book.dart';
 import 'package:project/tabs/home/pages/room/widgets/widget_description_input.dart';
@@ -109,9 +110,17 @@ class BookDialogState extends State<BookDialog> {
       'startTime': startTime,
       'details': details
     });
-    Navigator.of(context).pop();
-    clearInputs();
-    widget.reload(response);
+    FocusManager.instance.primaryFocus?.unfocus();
+    switch(response['success']) {
+      case true:
+        Navigator.of(context).pop();
+        clearInputs();
+        widget.reload(response['message']);
+        break;
+      case false:
+        Helpers().showSnackBar(context, response['message']);
+        break;
+    }
   }
 
   String dayMonthYear(DateTime date) {

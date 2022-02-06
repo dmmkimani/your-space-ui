@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/tabs/home/pages/the_great_hall/nav_bar/nav_bar_great_hall.dart';
-import 'package:project/widgets/widget_app_bar_w_pop.dart';
+import 'package:project/tabs/widgets/widget_app_bar_building.dart';
 
 class TheGreatHall extends StatefulWidget {
   const TheGreatHall({Key? key}) : super(key: key);
@@ -23,7 +23,7 @@ class _TheGreatHallState extends State<TheGreatHall> {
             padding: const EdgeInsets.only(top: 90),
             child: body,
           ),
-          AppBarWithPop(context, 'The Great Hall')
+          BuildingAppBar(context, 'The Great Hall')
         ],
       ),
     );

@@ -18,7 +18,10 @@ class _PCState extends State<PC> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Icon(Icons.computer, color: Colors.deepPurple),
+          const SizedBox(
+            height: 30.0,
+            child: Icon(Icons.computer, color: Colors.deepPurple),
+          ),
           const Divider(thickness: 2.0),
           Icon(widget.hasPC ? Icons.check : Icons.clear,
               color: widget.hasPC ? Colors.green : Colors.red)
