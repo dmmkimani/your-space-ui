@@ -6,7 +6,7 @@ class LogoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(bottom: 30.0),
+      padding: const EdgeInsets.only(bottom: 40.0),
       child: Image.asset(
         'images/su-logo.png',
         width: 300,

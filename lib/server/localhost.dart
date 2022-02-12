@@ -4,14 +4,20 @@ import 'dart:io';
 import 'package:http/http.dart';
 
 class LocalHost {
-  Future<Map<String, dynamic>> login(String email, String password) async {
+  Future<Map<String, dynamic>> createAccount(
+      String fName, String lName, String email, String password) async {
     Map<String, dynamic> functionResponse = {'success': false};
 
-    Map<String, String> body = {'email': email, 'password': password};
-    final credentials = json.encode(body);
+    Map<String, String> params = {
+      'fName': fName,
+      'lName': lName,
+      'email': email,
+      'password': password
+    };
+    final body = json.encode(params);
 
-    Response response =
-        await post(Uri.parse(localhost() + '/login'), body: credentials);
+    Response response = await post(Uri.parse(localhost() + '/create_account'),
+        body: body);
 
     switch (response.statusCode) {
       case 200:
@@ -19,7 +25,7 @@ class LocalHost {
         functionResponse = {'success': true, 'token': token};
         return functionResponse;
 
-      case 404:
+      case 403:
         String errorMessage = response.body.toString();
         functionResponse = {'success': false, 'message': errorMessage};
         return functionResponse;
@@ -28,14 +34,14 @@ class LocalHost {
     return functionResponse;
   }
 
-  Future<Map<String, dynamic>> createAccount(String email, String password) async {
+  Future<Map<String, dynamic>> login(String email, String password) async {
     Map<String, dynamic> functionResponse = {'success': false};
 
-    Map<String, String> body = {'email': email, 'password': password};
-    final credentials = json.encode(body);
+    Map<String, String> params = {'email': email, 'password': password};
+    final body = json.encode(params);
 
-    Response response = await post(Uri.parse(localhost() + '/create_account'),
-        body: credentials);
+    Response response =
+        await post(Uri.parse(localhost() + '/login'), body: body);
 
     switch (response.statusCode) {
       case 200:
@@ -43,7 +49,7 @@ class LocalHost {
         functionResponse = {'success': true, 'token': token};
         return functionResponse;
 
-      case 404:
+      case 403:
         String errorMessage = response.body.toString();
         functionResponse = {'success': false, 'message': errorMessage};
         return functionResponse;
@@ -85,20 +91,25 @@ class LocalHost {
   }
 
   Future<Map<String, dynamic>> book(Map<String, dynamic> booking) async {
-    Map<String, dynamic> functionResponse = {'success': false, 'message': 'An error has occurred!'};
+    Map<String, dynamic> functionResponse = {
+      'success': false,
+      'message': 'An error has occurred!'
+    };
 
     final body = json.encode(booking);
 
-    Response response = await post(Uri.parse(localhost() + '/book'), body: body);
+    Response response =
+        await post(Uri.parse(localhost() + '/book'), body: body);
 
     switch (response.statusCode) {
       case 200:
-        functionResponse = {'success': true, 'message': 'Booking successful!'};
+        String message = response.body.toString();
+        functionResponse = {'success': true, 'message': message};
         return functionResponse;
 
       case 403:
-        String errorMessage = response.body.toString();
-        functionResponse = {'success': false, 'message': errorMessage};
+        String message = response.body.toString();
+        functionResponse = {'success': false, 'message': message};
         return functionResponse;
     }
 

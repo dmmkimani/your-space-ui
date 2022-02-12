@@ -1,22 +1,38 @@
-import 'package:project/tabs/account/widgets/widget_email_input.dart';
-import 'package:project/tabs/account/widgets/widget_password_input.dart';
+import 'package:project/tabs/account/widgets/widget_input_email.dart';
+import 'package:project/tabs/account/widgets/widget_input_fname.dart';
+import 'package:project/tabs/account/widgets/widget_input_lname.dart';
+import 'package:project/tabs/account/widgets/widget_input_password.dart';
 
 class InputFunctions {
-
-  Map<String,String> getInputs() {
+  Map<String,String> getCreateAccountInputs() {
     return {
-      'email' : EmailInputWidgetState.email.text.toString(),
-      'password' : PasswordInputWidgetState.password.text.toString()
+      'fName' : FNameInputState.fName.text.toString(),
+      'lName' : LNameInputState.lName.text.toString(),
+      'email' : EmailInputState.email.text.toString(),
+      'password' : PasswordInputState.password.text.toString()
     };
   }
 
+  Map<String,String> getLoginInputs() {
+    return {
+      'email' : EmailInputState.email.text.toString(),
+      'password' : PasswordInputState.password.text.toString()
+    };
+  }
+
+  void clearCreateAccountInputs() {
+    FNameInputState.fName.clear();
+    LNameInputState.lName.clear();
+    clearInputs();
+  }
+
   void clearInputs() {
-    EmailInputWidgetState.email.clear();
-    PasswordInputWidgetState.password.clear();
+    EmailInputState.email.clear();
+    PasswordInputState.password.clear();
   }
 
   void disposeInputs() {
-    EmailInputWidgetState.email.dispose();
-    PasswordInputWidgetState.password.dispose();
+    EmailInputState.email.dispose();
+    PasswordInputState.password.dispose();
   }
 }

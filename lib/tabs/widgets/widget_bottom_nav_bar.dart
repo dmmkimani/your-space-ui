@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:project/tabs/account/screens/screen_login.dart';
+import 'package:project/tabs/home/page_home.dart';
 
 class BottomNavBar extends StatefulWidget {
   int selectedIndex;

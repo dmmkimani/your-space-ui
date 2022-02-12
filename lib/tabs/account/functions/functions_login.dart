@@ -5,74 +5,57 @@ import 'package:project/tabs/account/functions/functions_input.dart';
 import 'package:project/server/localhost.dart';
 
 class LoginFunctions {
-  BuildContext context;
-  LocalHost server = LocalHost();
+  final BuildContext _context;
+  final LocalHost _server = LocalHost();
 
-  LoginFunctions(this.context);
-
-  void login(FirebaseAuth? auth) async {
-    Map<String,String> userInputs = InputFunctions().getInputs();
-
-    String email = userInputs['email'].toString();
-    String password = userInputs['password'].toString();
-
-    if (email.isNotEmpty && password.isNotEmpty) {
-      Map<String,dynamic> response = await server.login(email, password);
-      switch(response['success']) {
-        case true:
-          String token = response['token'];
-          await auth?.signInWithCustomToken(token);
-          return;
-
-        case false:
-          String errorMessage = response['message'];
-          showErrorMessage(context, errorMessage);
-          return;
-      }
-    } else {
-      noInput(context);
-    }
-  }
+  LoginFunctions(this._context);
 
   void createAccount(FirebaseAuth? auth) async {
-    Map<String,String> userInputs = InputFunctions().getInputs();
+    Map<String, String> userInputs = InputFunctions().getCreateAccountInputs();
+
+    String fName = userInputs['fName'].toString();
+    String lName = userInputs['lName'].toString();
+    String email = userInputs['email'].toString();
+    String password = userInputs['password'].toString();
+
+    Map<String, dynamic> response =
+        await _server.createAccount(fName, lName, email, password);
+
+    switch (response['success']) {
+      case true:
+        String token = response['token'];
+        await auth?.signInWithCustomToken(token);
+        return;
+
+      case false:
+        String errorMessage = response['message'];
+        showErrorMessage(_context, errorMessage);
+        return;
+    }
+  }
+
+  void login(FirebaseAuth? auth) async {
+    Map<String, String> userInputs = InputFunctions().getLoginInputs();
 
     String email = userInputs['email'].toString();
     String password = userInputs['password'].toString();
 
-    if (email.isNotEmpty && password.isNotEmpty) {
-      Map<String,dynamic> response = await server.createAccount(email, password);
-      switch(response['success']) {
-        case true:
-          String token = response['token'];
-          await auth?.signInWithCustomToken(token);
-          return;
+    Map<String, dynamic> response = await _server.login(email, password);
+    switch (response['success']) {
+      case true:
+        String token = response['token'];
+        await auth?.signInWithCustomToken(token);
+        return;
 
-        case false:
-          String errorMessage = response['message'];
-          showErrorMessage(context, errorMessage);
-          return;
-      }
-    } else {
-      noInput(context);
+      case false:
+        String errorMessage = response['message'];
+        showErrorMessage(_context, errorMessage);
+        return;
     }
-  }
-
-  void noInput(BuildContext context) {
-    final scaffold = ScaffoldMessenger.of(context);
-    scaffold.showSnackBar(
-        const SnackBar(
-            content: Text('Please enter a username and a password')
-        )
-    );
   }
 
   void showErrorMessage(BuildContext context, String message) {
     final scaffold = ScaffoldMessenger.of(context);
-    scaffold.showSnackBar(
-        SnackBar(
-            content: Text(message)
-        )
-    );
+    scaffold.showSnackBar(SnackBar(content: Text(message)));
   }
 }

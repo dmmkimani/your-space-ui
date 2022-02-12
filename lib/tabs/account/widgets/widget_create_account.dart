@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:project/tabs/account/functions/functions_input.dart';
-
-import 'package:project/tabs/account/pages/page_create_account.dart';
+import 'package:project/tabs/account/screens/screen_create_account.dart';
 
 class CreateAccountWidget extends StatelessWidget {
-  final FirebaseAuth? auth;
+  final FirebaseAuth? _auth;
 
-  const CreateAccountWidget(this.auth, {Key? key}) : super(key: key);
+  const CreateAccountWidget(this._auth, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +19,9 @@ class CreateAccountWidget extends StatelessWidget {
         onTap: () {
           FocusManager.instance.primaryFocus?.unfocus();
           InputFunctions().clearInputs();
-          Navigator.push(
-              context, 
+          Navigator.of(context).push(
               MaterialPageRoute(
-                  builder: (context) => CreateAccountPage(auth)
+                  builder: (context) => CreateAccountPage(_auth)
               )
           );
         },

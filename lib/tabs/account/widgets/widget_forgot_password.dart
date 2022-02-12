@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:project/tabs/account/functions/functions_input.dart';
 
-import 'package:project/tabs/account/pages/page_forgot_password.dart';
+import 'package:project/tabs/account/screens/screen_forgot_password.dart';
 
 class ForgotPasswordWidget extends StatelessWidget {
   const ForgotPasswordWidget({Key? key}) : super(key: key);

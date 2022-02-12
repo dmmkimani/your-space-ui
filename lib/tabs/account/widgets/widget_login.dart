@@ -11,8 +11,8 @@ class LoginWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: GestureDetector(
         onTap: () {
-          InputFunctions().clearInputs();
-          Navigator.pop(context);
+          InputFunctions().clearCreateAccountInputs();
+          Navigator.of(context).pop();
         },
         child: const Text(
           'Already have an account?',

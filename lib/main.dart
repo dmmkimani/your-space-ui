@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'package:project/tabs/home/pages/home_page.dart';
-import 'package:project/tabs/account/pages/page_login.dart';
-import 'package:project/tabs/home/pages/room/room.dart';
-import 'package:project/tabs/home/pages/room/widgets/widget_calendar.dart';
+import 'package:project/tabs/account/screen_splash.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,10 +9,10 @@ class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _AppState createState() => _AppState();
 }
 
-class _HomePageState extends State<MyApp> {
+class _AppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,7 +20,7 @@ class _HomePageState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      home: const SplashScreen(),
     );
   }
 }

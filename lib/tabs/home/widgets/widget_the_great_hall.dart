@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:project/tabs/home/screens/the_great_hall/the_great_hall.dart';
 
-import 'package:project/tabs/home/pages/the_great_hall/the_great_hall.dart' as route;
-
-class TheGreatHall extends StatelessWidget {
-  const TheGreatHall({Key? key}) : super(key: key);
+class TheGreatHallWidget extends StatelessWidget {
+  const TheGreatHallWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +32,7 @@ class TheGreatHall extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => const route.TheGreatHall()
-            )
-        );
+                builder: (context) => const TheGreatHall()));
       },
     );
   }
