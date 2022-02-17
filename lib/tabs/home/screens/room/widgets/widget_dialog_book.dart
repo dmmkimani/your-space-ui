@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+
 import 'package:intl/intl.dart';
-import 'package:project/server/localhost.dart';
-import 'package:project/tabs/helpers.dart';
+
+import 'package:project/tabs/provider.dart';
+
+import 'package:project/tabs/function_helpers.dart';
+
 import 'package:project/tabs/home/screens/room/functions/helpers_room.dart';
 import 'package:project/tabs/home/screens/room/widgets/widget_btn_book.dart';
 import 'package:project/tabs/home/screens/room/widgets/widget_description_input.dart';
@@ -125,12 +129,15 @@ class _BookDialogState extends State<BookDialog> {
   }
 
   void book(BuildContext dialogContext) async {
-    Map<String, dynamic> response = await LocalHost().book({
+    Map<String, dynamic> response = await GlobalData.server.book({
+      'booker': GlobalData.currentUser!.email.toString(),
+      'date': RoomHelpers().formatDate(widget._date),
       'building': widget._building,
       'room': widget._room,
-      'date': RoomHelpers().formatDate(widget._date),
+      'people': numPeople,
+      'description': description,
       'startTime': startTime,
-      'details': details
+      'duration': duration,
     });
     FocusManager.instance.primaryFocus?.unfocus();
     switch (response['success']) {
@@ -140,7 +147,7 @@ class _BookDialogState extends State<BookDialog> {
         widget._reload(response['message']);
         break;
       case false:
-        Helpers().showSnackBar(dialogContext, response['message']);
+        HelperFunctions().showSnackBar(dialogContext, response['message']);
         break;
     }
   }
@@ -173,15 +180,6 @@ class _BookDialogState extends State<BookDialog> {
 
   String get description {
     return DescriptionInputState.description.text;
-  }
-
-  Map<String, dynamic> get details {
-    return {
-      'booker': 'dmmk@app.com',
-      'duration': duration,
-      'people': numPeople,
-      'description': description
-    };
   }
 
   void clearInputs() {

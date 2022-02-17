@@ -22,15 +22,15 @@ class Bookings extends StatefulWidget {
 class _BookingsState extends State<Bookings> {
   @override
   Widget build(BuildContext context) {
-    List<String> _timeSlots = widget._bookings.keys.toList();
-    _timeSlots.sort();
+    List<String> timeSlots = widget._bookings.keys.toList();
+    timeSlots.sort();
     return Container(
       padding: const EdgeInsets.only(top: 5.0),
       child: ListView.builder(
           physics: const BouncingScrollPhysics(),
           padding: EdgeInsets.zero,
           shrinkWrap: true,
-          itemCount: _timeSlots.length,
+          itemCount: timeSlots.length,
           itemBuilder: (BuildContext context, int position) {
             return Container(
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
@@ -42,29 +42,29 @@ class _BookingsState extends State<Bookings> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        _timeSlots[position],
+                        timeSlots[position],
                         style: const TextStyle(
                             fontSize: 18.0, fontWeight: FontWeight.normal),
                       ),
                       SizedBox(
                           width: 125.0,
                           child: isAvailable(
-                                  widget._bookings, _timeSlots[position])
-                              ? isBooked(widget._bookings, _timeSlots[position])
+                                  widget._bookings, timeSlots[position])
+                              ? isBooked(widget._bookings, timeSlots[position])
                                   ? const ReservedBtn()
-                                  : isLastTimeSlot(_timeSlots, position)
+                                  : isLastTimeSlot(timeSlots, position)
                                       ? const UnavailableBtn()
                                       : BookSlotBtn(
                                           widget._reload,
                                           widget._building,
                                           widget._room,
                                           widget._date,
-                                          _timeSlots,
-                                          _timeSlots[position])
+                                          timeSlots,
+                                          timeSlots[position])
                               : const UnavailableBtn())
                     ],
                   ),
-                  isLastTimeSlot(_timeSlots, position)
+                  isLastTimeSlot(timeSlots, position)
                       ? const Padding(padding: EdgeInsets.only(bottom: 5.0))
                       : const Divider(),
                 ],
@@ -79,7 +79,7 @@ class _BookingsState extends State<Bookings> {
   }
 
   bool isBooked(Map<String, dynamic> bookings, String timeSlot) {
-    return bookings[timeSlot]['booking']['booked'];
+    return bookings[timeSlot]['booked'];
   }
 
   bool isLastTimeSlot(List<String> timeSlots, int position) {

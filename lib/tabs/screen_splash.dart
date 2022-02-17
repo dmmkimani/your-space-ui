@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:project/tabs/account/screens/screen_account.dart';
-import 'package:project/tabs/account/screens/screen_login.dart';
+import 'package:project/tabs/provider.dart';
+
+import 'package:project/tabs/home/page_home.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -27,19 +28,19 @@ class _SplashScreenState extends State<SplashScreen> {
             if (snapshot.data != null) {
               FirebaseAuth _auth = FirebaseAuth.instance;
               User? _user = _auth.currentUser;
+              GlobalData.auth = _auth;
               WidgetsBinding.instance!.addPostFrameCallback((_) {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) {
+                Navigator.of(context)
+                    .pushReplacement(MaterialPageRoute(builder: (context) {
                   if (_user != null) {
-                    return AccountPage(_user);
-                  } else {
-                    return LoginPage(_auth);
+                    GlobalData.currentUser = _user;
                   }
+                  return const HomePage();
                 }));
               });
             }
             return loading;
-          }
-      ),
+          }),
     );
   }
 }

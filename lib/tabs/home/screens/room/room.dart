@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:project/tabs/provider.dart';
 
-import 'package:project/server/localhost.dart';
-import 'package:project/tabs/helpers.dart';
+import 'package:project/tabs/function_helpers.dart';
 import 'package:project/tabs/home/screens/room/functions/helpers_room.dart';
 
 import 'package:project/tabs/home/screens/room/widgets/widget_amenities_table.dart';
@@ -34,7 +34,7 @@ class _RoomState extends State<Room> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: FutureBuilder(
-          future: loadWidgets(),
+          future: loadWidgetData(),
           builder: (BuildContext context,
               AsyncSnapshot<Map<String, dynamic>> snapshot) {
             if (snapshot.data == null) {
@@ -71,18 +71,18 @@ class _RoomState extends State<Room> {
     );
   }
 
-  Future<Map<String, dynamic>> loadWidgets() async {
+  Future<Map<String, dynamic>> loadWidgetData() async {
     return {
-      'roomDetails':
-          await LocalHost().getRoomDetails(widget._building, widget._room),
-      'roomBookings': await LocalHost().getBookings(widget._building,
+      'roomDetails': await GlobalData.server
+          .getRoomDetails(widget._building, widget._room),
+      'roomBookings': await GlobalData.server.getRoomBookings(widget._building,
           widget._room, RoomHelpers().formatDate(_selectedDate))
     };
   }
 
   void reload(String message) {
     setState(() {});
-    Helpers().showSnackBar(context, message);
+    HelperFunctions().showSnackBar(context, message);
   }
 
   void changeDate(DateTime date) {

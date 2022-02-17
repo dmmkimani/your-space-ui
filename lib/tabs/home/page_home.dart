@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:project/tabs/widgets/widget_app_bar.dart';
+import 'package:project/tabs/widgets/widget_bottom_nav_bar.dart';
 
 import 'widgets/college_of_engineering.dart';
 import 'widgets/esri.dart';
@@ -10,19 +11,13 @@ import 'widgets/widget_the_great_hall.dart';
 import 'widgets/y_twyni.dart';
 
 class HomePage extends StatefulWidget {
-  final PageController _tabController;
-
-  const HomePage(this._tabController, {Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>
-    with AutomaticKeepAliveClientMixin<HomePage> {
-
-  final int _selectedTabIndex = 0;
-
+class _HomePageState extends State<HomePage> {
   final List<Widget> _buildings = [
     const TheGreatHallWidget(),
     const SchoolOfManagement(),
@@ -34,7 +29,6 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return Scaffold(
       body: Stack(
         children: [
@@ -63,27 +57,7 @@ class _HomePageState extends State<HomePage>
           const DefaultAppBar('Home')
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-              backgroundColor: Colors.white),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle),
-              label: 'Account',
-              backgroundColor: Colors.white),
-        ],
-        currentIndex: _selectedTabIndex,
-        selectedItemColor: Colors.blue,
-        onTap: (selectedPageIndex) {
-          FocusManager.instance.primaryFocus?.unfocus();
-          widget._tabController.jumpToPage(selectedPageIndex);
-        },
-      ),
+      bottomNavigationBar: BottomNavBar(0),
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

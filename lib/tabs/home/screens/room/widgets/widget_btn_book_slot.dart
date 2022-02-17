@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/tabs/provider.dart';
 import 'package:project/tabs/home/screens/room/widgets/widget_dialog_book.dart';
 
 class BookSlotBtn extends StatefulWidget {
@@ -23,6 +24,9 @@ class _BookSlotBtnState extends State<BookSlotBtn> {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
+        if (GlobalData.currentUser == null) {
+          // Go to login page but keep this page alive
+        }
         showDialog(
             context: context,
             builder: (context) => BookDialog(

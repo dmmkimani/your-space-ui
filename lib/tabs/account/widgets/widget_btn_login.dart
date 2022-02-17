@@ -1,12 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:project/tabs/account/functions/functions_login.dart';
 
 class LoginBtn extends StatefulWidget {
-  final FirebaseAuth? _auth;
-
-  const LoginBtn(this._auth, {Key? key}) : super(key: key);
+  const LoginBtn({Key? key}) : super(key: key);
 
   @override
   _LoginBtnState createState() => _LoginBtnState();
@@ -27,7 +24,7 @@ class _LoginBtnState extends State<LoginBtn> {
           ),
           onPressed: () {
             FocusManager.instance.primaryFocus?.unfocus();
-            LoginFunctions(context).login(widget._auth);
+            LoginFunctions(context).login();
           },
           style: ButtonStyle(
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(

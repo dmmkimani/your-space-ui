@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Helpers {
+class HelperFunctions {
   void showSnackBar(BuildContext context, String message) {
     final scaffold = ScaffoldMessenger.of(context);
     Future.delayed(const Duration(milliseconds: 500), () {

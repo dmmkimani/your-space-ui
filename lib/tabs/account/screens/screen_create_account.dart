@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:project/tabs/provider.dart';
 
 import 'package:project/tabs/account/widgets/widget_btn_create_account.dart';
 import 'package:project/tabs/account/widgets/widget_input_fname.dart';
@@ -15,9 +16,7 @@ import 'package:project/tabs/widgets/widget_app_bar.dart';
 import 'screen_account.dart';
 
 class CreateAccountPage extends StatefulWidget {
-  final FirebaseAuth? _auth;
-
-  const CreateAccountPage(this._auth, {Key? key}) : super(key: key);
+  const CreateAccountPage({Key? key}) : super(key: key);
 
   @override
   _CreateAccountPageState createState() => _CreateAccountPageState();
@@ -31,10 +30,10 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
   @override
   void initState() {
-    widget._auth?.authStateChanges().listen((User? _user) {
+    GlobalData.auth!.authStateChanges().listen((User? _user) {
       if (_user != null) {
         setState(() {
-          goToAccountPage(_user);
+          goToAccountPage();
         });
       }
     });
@@ -72,7 +71,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                   ),
                   _emailInput,
                   _passwordInput,
-                  CreateAccountBtn(widget._auth),
+                  const CreateAccountBtn(),
                   const LoginWidget(),
                 ],
               ),
@@ -84,9 +83,9 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
     );
   }
 
-  void goToAccountPage(user) {
+  void goToAccountPage() {
     Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => AccountPage(user)));
+        MaterialPageRoute(builder: (context) => const AccountPage()));
   }
 
   double get deviceWidth {

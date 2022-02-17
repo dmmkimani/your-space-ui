@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project/tabs/home/screens/the_great_hall/nav_bar/nav_bar_great_hall.dart';
 import 'package:project/tabs/widgets/widget_app_bar_building.dart';
+import 'package:project/tabs/widgets/widget_bottom_nav_bar.dart';
 
 class TheGreatHall extends StatefulWidget {
   const TheGreatHall({Key? key}) : super(key: key);
@@ -26,6 +27,7 @@ class _TheGreatHallState extends State<TheGreatHall> {
           BuildingAppBar(context, 'The Great Hall')
         ],
       ),
+      bottomNavigationBar: BottomNavBar(0),
     );
   }
 

@@ -1,12 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:project/tabs/account/functions/functions_login.dart';
 
 class CreateAccountBtn extends StatefulWidget {
-  final FirebaseAuth? _auth;
-
-  const CreateAccountBtn(this._auth, {Key? key}) : super(key: key);
+  const CreateAccountBtn({Key? key}) : super(key: key);
 
   @override
   _CreateAccountBtnState createState() => _CreateAccountBtnState();
@@ -29,7 +26,7 @@ class _CreateAccountBtnState extends State<CreateAccountBtn> {
           onPressed: () {
             FocusManager.instance.primaryFocus?.unfocus();
             LoginFunctions(context)
-                .createAccount(widget._auth);
+                .createAccount();
           },
           style: ButtonStyle(
               shape: MaterialStateProperty.all<

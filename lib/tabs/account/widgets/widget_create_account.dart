@@ -6,9 +6,7 @@ import 'package:project/tabs/account/functions/functions_input.dart';
 import 'package:project/tabs/account/screens/screen_create_account.dart';
 
 class CreateAccountWidget extends StatelessWidget {
-  final FirebaseAuth? _auth;
-
-  const CreateAccountWidget(this._auth, {Key? key}) : super(key: key);
+  const CreateAccountWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +19,7 @@ class CreateAccountWidget extends StatelessWidget {
           InputFunctions().clearInputs();
           Navigator.of(context).push(
               MaterialPageRoute(
-                  builder: (context) => CreateAccountPage(_auth)
+                  builder: (context) => const CreateAccountPage()
               )
           );
         },

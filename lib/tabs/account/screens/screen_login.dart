@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:project/tabs/account/screens/screen_account.dart';
 import 'package:project/tabs/account/widgets/widget_btn_login.dart';
 import 'package:project/tabs/account/widgets/widget_input_password.dart';
@@ -12,9 +11,7 @@ import 'package:project/tabs/account/widgets/widget_logo.dart';
 import 'package:project/tabs/widgets/widget_app_bar.dart';
 
 class LoginPage extends StatefulWidget {
-  final FirebaseAuth _auth;
-
-  const LoginPage(this._auth, {Key? key}) : super(key: key);
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -44,8 +41,8 @@ class _LoginPageState extends State<LoginPage>
                   _emailInput,
                   _passwordInput,
                   const ForgotPasswordWidget(),
-                  LoginBtn(widget._auth),
-                  CreateAccountWidget(widget._auth),
+                  const LoginBtn(),
+                  const CreateAccountWidget(),
                 ],
               ),
             ),
@@ -74,9 +71,9 @@ class _LoginPageState extends State<LoginPage>
     );
   }
 
-  void goToAccountPage(user) {
+  void goToAccountPage() {
     Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => AccountPage(user)));
+        MaterialPageRoute(builder: (context) => const AccountPage()));
   }
 
   @override

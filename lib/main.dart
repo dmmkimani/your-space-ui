@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project/tabs/account/screen_splash.dart';
+import 'package:project/tabs/account/screens/screen_account.dart';
+import 'package:project/tabs/screen_splash.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +21,7 @@ class _AppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const SplashScreen(),
+      home: const AccountPage(),
     );
   }
 }
