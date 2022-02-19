@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:project/tabs/provider.dart';
 
-import 'package:project/tabs/home/page_home.dart';
+import 'package:project/tabs/home/home.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);

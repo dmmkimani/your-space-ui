@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'package:intl/intl.dart';
-
 import 'package:project/tabs/provider.dart';
-
 import 'package:project/tabs/function_helpers.dart';
 
 import 'package:project/tabs/home/screens/room/functions/helpers_room.dart';
-import 'package:project/tabs/home/screens/room/widgets/widget_btn_book.dart';
-import 'package:project/tabs/home/screens/room/widgets/widget_description_input.dart';
-import 'package:project/tabs/home/screens/room/widgets/widget_drop_down_time_slots.dart';
+import 'package:project/tabs/home/screens/room/widgets/btn_book.dart';
+import 'package:project/tabs/home/screens/room/widgets/textfield_description.dart';
+import 'package:project/tabs/home/screens/room/widgets/dd_time_slots.dart';
 import 'package:project/tabs/home/screens/room/widgets/widget_num_people.dart';
 
 class BookDialog extends StatefulWidget {
@@ -82,7 +79,8 @@ class _BookDialogState extends State<BookDialog> {
                         Container(
                           padding: const EdgeInsets.only(bottom: 5.0),
                           child: Text(
-                            'Date: ' + dayMonthYear(widget._date),
+                            'Date: ' +
+                                HelperFunctions().formatDate(widget._date),
                             style: const TextStyle(
                                 fontSize: 16.0, fontStyle: FontStyle.normal),
                           ),
@@ -150,10 +148,6 @@ class _BookDialogState extends State<BookDialog> {
         HelperFunctions().showSnackBar(dialogContext, response['message']);
         break;
     }
-  }
-
-  String dayMonthYear(DateTime date) {
-    return DateFormat('d MMM yyyy').format(date);
   }
 
   String get date {

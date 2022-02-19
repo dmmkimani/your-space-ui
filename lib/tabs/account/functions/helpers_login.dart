@@ -2,24 +2,23 @@ import 'package:flutter/material.dart';
 
 import 'package:project/tabs/provider.dart';
 
-import 'package:project/tabs/account/functions/functions_input.dart';
+import 'package:project/tabs/account/functions/helpers_input.dart';
 import 'package:project/tabs/function_helpers.dart';
 
-class LoginFunctions {
+class LoginHelpers {
   final BuildContext _context;
 
-  LoginFunctions(this._context);
+  LoginHelpers(this._context);
 
   void createAccount() async {
-    Map<String, String> userInputs = InputFunctions().getCreateAccountInputs();
+    Map<String, String> userInputs = InputHelpers().getCreateAccountInputs();
 
-    String fName = userInputs['fName'].toString();
-    String lName = userInputs['lName'].toString();
-    String email = userInputs['email'].toString();
-    String password = userInputs['password'].toString();
-
-    Map<String, dynamic> response =
-        await GlobalData.server.createAccount(fName, lName, email, password);
+    Map<String, dynamic> response = await GlobalData.server.createAccount({
+      'fName': userInputs['fName'].toString(),
+      'lName': userInputs['lName'].toString(),
+      'email': userInputs['email'].toString(),
+      'password': userInputs['password'].toString()
+    });
 
     switch (response['success']) {
       case true:
@@ -35,12 +34,12 @@ class LoginFunctions {
   }
 
   void login() async {
-    Map<String, String> userInputs = InputFunctions().getLoginInputs();
+    Map<String, String> userInputs = InputHelpers().getLoginInputs();
 
-    String email = userInputs['email'].toString();
-    String password = userInputs['password'].toString();
-
-    Map<String, dynamic> response = await GlobalData.server.login(email, password);
+    Map<String, dynamic> response = await GlobalData.server.login({
+      'email': userInputs['email'].toString(),
+      'password': userInputs['password'].toString()
+    });
     switch (response['success']) {
       case true:
         String token = response['token'];

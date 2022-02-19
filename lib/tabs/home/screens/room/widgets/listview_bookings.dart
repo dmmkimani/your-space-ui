@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:project/tabs/home/screens/room/widgets/widget_btn_reserved.dart';
-import 'package:project/tabs/home/screens/room/widgets/widget_btn_book_slot.dart';
-import 'package:project/tabs/home/screens/room/widgets/widget_btn_unavailable.dart';
+import 'package:project/tabs/home/screens/room/widgets/btn_reserved.dart';
+import 'package:project/tabs/home/screens/room/widgets/btn_book_slot.dart';
+import 'package:project/tabs/home/screens/room/widgets/btn_unavailable.dart';
 
 class Bookings extends StatefulWidget {
   final Function _reload;

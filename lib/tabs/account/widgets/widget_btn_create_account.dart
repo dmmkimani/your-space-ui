@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:project/tabs/account/functions/functions_login.dart';
+import 'package:project/tabs/account/functions/helpers_login.dart';
 
 class CreateAccountBtn extends StatefulWidget {
   const CreateAccountBtn({Key? key}) : super(key: key);
@@ -25,7 +25,7 @@ class _CreateAccountBtnState extends State<CreateAccountBtn> {
           ),
           onPressed: () {
             FocusManager.instance.primaryFocus?.unfocus();
-            LoginFunctions(context)
+            LoginHelpers(context)
                 .createAccount();
           },
           style: ButtonStyle(

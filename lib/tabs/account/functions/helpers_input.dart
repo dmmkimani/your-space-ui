@@ -3,7 +3,7 @@ import 'package:project/tabs/account/widgets/widget_input_fname.dart';
 import 'package:project/tabs/account/widgets/widget_input_lname.dart';
 import 'package:project/tabs/account/widgets/widget_input_password.dart';
 
-class InputFunctions {
+class InputHelpers {
   Map<String,String> getCreateAccountInputs() {
     return {
       'fName' : FNameInputState.fName.text.toString(),

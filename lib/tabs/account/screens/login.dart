@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:project/tabs/account/screens/screen_account.dart';
+import 'package:project/tabs/account/screens/account.dart';
 import 'package:project/tabs/account/widgets/widget_btn_login.dart';
 import 'package:project/tabs/account/widgets/widget_input_password.dart';
 
@@ -8,7 +8,7 @@ import 'package:project/tabs/account/widgets/widget_create_account.dart';
 import 'package:project/tabs/account/widgets/widget_forgot_password.dart';
 import 'package:project/tabs/account/widgets/widget_input_email.dart';
 import 'package:project/tabs/account/widgets/widget_logo.dart';
-import 'package:project/tabs/widgets/widget_app_bar.dart';
+import 'package:project/tabs/widgets/app_bar.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);

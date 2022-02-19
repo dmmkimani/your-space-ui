@@ -11,9 +11,9 @@ import 'package:project/tabs/account/widgets/widget_login.dart';
 import 'package:project/tabs/account/widgets/widget_input_email.dart';
 import 'package:project/tabs/account/widgets/widget_input_password.dart';
 import 'package:project/tabs/account/widgets/widget_logo.dart';
-import 'package:project/tabs/widgets/widget_app_bar.dart';
+import 'package:project/tabs/widgets/app_bar.dart';
 
-import 'screen_account.dart';
+import 'account.dart';
 
 class CreateAccountPage extends StatefulWidget {
   const CreateAccountPage({Key? key}) : super(key: key);

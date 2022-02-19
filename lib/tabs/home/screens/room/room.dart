@@ -4,8 +4,8 @@ import 'package:project/tabs/provider.dart';
 import 'package:project/tabs/function_helpers.dart';
 import 'package:project/tabs/home/screens/room/functions/helpers_room.dart';
 
-import 'package:project/tabs/home/screens/room/widgets/widget_amenities_table.dart';
-import 'package:project/tabs/home/screens/room/widgets/widget_bookings.dart';
+import 'package:project/tabs/home/screens/room/widgets/table_amenities.dart';
+import 'package:project/tabs/home/screens/room/widgets/listview_bookings.dart';
 import 'package:project/tabs/home/screens/room/widgets/widget_calendar.dart';
 import 'package:project/tabs/home/screens/room/widgets/widget_capacity.dart';
 
@@ -74,9 +74,12 @@ class _RoomState extends State<Room> {
   Future<Map<String, dynamic>> loadWidgetData() async {
     return {
       'roomDetails': await GlobalData.server
-          .getRoomDetails(widget._building, widget._room),
-      'roomBookings': await GlobalData.server.getRoomBookings(widget._building,
-          widget._room, RoomHelpers().formatDate(_selectedDate))
+          .getRoomDetails({'building': widget._building, 'room': widget._room}),
+      'roomBookings': await GlobalData.server.getRoomBookings({
+        'building': widget._building,
+        'room': widget._room,
+        'date': RoomHelpers().formatDate(_selectedDate)
+      })
     };
   }
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/tabs/account/functions/functions_input.dart';
+import 'package:project/tabs/account/functions/helpers_input.dart';
 
 class LoginWidget extends StatelessWidget {
   const LoginWidget({Key? key}) : super(key: key);
@@ -11,7 +11,7 @@ class LoginWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: GestureDetector(
         onTap: () {
-          InputFunctions().clearCreateAccountInputs();
+          InputHelpers().clearCreateAccountInputs();
           Navigator.of(context).pop();
         },
         child: const Text(

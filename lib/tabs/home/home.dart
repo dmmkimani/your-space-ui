@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:project/tabs/widgets/widget_app_bar.dart';
-import 'package:project/tabs/widgets/widget_bottom_nav_bar.dart';
+import 'package:project/tabs/widgets/app_bar.dart';
+import 'package:project/tabs/widgets/bottom_nav_bar.dart';
 
 import 'widgets/college_of_engineering.dart';
 import 'widgets/esri.dart';

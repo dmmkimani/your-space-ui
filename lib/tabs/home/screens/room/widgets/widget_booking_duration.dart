@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/tabs/home/screens/room/widgets/widget_drop_down_time_slots.dart';
+import 'package:project/tabs/home/screens/room/widgets/dd_time_slots.dart';
 
 class BookingDuration extends StatefulWidget {
   final List<String> _timeSlots;

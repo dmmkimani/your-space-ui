@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:project/tabs/account/functions/functions_input.dart';
-import 'package:project/tabs/account/screens/screen_create_account.dart';
+import 'package:project/tabs/account/functions/helpers_input.dart';
+import 'package:project/tabs/account/screens/create_account.dart';
 
 class CreateAccountWidget extends StatelessWidget {
   const CreateAccountWidget({Key? key}) : super(key: key);
@@ -16,7 +16,7 @@ class CreateAccountWidget extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           FocusManager.instance.primaryFocus?.unfocus();
-          InputFunctions().clearInputs();
+          InputHelpers().clearInputs();
           Navigator.of(context).push(
               MaterialPageRoute(
                   builder: (context) => const CreateAccountPage()

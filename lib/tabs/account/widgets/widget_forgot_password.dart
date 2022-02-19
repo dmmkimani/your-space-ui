@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:project/tabs/account/functions/functions_input.dart';
+import 'package:project/tabs/account/functions/helpers_input.dart';
 
-import 'package:project/tabs/account/screens/screen_forgot_password.dart';
+import 'package:project/tabs/account/screens/forgot_password.dart';
 
 class ForgotPasswordWidget extends StatelessWidget {
   const ForgotPasswordWidget({Key? key}) : super(key: key);
@@ -15,7 +15,7 @@ class ForgotPasswordWidget extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           FocusManager.instance.primaryFocus?.unfocus();
-          InputFunctions().clearInputs();
+          InputHelpers().clearInputs();
           Navigator.push(
               context,
               MaterialPageRoute(

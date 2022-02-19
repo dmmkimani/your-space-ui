@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/tabs/provider.dart';
-import 'package:project/tabs/home/screens/room/widgets/widget_dialog_book.dart';
+import 'package:project/tabs/home/screens/room/widgets/dialog_book.dart';
 
 class BookSlotBtn extends StatefulWidget {
   final Function _reload;
