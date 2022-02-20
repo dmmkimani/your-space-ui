@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project/tabs/account/screens/account.dart';
 import 'package:project/tabs/splash_screen.dart';
+import 'package:project/tabs/account/screens/account.dart';
 
 void main() {
   runApp(const MyApp());

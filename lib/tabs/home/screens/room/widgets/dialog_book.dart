@@ -50,7 +50,7 @@ class _BookDialogState extends State<BookDialog> {
                   children: [
                     InkWell(
                       onTap: () {
-                        Navigator.pop(context);
+                        Navigator.of(context).pop();
                         clearInputs();
                       },
                       splashColor: Colors.transparent,
@@ -111,13 +111,13 @@ class _BookDialogState extends State<BookDialog> {
                     ),
                   ),
                 ),
-                actionsAlignment: MainAxisAlignment.center,
                 actions: <Widget>[
                   Container(
                     padding: const EdgeInsets.only(bottom: 10.0),
                     child: BookBtn(dialogContext, book),
                   )
                 ],
+                actionsAlignment: MainAxisAlignment.center,
               ),
             ),
           ),

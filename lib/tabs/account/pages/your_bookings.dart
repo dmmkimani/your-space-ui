@@ -24,12 +24,13 @@ class _YourBookingsState extends State<YourBookings>
               child: CircularProgressIndicator(),
             );
           } else {
-            Map<String, dynamic> bookings =
-                snapshot.requireData['response'];
+            Map<String, dynamic> bookings = snapshot.requireData['response'];
+            List<String> bookingDates = bookings.keys.toList();
+            bookingDates.sort((b, a) => a.compareTo(b));
             return Container(
               padding:
-                  const EdgeInsets.only(top: 185.0, left: 20.0, right: 20.0),
-              child: BookingsList(bookings),
+                  const EdgeInsets.only(top: 200.0, left: 20.0, right: 20.0),
+              child: BookingsList(bookings, bookingDates),
             );
           }
         });
