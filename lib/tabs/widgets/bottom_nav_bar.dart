@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:project/tabs/account/screens/login.dart';
+
 import 'package:project/tabs/home/home.dart';
+import 'package:project/tabs/account/splash_screen_account.dart';
 
 class BottomNavBar extends StatefulWidget {
-  int selectedIndex;
+  int _selectedIndex;
 
-  BottomNavBar(this.selectedIndex, {Key? key}) : super(key: key);
+  BottomNavBar(this._selectedIndex, {Key? key}) : super(key: key);
 
   @override
   _BottomNavBarState createState() => _BottomNavBarState();
@@ -25,15 +26,28 @@ class _BottomNavBarState extends State<BottomNavBar> {
             label: 'Account',
             backgroundColor: Colors.white),
       ],
-      currentIndex: widget.selectedIndex,
+      currentIndex: widget._selectedIndex,
       selectedItemColor: Colors.blue,
       onTap: _onItemTapped,
     );
   }
 
   void _onItemTapped(int index) {
-    setState(() {
-      widget.selectedIndex = index;
-    });
+    if (index != widget._selectedIndex) {
+      switch (index) {
+        case 0:
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => const HomePage()));
+          break;
+
+        case 1:
+          Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (context) => const AccountSplashScreen()));
+          break;
+      }
+      setState(() {
+        widget._selectedIndex = index;
+      });
+    }
   }
 }

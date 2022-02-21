@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/icons/custom_icons.dart';
+import 'package:project/tabs/home/screens/room/icons/custom_icons.dart';
 
 class Projector extends StatefulWidget {
   final bool _hasProjector;

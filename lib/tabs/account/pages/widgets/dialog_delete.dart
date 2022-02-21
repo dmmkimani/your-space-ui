@@ -18,9 +18,9 @@ class _DeleteDialogState extends State<DeleteDialog> {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: const Text(
-        'Delete Post',
+        'Delete Booking',
         textAlign: TextAlign.start,
-        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+        style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
       ),
       content: const Text(
         'Are you sure you want to delete this booking from your booking history?',
@@ -41,7 +41,7 @@ class _DeleteDialogState extends State<DeleteDialog> {
                 child: const Text(
                   'CANCEL',
                   style: TextStyle(
-                      color: Colors.red,
+                      color: Colors.blue,
                       fontSize: 13.0,
                       fontWeight: FontWeight.normal),
                 ),
@@ -59,7 +59,7 @@ class _DeleteDialogState extends State<DeleteDialog> {
                 child: const Text(
                   'DELETE',
                   style: TextStyle(
-                      color: Colors.red,
+                      color: Colors.blue,
                       fontSize: 13.0,
                       fontWeight: FontWeight.normal),
                 ),

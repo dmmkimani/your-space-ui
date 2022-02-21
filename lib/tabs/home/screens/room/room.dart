@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:project/tabs/provider.dart';
 
-import 'package:project/tabs/function_helpers.dart';
-import 'package:project/tabs/home/screens/room/functions/helpers_room.dart';
+import 'package:project/tabs/provider.dart';
 
 import 'package:project/tabs/home/screens/room/widgets/table_amenities.dart';
 import 'package:project/tabs/home/screens/room/widgets/listview_bookings.dart';
 import 'package:project/tabs/home/screens/room/widgets/widget_calendar.dart';
 import 'package:project/tabs/home/screens/room/widgets/widget_capacity.dart';
+import 'package:project/tabs/account/screens/account.dart';
+
+import 'package:project/tabs/home/screens/room/functions/helpers_room.dart';
 
 class Room extends StatefulWidget {
   final String _building;
@@ -85,7 +86,24 @@ class _RoomState extends State<Room> {
 
   void reload(String message) {
     setState(() {});
-    HelperFunctions().showSnackBar(context, message);
+    final scaffold = ScaffoldMessenger.of(context);
+    Future.delayed(const Duration(milliseconds: 500), () {
+      scaffold.showSnackBar(SnackBar(
+        content: Text(message),
+        action: SnackBarAction(
+          label: 'VIEW BOOKING',
+          onPressed: () {
+            //
+            // -- TEMPORARY --
+            // THIS SHOULD CHANGE TABS NOT PUSH A NEW ROUTE
+            //
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => const AccountPage()));
+          },
+        ),
+        duration: const Duration(seconds: 5),
+      ));
+    });
   }
 
   void changeDate(DateTime date) {
