@@ -12,11 +12,12 @@ class _ReservedBtnState extends State<ReservedBtn> {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: null,
-      child: const Text('Reserved', style: TextStyle(color: Colors.white)),
+      child: const Text('Reserved',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
       style: ButtonStyle(
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(18.0),
+            borderRadius: BorderRadius.circular(16.0),
           )),
           backgroundColor: MaterialStateProperty.all(Colors.red)),
     );

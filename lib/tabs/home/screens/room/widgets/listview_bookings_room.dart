@@ -3,23 +3,23 @@ import 'package:project/tabs/home/screens/room/widgets/btn_reserved.dart';
 import 'package:project/tabs/home/screens/room/widgets/btn_book_slot.dart';
 import 'package:project/tabs/home/screens/room/widgets/btn_unavailable.dart';
 
-class Bookings extends StatefulWidget {
+class RoomBookings extends StatefulWidget {
   final Function _reload;
   final String _building;
   final String _room;
   final DateTime _date;
   final Map<String, dynamic> _bookings;
 
-  const Bookings(
+  const RoomBookings(
       this._reload, this._building, this._room, this._date, this._bookings,
       {Key? key})
       : super(key: key);
 
   @override
-  _BookingsState createState() => _BookingsState();
+  _RoomBookingsState createState() => _RoomBookingsState();
 }
 
-class _BookingsState extends State<Bookings> {
+class _RoomBookingsState extends State<RoomBookings> {
   @override
   Widget build(BuildContext context) {
     List<String> timeSlots = widget._bookings.keys.toList();

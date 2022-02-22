@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:http/http.dart';
 
 class LocalHost {
@@ -72,9 +71,7 @@ class LocalHost {
   }
 
   Future<Map<String, dynamic>> getUserBookings(String userEmail) async {
-    Map<String, String> query = {'userEmail': userEmail};
-
-    final body = json.encode(query);
+    final body = json.encode({'userEmail': userEmail});
 
     Response response =
         await post(Uri.parse(localhost() + '/user_bookings'), body: body);
@@ -116,12 +113,32 @@ class LocalHost {
     }
   }
 
-  Future<Map<String, dynamic>> deleteFromFeed(
+  Future<Map<String, dynamic>> amendBooking(
       Map<String, dynamic> bookingDetails) async {
-    Response response = await post(Uri.parse(localhost() + '/delete'),
+    Response response = await post(Uri.parse(localhost() + '/amend'),
         body: json.encode(bookingDetails));
 
-    return json.decode(response.body);
+    switch (response.statusCode) {
+      case 200:
+        return {
+          'success': true,
+          'message': json.decode(response.body.toString())
+        };
+
+      case 403:
+        return {
+          'success': false,
+          'message': json.decode(response.body.toString())
+        };
+
+      default:
+        return {'success': false, 'message': 'An error occurred!'};
+    }
+  }
+
+  Future<void> deleteFromHistory(Map<String, dynamic> bookingDetails) async {
+    await post(Uri.parse(localhost() + '/delete'),
+        body: json.encode(bookingDetails));
   }
 
   String localhost() {

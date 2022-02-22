@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:project/tabs/provider.dart';
 
 import 'package:project/tabs/home/screens/room/widgets/table_amenities.dart';
-import 'package:project/tabs/home/screens/room/widgets/listview_bookings.dart';
+import 'package:project/tabs/home/screens/room/widgets/listview_bookings_room.dart';
 import 'package:project/tabs/home/screens/room/widgets/widget_calendar.dart';
 import 'package:project/tabs/home/screens/room/widgets/widget_capacity.dart';
 import 'package:project/tabs/account/screens/account.dart';
@@ -63,7 +63,7 @@ class _RoomState extends State<Room> {
                   AmenitiesTable(details['amenities']),
                   Calendar(_currentDate, changeDate),
                   Expanded(
-                      child: Bookings(reload, widget._building, widget._room,
+                      child: RoomBookings(refresh, widget._building, widget._room,
                           _selectedDate, bookings))
                 ],
               );
@@ -84,7 +84,7 @@ class _RoomState extends State<Room> {
     };
   }
 
-  void reload(String message) {
+  void refresh(String message) {
     setState(() {});
     final scaffold = ScaffoldMessenger.of(context);
     Future.delayed(const Duration(milliseconds: 500), () {

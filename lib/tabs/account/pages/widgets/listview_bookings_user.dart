@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:project/tabs/account/pages/widgets/booking.dart';
+import 'package:project/tabs/function_helpers.dart';
 
 import '../../../provider.dart';
 
-class BookingsList extends StatefulWidget {
+class UserBookings extends StatefulWidget {
   final Map<String, dynamic> _bookings;
   final List<String> _bookingDates;
+  final Function _refresh;
 
-  const BookingsList(this._bookings, this._bookingDates, {Key? key})
+  const UserBookings(this._bookings, this._bookingDates, this._refresh,
+      {Key? key})
       : super(key: key);
 
   @override
-  _BookingsListState createState() => _BookingsListState();
+  _UserBookingsState createState() => _UserBookingsState();
 }
 
-class _BookingsListState extends State<BookingsList> {
+class _UserBookingsState extends State<UserBookings> {
   final key = GlobalKey<AnimatedListState>();
 
   @override
@@ -59,11 +62,17 @@ class _BookingsListState extends State<BookingsList> {
 
   Widget buildBooking(int position, Map<String, dynamic> details,
           Animation<double> animation) =>
-      Booking(position, details, deleteBooking, animation);
+      Booking(position, details, deleteBooking, widget._refresh, animation);
 
   void deleteBooking(int position, Map<String, dynamic> details) {
     widget._bookingDates.removeAt(position);
     key.currentState!.removeItem(position,
         (context, animation) => buildBooking(position, details, animation));
+    if (widget._bookingDates.isEmpty) {
+      Future.delayed(const Duration(milliseconds: 500), () {
+        widget._refresh('');
+      });
+    }
+    HelperFunctions().showSnackBar(context, 'Booking deleted');
   }
 }

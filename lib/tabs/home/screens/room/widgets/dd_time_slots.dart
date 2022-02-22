@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 class TimeSlotsDropDown extends StatefulWidget {
   final List<String> _timeSlots;
   String selectedTimeSlot;
+  final bool _isLocked;
 
-  TimeSlotsDropDown(this._timeSlots, this.selectedTimeSlot, {Key? key})
+  TimeSlotsDropDown(this._timeSlots, this.selectedTimeSlot, this._isLocked,
+      {Key? key})
       : super(key: key);
 
   @override
@@ -21,11 +23,13 @@ class _TimeSlotsDropDownState extends State<TimeSlotsDropDown> {
         onTap: () {
           FocusManager.instance.primaryFocus?.unfocus();
         },
-        onChanged: (newTimeSlot) {
-          setState(() {
-            widget.selectedTimeSlot = newTimeSlot.toString();
-          });
-        },
+        onChanged: !widget._isLocked
+            ? (newTimeSlot) {
+                setState(() {
+                  widget.selectedTimeSlot = newTimeSlot.toString();
+                });
+              }
+            : null,
         items: widget._timeSlots.map((String timeSlot) {
           return DropdownMenuItem<String>(
             child: Text(timeSlot),

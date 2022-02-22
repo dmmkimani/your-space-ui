@@ -1,35 +1,35 @@
 import 'package:flutter/material.dart';
 
-class BookBtn extends StatefulWidget {
+class SaveBtn extends StatefulWidget {
   final BuildContext _context;
-  final Function _book;
+  final Function _amend;
 
-  const BookBtn(this._context, this._book, {Key? key}) : super(key: key);
+  const SaveBtn(this._context, this._amend, {Key? key}) : super(key: key);
 
   @override
-  _BookBtnState createState() => _BookBtnState();
+  _SaveBtnState createState() => _SaveBtnState();
 }
 
-class _BookBtnState extends State<BookBtn> {
+class _SaveBtnState extends State<SaveBtn> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 125.0,
+      width: double.infinity,
       height: 50.0,
       child: ElevatedButton(
         onPressed: () {
-          widget._book(widget._context);
+          widget._amend(widget._context);
         },
         child: const Text(
-          'BOOK',
+          'SAVE',
           style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
         ),
         style: ButtonStyle(
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(18.0),
-            )),
-            backgroundColor: MaterialStateProperty.all(Colors.green)),
+                  borderRadius: BorderRadius.circular(18.0),
+                )),
+            backgroundColor: MaterialStateProperty.all(Colors.blue)),
       ),
     );
   }

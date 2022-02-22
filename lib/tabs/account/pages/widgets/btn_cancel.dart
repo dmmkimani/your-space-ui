@@ -1,27 +1,22 @@
 import 'package:flutter/material.dart';
 
-class BookBtn extends StatefulWidget {
-  final BuildContext _context;
-  final Function _book;
-
-  const BookBtn(this._context, this._book, {Key? key}) : super(key: key);
+class CancelBtn extends StatefulWidget {
+  const CancelBtn({Key? key}) : super(key: key);
 
   @override
-  _BookBtnState createState() => _BookBtnState();
+  _CancelBtnState createState() => _CancelBtnState();
 }
 
-class _BookBtnState extends State<BookBtn> {
+class _CancelBtnState extends State<CancelBtn> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 125.0,
+      width: double.infinity,
       height: 50.0,
       child: ElevatedButton(
-        onPressed: () {
-          widget._book(widget._context);
-        },
+        onPressed: () {},
         child: const Text(
-          'BOOK',
+          'CANCEL THIS BOOKING',
           style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
         ),
         style: ButtonStyle(
@@ -29,7 +24,7 @@ class _BookBtnState extends State<BookBtn> {
                 RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(18.0),
             )),
-            backgroundColor: MaterialStateProperty.all(Colors.green)),
+            backgroundColor: MaterialStateProperty.all(Colors.red)),
       ),
     );
   }

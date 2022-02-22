@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/tabs/provider.dart';
 
 class DeleteDialog extends StatefulWidget {
   final int _position;
@@ -53,8 +54,13 @@ class _DeleteDialogState extends State<DeleteDialog> {
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () {
-                  widget._deleteBooking(widget._position, widget._details);
+                  GlobalData.server.deleteFromHistory({
+                    'userEmail': GlobalData.auth!.currentUser!.email,
+                    'id': widget._details['id'],
+                    'date': widget._details['bookingDate']
+                  });
                   Navigator.of(context).pop();
+                  widget._deleteBooking(widget._position, widget._details);
                 },
                 child: const Text(
                   'DELETE',

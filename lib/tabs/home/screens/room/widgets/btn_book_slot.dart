@@ -37,11 +37,12 @@ class _BookSlotBtnState extends State<BookSlotBtn> {
                 widget._timeSlots,
                 widget._selectedTimeSlot));
       },
-      child: const Text('Book', style: TextStyle(color: Colors.white)),
+      child: const Text('Book',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
       style: ButtonStyle(
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(18.0),
+            borderRadius: BorderRadius.circular(16.0),
           )),
           backgroundColor: MaterialStateProperty.all(Colors.green)),
     );

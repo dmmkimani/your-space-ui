@@ -19,8 +19,7 @@ class DescriptionInputState extends State<DescriptionInput> {
         widget._controller.animateTo(
             widget._controller.position.maxScrollExtent + 55.0,
             duration: const Duration(milliseconds: 250),
-            curve: Curves.ease
-        );
+            curve: Curves.ease);
       },
       keyboardType: TextInputType.multiline,
       textInputAction: TextInputAction.done,

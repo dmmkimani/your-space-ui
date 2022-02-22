@@ -33,10 +33,9 @@ class NumPeopleState extends State<NumPeople> {
             controller: numPeople,
             textAlign: TextAlign.center,
             decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              contentPadding: EdgeInsets.only(bottom: 1, left: 2.75),
-              counter: Offstage()
-            ),
+                border: OutlineInputBorder(),
+                contentPadding: EdgeInsets.only(bottom: 1, left: 2.75),
+                counter: Offstage()),
           ),
         )
       ],

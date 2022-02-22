@@ -12,12 +12,13 @@ class _UnavailableBtnState extends State<UnavailableBtn> {
   Widget build(BuildContext context) {
     return OutlinedButton(
       onPressed: null,
-      child: const Text('Unavailable', style: TextStyle(color: Colors.red)),
+      child: const Text('Unavailable',
+          style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
       style: ButtonStyle(
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(18.0),
-              )),
+            borderRadius: BorderRadius.circular(16.0),
+          )),
           backgroundColor: MaterialStateProperty.all(Colors.transparent)),
     );
   }
