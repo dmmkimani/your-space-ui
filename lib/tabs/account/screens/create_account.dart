@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:project/tabs/provider.dart';
 
-import 'package:project/tabs/account/widgets/widget_btn_create_account.dart';
-import 'package:project/tabs/account/widgets/widget_input_fname.dart';
-import 'package:project/tabs/account/widgets/widget_input_lname.dart';
+import 'package:project/tabs/account/widgets/btn_create_account.dart';
+import 'package:project/tabs/account/widgets/textfield_fname.dart';
+import 'package:project/tabs/account/widgets/textfield_lname.dart';
 
-import 'package:project/tabs/account/widgets/widget_login.dart';
-import 'package:project/tabs/account/widgets/widget_input_email.dart';
-import 'package:project/tabs/account/widgets/widget_input_password.dart';
-import 'package:project/tabs/account/widgets/widget_logo.dart';
+import 'package:project/tabs/account/widgets/text_login.dart';
+import 'package:project/tabs/account/widgets/textfield_email.dart';
+import 'package:project/tabs/account/widgets/textfield_password.dart';
+import 'package:project/tabs/account/widgets/logo.dart';
 import 'package:project/tabs/widgets/app_bar.dart';
 
 import 'account.dart';

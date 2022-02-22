@@ -1,7 +1,7 @@
-import 'package:project/tabs/account/widgets/widget_input_email.dart';
-import 'package:project/tabs/account/widgets/widget_input_fname.dart';
-import 'package:project/tabs/account/widgets/widget_input_lname.dart';
-import 'package:project/tabs/account/widgets/widget_input_password.dart';
+import 'package:project/tabs/account/widgets/textfield_email.dart';
+import 'package:project/tabs/account/widgets/textfield_fname.dart';
+import 'package:project/tabs/account/widgets/textfield_lname.dart';
+import 'package:project/tabs/account/widgets/textfield_password.dart';
 
 class InputHelpers {
   Map<String,String> getCreateAccountInputs() {

@@ -1,30 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:project/tabs/provider.dart';
 
-class DeleteDialog extends StatefulWidget {
-  final int _position;
-  final Map<String, dynamic> _details;
-  final Function _removeFromList;
+class CancelDialog extends StatefulWidget {
+  final Function _cancel;
 
-  const DeleteDialog(this._position, this._details, this._removeFromList,
-      {Key? key})
-      : super(key: key);
+  const CancelDialog(this._cancel, {Key? key}) : super(key: key);
 
   @override
-  _DeleteDialogState createState() => _DeleteDialogState();
+  _CancelDialogState createState() => _CancelDialogState();
 }
 
-class _DeleteDialogState extends State<DeleteDialog> {
+class _CancelDialogState extends State<CancelDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       title: const Text(
-        'Delete Booking',
+        'Cancel Booking',
         textAlign: TextAlign.start,
         style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
       ),
       content: const Text(
-        'Are you sure you want to delete this booking from your booking history?',
+        'Are you sure you want to cancel your booking?',
         style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.normal),
       ),
       actions: <Widget>[
@@ -40,7 +35,7 @@ class _DeleteDialogState extends State<DeleteDialog> {
                   Navigator.of(context).pop();
                 },
                 child: const Text(
-                  'CANCEL',
+                  'NO',
                   style: TextStyle(
                       color: Colors.blue,
                       fontSize: 13.0,
@@ -54,16 +49,11 @@ class _DeleteDialogState extends State<DeleteDialog> {
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () {
-                  GlobalData.server.deleteFromHistory({
-                    'userEmail': GlobalData.auth!.currentUser!.email,
-                    'id': widget._details['id'],
-                    'date': widget._details['bookingDate']
-                  });
                   Navigator.of(context).pop();
-                  widget._removeFromList(widget._position, widget._details, false);
+                  widget._cancel();
                 },
                 child: const Text(
-                  'DELETE',
+                  'YES',
                   style: TextStyle(
                       color: Colors.blue,
                       fontSize: 13.0,

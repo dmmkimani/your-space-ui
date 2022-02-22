@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project/tabs/account/pages/account_info.dart';
 import 'package:project/tabs/account/pages/your_bookings.dart';
 
-import 'package:project/tabs/account/widgets/widget_controller.dart';
+import 'package:project/tabs/account/widgets/page_controller.dart';
 import 'package:project/tabs/widgets/app_bar.dart';
 import 'package:project/tabs/widgets/bottom_nav_bar.dart';
 

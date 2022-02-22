@@ -136,6 +136,11 @@ class LocalHost {
     }
   }
 
+  Future<void> cancelBooking(Map<String, dynamic> bookingDetails) async {
+    await post(Uri.parse(localhost() + '/cancel'),
+        body: json.encode(bookingDetails));
+  }
+
   Future<void> deleteFromHistory(Map<String, dynamic> bookingDetails) async {
     await post(Uri.parse(localhost() + '/delete'),
         body: json.encode(bookingDetails));

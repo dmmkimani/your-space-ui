@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 class DescriptionInput extends StatefulWidget {
   final ScrollController _controller;
+  final String description;
 
-  const DescriptionInput(this._controller, {Key? key}) : super(key: key);
+  const DescriptionInput(this._controller, {this.description = '', Key? key})
+      : super(key: key);
 
   @override
   DescriptionInputState createState() => DescriptionInputState();
@@ -11,6 +13,14 @@ class DescriptionInput extends StatefulWidget {
 
 class DescriptionInputState extends State<DescriptionInput> {
   static final description = TextEditingController();
+
+  @override
+  void initState() {
+    if (widget.description.isNotEmpty) {
+      description.text = widget.description;
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

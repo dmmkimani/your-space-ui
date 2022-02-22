@@ -18,7 +18,7 @@ class _YourBookingsState extends State<YourBookings>
   Widget build(BuildContext context) {
     super.build(context);
     return FutureBuilder(
-        future: GlobalData.server.getUserBookings('booker.csc354@gmail.com'),
+        future: GlobalData.server.getUserBookings(GlobalData.auth!.currentUser!.email!),
         builder: (BuildContext context,
             AsyncSnapshot<Map<String, dynamic>> snapshot) {
           if (snapshot.data == null) {
@@ -50,10 +50,12 @@ class _YourBookingsState extends State<YourBookings>
   }
 
   void refresh(String message) {
-    setState(() {});
-    if (message.isNotEmpty) {
-      HelperFunctions().showSnackBar(context, message);
-    }
+    Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {});
+      if (message.isNotEmpty) {
+        HelperFunctions().showSnackBar(context, message);
+      }
+    });
   }
 
   @override

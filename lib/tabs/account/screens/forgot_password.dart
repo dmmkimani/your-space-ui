@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:project/tabs/account/widgets/widget_input_email.dart';
-import 'package:project/tabs/account/widgets/widget_text_forgot_password.dart';
-import 'package:project/tabs/account/widgets/widget_icon_lock.dart';
-import 'package:project/tabs/account/widgets/widget_btn_reset_password.dart';
+import 'package:project/tabs/account/widgets/textfield_email.dart';
+import 'package:project/tabs/account/widgets/text_reset_password.dart';
+import 'package:project/tabs/account/widgets/icon_lock.dart';
+import 'package:project/tabs/account/widgets/btn_reset_password.dart';
 import 'package:project/tabs/widgets/app_bar_pop.dart';
 
 class ForgotPasswordPage extends StatefulWidget {

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:project/tabs/account/pages/widgets/dialog_cancel.dart';
 
 class CancelBtn extends StatefulWidget {
-  const CancelBtn({Key? key}) : super(key: key);
+  final Function _cancel;
+
+  const CancelBtn(this._cancel, {Key? key}) : super(key: key);
 
   @override
   _CancelBtnState createState() => _CancelBtnState();
@@ -14,7 +17,11 @@ class _CancelBtnState extends State<CancelBtn> {
       width: double.infinity,
       height: 50.0,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          showDialog(
+              context: context,
+              builder: (context) => CancelDialog(widget._cancel));
+        },
         child: const Text(
           'CANCEL THIS BOOKING',
           style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),

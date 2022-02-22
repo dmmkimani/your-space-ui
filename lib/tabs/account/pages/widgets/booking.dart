@@ -8,11 +8,11 @@ import 'package:project/tabs/account/pages/widgets/btn_amend.dart';
 class Booking extends StatefulWidget {
   final int _position;
   final Map<String, dynamic> _details;
-  final Function _deleteBooking;
+  final Function _removeFromList;
   final Function _refresh;
   final Animation<double> _animation;
 
-  const Booking(this._position, this._details, this._deleteBooking,
+  const Booking(this._position, this._details, this._removeFromList,
       this._refresh, this._animation,
       {Key? key})
       : super(key: key);
@@ -27,8 +27,8 @@ class _BookingState extends State<Booking> {
     String bookingDate = widget._details['bookingDate'];
     String buildingName = widget._details['buildingName'];
     String room = widget._details['room'];
-    String startTime = widget._details['from'];
-    String endTime = widget._details['to'];
+    String startTime = widget._details['startTime'];
+    String endTime = widget._details['endTime'];
     String description = widget._details['description'];
 
     return SizeTransition(
@@ -71,10 +71,12 @@ class _BookingState extends State<Booking> {
                   ],
                 ),
               ),
-              hasBookingExpired(bookingDate, startTime)
-                  ? DeleteBtn(
-                      widget._position, widget._details, widget._deleteBooking)
-                  : AmendBtn(widget._details, widget._refresh),
+              hasBookingStarted(bookingDate, startTime)
+                  ? hasBookingExpired(bookingDate, endTime)
+                      ? DeleteBtn(widget._position, widget._details,
+                          widget._removeFromList)
+                      : Container()
+                  : AmendBtn(widget._position, widget._details, widget._refresh, widget._removeFromList),
             ],
           ),
         ],
@@ -82,11 +84,13 @@ class _BookingState extends State<Booking> {
     );
   }
 
-  bool hasBookingExpired(String bookingDate, String startTime) {
-    int hour = HelperFunctions().timeSlotToInt(startTime);
-    hour -= 3;
-    startTime = HelperFunctions().intToTimeSlot(hour);
+  bool hasBookingStarted(String bookingDate, String startTime) {
     return DateTime.now()
         .isAfter(HelperFunctions().parseDate(bookingDate, startTime));
+  }
+
+  bool hasBookingExpired(String bookingDate, String endTime) {
+    return DateTime.now()
+        .isAfter(HelperFunctions().parseDate(bookingDate, endTime));
   }
 }

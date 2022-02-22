@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class NumPeople extends StatefulWidget {
-  const NumPeople({Key? key}) : super(key: key);
+  final String people;
+
+  const NumPeople({this.people = '', Key? key}) : super(key: key);
 
   @override
   NumPeopleState createState() => NumPeopleState();
@@ -9,6 +11,14 @@ class NumPeople extends StatefulWidget {
 
 class NumPeopleState extends State<NumPeople> {
   static final numPeople = TextEditingController();
+
+  @override
+  void initState() {
+    if (widget.people.isNotEmpty) {
+      numPeople.text = widget.people;
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

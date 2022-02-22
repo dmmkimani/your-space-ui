@@ -12,10 +12,15 @@ import 'package:project/tabs/home/screens/room/widgets/widget_num_people.dart';
 import '../../../provider.dart';
 
 class AmendDialog extends StatefulWidget {
+  final int _position;
   final Map<String, dynamic> _details;
   final Function _refresh;
+  final Function _removeFromList;
 
-  const AmendDialog(this._details, this._refresh, {Key? key}) : super(key: key);
+  const AmendDialog(
+      this._position, this._details, this._refresh, this._removeFromList,
+      {Key? key})
+      : super(key: key);
 
   @override
   _AmendDialogState createState() => _AmendDialogState();
@@ -30,8 +35,8 @@ class _AmendDialogState extends State<AmendDialog> {
   Widget build(BuildContext context) {
     String date = widget._details['bookingDate'].toString().split('-')[0];
     String time = widget._details['bookingDate'].toString().split('-')[1];
-    String from = widget._details['from'];
-    String to = widget._details['to'];
+    String from = widget._details['startTime'];
+    String to = widget._details['endTime'];
     _from = TimeSlotsDropDown([from], from, true);
     _to = TimeSlotsDropDown([to], to, true);
     return ScaffoldMessenger(child: Builder(
@@ -77,11 +82,12 @@ class _AmendDialogState extends State<AmendDialog> {
                       children: [
                         BookingDate(HelperFunctions().parseDate(date, time)),
                         const Divider(),
-                        const NumPeople(),
+                        NumPeople(people: widget._details['people']),
                         const Divider(),
                         BookingDuration(_from, _to),
                         const Divider(),
-                        DescriptionInput(_controller)
+                        DescriptionInput(_controller,
+                            description: widget._details['description'])
                       ],
                     ),
                   ),
@@ -95,7 +101,7 @@ class _AmendDialogState extends State<AmendDialog> {
                       children: [
                         SaveBtn(dialogContext, amend),
                         const SizedBox(height: 15.0),
-                        const CancelBtn()
+                        CancelBtn(cancel)
                       ],
                     ),
                   )
@@ -110,16 +116,16 @@ class _AmendDialogState extends State<AmendDialog> {
   }
 
   void amend(BuildContext dialogContext) async {
+    FocusManager.instance.primaryFocus?.unfocus();
     Map<String, dynamic> response = await GlobalData.server.amendBooking({
       'userEmail': GlobalData.auth!.currentUser!.email,
       'id': widget._details['id'],
       'building': widget._details['building'],
       'room': widget._details['room'],
       'date': widget._details['bookingDate'],
-      'people': widget._details['people'],
-      'description': widget._details['description']
+      'people': numPeople,
+      'description': description
     });
-    FocusManager.instance.primaryFocus?.unfocus();
     switch (response['success']) {
       case true:
         Navigator.of(context).pop();
@@ -130,6 +136,37 @@ class _AmendDialogState extends State<AmendDialog> {
         HelperFunctions().showSnackBar(dialogContext, response['message']);
         break;
     }
+  }
+
+  void cancel() async {
+    FocusManager.instance.primaryFocus?.unfocus();
+    Navigator.of(context).pop();
+    clearInputs();
+    await GlobalData.server.cancelBooking({
+      'userEmail': GlobalData.auth!.currentUser!.email,
+      'id': widget._details['id'],
+      'building': widget._details['building'],
+      'room': widget._details['room'],
+      'date': widget._details['bookingDate'],
+      'startTime': widget._details['startTime'],
+      'duration': duration
+    });
+    widget._removeFromList(widget._position, widget._details, true);
+    widget._refresh('');
+  }
+
+  int get duration {
+    int from = int.parse(_from.selectedTimeSlot.split(':')[0]);
+    int to = int.parse(_to.selectedTimeSlot.split(':')[0]);
+    return (to - from);
+  }
+
+  String get numPeople {
+    return NumPeopleState.numPeople.text;
+  }
+
+  String get description {
+    return DescriptionInputState.description.text;
   }
 
   void clearInputs() {

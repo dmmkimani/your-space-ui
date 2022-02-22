@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project/tabs/account/widgets/widget_btn_account_info.dart';
-import 'package:project/tabs/account/widgets/widget_btn_your_bookings.dart';
+import 'package:project/tabs/account/widgets/btn_account_info.dart';
+import 'package:project/tabs/account/widgets/btn_your_bookings.dart';
 
 class AccountViewController extends StatefulWidget {
   final PageController _controller;

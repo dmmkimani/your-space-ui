@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:project/tabs/account/pages/widgets/booking.dart';
-import 'package:project/tabs/function_helpers.dart';
 
 import '../../../provider.dart';
 
@@ -62,17 +61,20 @@ class _UserBookingsState extends State<UserBookings> {
 
   Widget buildBooking(int position, Map<String, dynamic> details,
           Animation<double> animation) =>
-      Booking(position, details, deleteBooking, widget._refresh, animation);
+      Booking(position, details, removeFromList, widget._refresh, animation);
 
-  void deleteBooking(int position, Map<String, dynamic> details) {
+  void removeFromList(
+      int position, Map<String, dynamic> details, bool isCancelling) {
     widget._bookingDates.removeAt(position);
     key.currentState!.removeItem(position,
         (context, animation) => buildBooking(position, details, animation));
     if (widget._bookingDates.isEmpty) {
-      Future.delayed(const Duration(milliseconds: 500), () {
-        widget._refresh('');
-      });
+      widget._refresh('');
     }
-    HelperFunctions().showSnackBar(context, 'Booking deleted');
+    if (isCancelling) {
+      widget._refresh('Booking cancelled.');
+    } else {
+      widget._refresh('Booking deleted from your booking history.');
+    }
   }
 }

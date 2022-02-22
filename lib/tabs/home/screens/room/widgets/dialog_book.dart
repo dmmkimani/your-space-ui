@@ -107,7 +107,7 @@ class _BookDialogState extends State<BookDialog> {
 
   void book(BuildContext dialogContext) async {
     Map<String, dynamic> response = await GlobalData.server.book({
-      'booker': GlobalData.currentUser!.email.toString(),
+      'userEmail': GlobalData.currentUser!.email,
       'date': RoomHelpers().formatDate(widget._date),
       'building': widget._building,
       'room': widget._room,
@@ -137,18 +137,18 @@ class _BookDialogState extends State<BookDialog> {
         widget._date.year.toString();
   }
 
-  String get numPeople {
-    return NumPeopleState.numPeople.text;
-  }
-
   String get startTime {
     return _from.selectedTimeSlot;
   }
 
   int get duration {
-    int fromTimeSlot = int.parse(_from.selectedTimeSlot.split(':')[0]);
-    int toTimeSlot = int.parse(_to.selectedTimeSlot.split(':')[0]);
-    return (toTimeSlot - fromTimeSlot);
+    int from = int.parse(_from.selectedTimeSlot.split(':')[0]);
+    int to = int.parse(_to.selectedTimeSlot.split(':')[0]);
+    return (to - from);
+  }
+
+  String get numPeople {
+    return NumPeopleState.numPeople.text;
   }
 
   String get description {

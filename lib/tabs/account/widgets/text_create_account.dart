@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:project/tabs/account/functions/helpers_input.dart';
 import 'package:project/tabs/account/screens/create_account.dart';
 
