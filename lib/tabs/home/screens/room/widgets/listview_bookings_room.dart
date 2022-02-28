@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/tabs/function_helpers.dart';
 import 'package:project/tabs/home/screens/room/widgets/btn_reserved.dart';
 import 'package:project/tabs/home/screens/room/widgets/btn_book_slot.dart';
 import 'package:project/tabs/home/screens/room/widgets/btn_unavailable.dart';
@@ -48,8 +49,10 @@ class _RoomBookingsState extends State<RoomBookings> {
                       ),
                       SizedBox(
                           width: 125.0,
-                          child: isAvailable(
-                                  widget._bookings, timeSlots[position])
+                          child: isAfterNow(
+                                      widget._date, timeSlots[position]) &&
+                                  isAvailable(
+                                      widget._bookings, timeSlots[position])
                               ? isBooked(widget._bookings, timeSlots[position])
                                   ? const ReservedBtn()
                                   : isLastTimeSlot(timeSlots, position)
@@ -72,6 +75,16 @@ class _RoomBookingsState extends State<RoomBookings> {
             );
           }),
     );
+  }
+
+  bool isAfterNow(DateTime selectedDate, String timeSlot) {
+    String date = widget._date.day.toString() +
+        '.' +
+        widget._date.month.toString() +
+        '.' +
+        widget._date.year.toString();
+
+    return DateTime.now().isBefore(HelperFunctions().parseDate(date, timeSlot));
   }
 
   bool isAvailable(Map<String, dynamic> bookings, String timeSlot) {

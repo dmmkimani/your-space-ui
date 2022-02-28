@@ -8,7 +8,7 @@ import 'package:project/tabs/home/screens/room/widgets/widget_calendar.dart';
 import 'package:project/tabs/home/screens/room/widgets/widget_capacity.dart';
 import 'package:project/tabs/account/screens/account.dart';
 
-import 'package:project/tabs/home/screens/room/functions/helpers_room.dart';
+import 'package:project/tabs/home/screens/room/functions/helpers.dart';
 
 class Room extends StatefulWidget {
   final String _building;
@@ -56,7 +56,7 @@ class _RoomState extends State<Room> {
                     child: Text(
                       widget._room.toUpperCase(),
                       style: const TextStyle(
-                          fontSize: 22.0, fontWeight: FontWeight.normal),
+                          fontSize: 22.0, fontWeight: FontWeight.bold),
                     ),
                   ),
                   CapacityWidget(details['capacity']),

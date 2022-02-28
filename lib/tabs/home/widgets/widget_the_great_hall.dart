@@ -29,10 +29,8 @@ class TheGreatHallWidget extends StatelessWidget {
         ],
       ),
       onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const TheGreatHall()));
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const TheGreatHall()));
       },
     );
   }

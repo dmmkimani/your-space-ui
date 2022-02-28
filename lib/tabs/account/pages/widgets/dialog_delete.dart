@@ -55,7 +55,7 @@ class _DeleteDialogState extends State<DeleteDialog> {
                 highlightColor: Colors.transparent,
                 onTap: () {
                   GlobalData.server.deleteFromHistory({
-                    'userEmail': GlobalData.auth!.currentUser!.email,
+                    'userEmail': GlobalData.currentUser!.email,
                     'id': widget._details['id'],
                     'date': widget._details['bookingDate']
                   });

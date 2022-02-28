@@ -70,11 +70,16 @@ class LocalHost {
     return json.decode(response.body);
   }
 
-  Future<Map<String, dynamic>> getUserBookings(String userEmail) async {
-    final body = json.encode({'userEmail': userEmail});
+  Future<Map<String, dynamic>> getUserInfo(String userEmail) async {
+    Response response = await post(Uri.parse(localhost() + '/user_info'),
+        body: json.encode(userEmail));
 
-    Response response =
-        await post(Uri.parse(localhost() + '/user_bookings'), body: body);
+    return json.decode(response.body);
+  }
+
+  Future<Map<String, dynamic>> getUserBookings(String userEmail) async {
+    Response response = await post(Uri.parse(localhost() + '/user_bookings'),
+        body: json.encode(userEmail));
 
     switch (response.statusCode) {
       case 200:

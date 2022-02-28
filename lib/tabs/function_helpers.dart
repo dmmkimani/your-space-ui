@@ -11,6 +11,9 @@ class HelperFunctions {
     String month = date.split('.')[1].toString();
     String year = date.split('.')[2].split('-')[0].toString();
 
+    if (day.length == 1) {
+      day = '0$day';
+    }
     if (month.length == 1) {
       month = '0$month';
     }

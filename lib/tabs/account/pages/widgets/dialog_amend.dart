@@ -118,7 +118,7 @@ class _AmendDialogState extends State<AmendDialog> {
   void amend(BuildContext dialogContext) async {
     FocusManager.instance.primaryFocus?.unfocus();
     Map<String, dynamic> response = await GlobalData.server.amendBooking({
-      'userEmail': GlobalData.auth!.currentUser!.email,
+      'userEmail': GlobalData.currentUser!.email,
       'id': widget._details['id'],
       'building': widget._details['building'],
       'room': widget._details['room'],
@@ -143,7 +143,7 @@ class _AmendDialogState extends State<AmendDialog> {
     Navigator.of(context).pop();
     clearInputs();
     await GlobalData.server.cancelBooking({
-      'userEmail': GlobalData.auth!.currentUser!.email,
+      'userEmail': GlobalData.currentUser!.email,
       'id': widget._details['id'],
       'building': widget._details['building'],
       'room': widget._details['room'],

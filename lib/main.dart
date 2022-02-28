@@ -19,6 +19,8 @@ class _AppState extends State<MyApp> {
       title: 'Wall Mounted Room Calendar',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
       ),
       home: const SplashScreen(),
     );

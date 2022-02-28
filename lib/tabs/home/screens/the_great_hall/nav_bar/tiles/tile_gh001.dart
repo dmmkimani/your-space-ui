@@ -10,7 +10,10 @@ class GH001Tile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      trailing: const Icon(Icons.arrow_forward_ios),
+      onTap: () {
+        _changeRoom(const Room('the_great_hall', 'gh001'));
+        Navigator.of(_buildContext).pop();
+      },
       title: const Text(
           'GH001',
           style: TextStyle(
@@ -19,10 +22,7 @@ class GH001Tile extends StatelessWidget {
               color: Colors.black
           )
       ),
-      onTap: () {
-        _changeRoom(const Room('the_great_hall', 'gh001'));
-        Navigator.of(_buildContext).pop();
-      },
+      trailing: const Icon(Icons.navigate_next),
     );
   }
 }
