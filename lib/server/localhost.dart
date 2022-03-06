@@ -48,8 +48,8 @@ class LocalHost {
     }
   }
 
-  Future<String> getBuildingName(String building) async {
-    Response response = await post(Uri.parse(localhost() + '/building_name'),
+  Future<Map<String, dynamic>> getBuildingDetails(String building) async {
+    Response response = await post(Uri.parse(localhost() + '/building_details'),
         body: json.encode(building));
 
     return json.decode(response.body);

@@ -1,33 +1,33 @@
 import 'package:flutter/material.dart';
 
-class CollegeOfEngineering extends StatelessWidget {
-  const CollegeOfEngineering({Key? key}) : super(key: key);
+class SingletonCampus extends StatelessWidget {
+  const SingletonCampus({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
+      onTap: () {},
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
-            'images/buildings/college_of_engineering.jpg',
+            'images/campuses/singleton.jpg',
             width: double.infinity,
-            height: 300,
+            height: 270.0,
             fit: BoxFit.cover,
           ),
           Container(
-            padding: const EdgeInsets.only(top: 10),
+            padding: const EdgeInsets.all(10),
             child: const Text(
-              'College of Engineering',
+              'Singleton Park Campus',
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20.0,
                   color: Colors.black),
             ),
-          ),
+          )
         ],
       ),
-      onTap: () {},
     );
   }
 }

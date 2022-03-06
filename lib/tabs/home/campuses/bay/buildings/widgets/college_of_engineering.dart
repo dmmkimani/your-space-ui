@@ -1,25 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:project/tabs/home/screens/the_great_hall/the_great_hall.dart';
+import 'package:project/tabs/home/screens/building/building.dart';
 
-class TheGreatHallWidget extends StatelessWidget {
-  const TheGreatHallWidget({Key? key}) : super(key: key);
+class CollegeOfEngineering extends StatelessWidget {
+  const CollegeOfEngineering({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => const Building('college_of_engineering')));
+      },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
-            'images/buildings/the_great_hall.jpg',
+            'images/buildings/college_of_engineering.jpg',
             width: double.infinity,
             height: 300,
             fit: BoxFit.cover,
           ),
           Container(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.only(top: 10),
             child: const Text(
-              'The Great Hall',
+              'College of Engineering',
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20.0,
@@ -28,10 +32,6 @@ class TheGreatHallWidget extends StatelessWidget {
           ),
         ],
       ),
-      onTap: () {
-        Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => const TheGreatHall()));
-      },
     );
   }
 }

@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:project/tabs/home/screens/building/building.dart';
 
-class TheCollege extends StatelessWidget {
-  const TheCollege({Key? key}) : super(key: key);
+class YTwyni extends StatelessWidget {
+  const YTwyni({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const Building('y_twyni')));
+      },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
-            'images/buildings/the_college.jpg',
+            'images/buildings/y_twyni.jpg',
             width: double.infinity,
             height: 300,
             fit: BoxFit.cover,
@@ -18,7 +23,7 @@ class TheCollege extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(10),
             child: const Text(
-              'The College',
+              'Y Twyni',
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20.0,
@@ -27,7 +32,6 @@ class TheCollege extends StatelessWidget {
           ),
         ],
       ),
-      onTap: () {},
     );
   }
 }

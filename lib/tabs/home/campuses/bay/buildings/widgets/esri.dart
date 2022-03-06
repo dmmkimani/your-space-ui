@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:project/tabs/home/screens/building/building.dart';
 
 class ESRI extends StatelessWidget {
   const ESRI({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => const Building('esri')));
+      },
       child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -27,7 +32,6 @@ class ESRI extends StatelessWidget {
             ),
           ],
         ),
-      onTap: () {},
     );
   }
 }

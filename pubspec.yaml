@@ -70,6 +70,8 @@ flutter:
 
   assets:
     - images/su-logo.png
+    - images/campuses/bay.jpg
+    - images/campuses/singleton.jpg
     - images/buildings/the_great_hall.jpg
     - images/buildings/school_of_management.jpg
     - images/buildings/the_college.jpg

@@ -1,33 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:project/tabs/home/campuses/bay/buildings/buildings.dart';
 
-class YTwyni extends StatelessWidget {
-  const YTwyni({Key? key}) : super(key: key);
+class BayWidget extends StatelessWidget {
+  const BayWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
+      onTap: () {
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const BayCampus()));
+      },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
-            'images/buildings/y_twyni.jpg',
+            'images/campuses/bay.jpg',
             width: double.infinity,
-            height: 300,
+            height: 270.0,
             fit: BoxFit.cover,
           ),
           Container(
             padding: const EdgeInsets.all(10),
             child: const Text(
-              'Y Twyni',
+              'Bay Campus',
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20.0,
                   color: Colors.black),
             ),
-          ),
+          )
         ],
       ),
-      onTap: () {},
     );
   }
 }

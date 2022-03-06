@@ -30,14 +30,15 @@ class _UserBookingsState extends State<UserBookings> {
           String bookingDate = widget._bookingDates[position];
           Map<String, dynamic> details = widget._bookings[bookingDate];
           return FutureBuilder(
-              future: GlobalData.server.getBuildingName(details['building']),
-              builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+              future: GlobalData.server.getBuildingDetails(details['building']),
+              builder: (BuildContext context,
+                  AsyncSnapshot<Map<String, dynamic>> snapshot) {
                 if (snapshot.data == null) {
                   return Container();
                 } else {
                   details.addAll({
                     'bookingDate': bookingDate,
-                    'buildingName': snapshot.requireData,
+                    'buildingName': snapshot.requireData['name'],
                   });
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.center,

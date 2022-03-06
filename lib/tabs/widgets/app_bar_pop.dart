@@ -31,7 +31,7 @@ class _PopAppBarState extends State<PopAppBar> {
           const Border(bottom: BorderSide(color: Colors.grey, width: 0.2)),
           title: Text(
             widget.title,
-            style: const TextStyle(color: Colors.black),
+            style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           ),
         ));
   }

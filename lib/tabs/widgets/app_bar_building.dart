@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project/tabs/home/widgets/widget_dialog_key.dart';
+import 'package:project/tabs/home/widgets/dialog_key.dart';
 
 class BuildingAppBar extends StatefulWidget {
   final BuildContext context;
