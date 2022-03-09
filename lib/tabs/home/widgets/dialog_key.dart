@@ -29,7 +29,7 @@ class KeyDialog extends StatelessWidget {
         ],
       ),
       content: SizedBox(
-        height: 300.0,
+        height: 325.0,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -110,6 +110,23 @@ class KeyDialog extends StatelessWidget {
                 SizedBox(
                   width: 120.0,
                   child: Text('Speakers',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.black)),
+                )
+              ],
+            ),
+            const Divider(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Icon(Icons.tv, size: 30.0, color: Colors.deepPurple),
+                SizedBox(width: 20.0),
+                SizedBox(
+                  width: 120.0,
+                  child: Text('LCD Screen',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 16.0,

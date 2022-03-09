@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/tabs/home/functions/helpers.dart';
 
 import '../../../function_helpers.dart';
 
@@ -46,7 +47,13 @@ class _BookingState extends State<Booking> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(room.toUpperCase() + ' in ' + buildingName,
+                    !RoomHelpers().doAlternativeFormat(widget._details['building'])
+                        ? Text(room.toUpperCase() + ' in ' + buildingName,
+                        style: const TextStyle(
+                          fontSize: 17.0,
+                          fontWeight: FontWeight.bold,
+                        ))
+                        : Text(RoomHelpers().formatTitle(room) + ' in ' + buildingName,
                         style: const TextStyle(
                           fontSize: 17.0,
                           fontWeight: FontWeight.bold,

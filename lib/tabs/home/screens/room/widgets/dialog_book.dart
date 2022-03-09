@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:project/tabs/home/functions/helpers.dart';
 import 'package:project/tabs/home/screens/room/widgets/widget_date.dart';
 import 'package:project/tabs/home/screens/room/widgets/widget_duration.dart';
 
 import 'package:project/tabs/provider.dart';
 import 'package:project/tabs/function_helpers.dart';
 
-import 'package:project/tabs/home/screens/room/functions/helpers.dart';
 import 'package:project/tabs/home/screens/room/widgets/btn_book.dart';
 import 'package:project/tabs/home/screens/room/widgets/textfield_description.dart';
 import 'package:project/tabs/home/screens/room/widgets/dd_time_slots.dart';

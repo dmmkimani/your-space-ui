@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/tabs/home/functions/helpers.dart';
 
 import 'package:project/tabs/provider.dart';
 
@@ -7,8 +8,6 @@ import 'package:project/tabs/home/screens/room/widgets/listview_bookings_room.da
 import 'package:project/tabs/home/screens/room/widgets/widget_calendar.dart';
 import 'package:project/tabs/home/screens/room/widgets/widget_capacity.dart';
 import 'package:project/tabs/account/screens/account.dart';
-
-import 'package:project/tabs/home/screens/room/functions/helpers.dart';
 
 class Room extends StatefulWidget {
   final String _building;
@@ -53,18 +52,24 @@ class _RoomState extends State<Room> {
                 children: [
                   Container(
                     padding: const EdgeInsets.only(top: 15.0, bottom: 10.0),
-                    child: Text(
-                      widget._room.toUpperCase(),
-                      style: const TextStyle(
-                          fontSize: 22.0, fontWeight: FontWeight.bold),
-                    ),
+                    child: !RoomHelpers().doAlternativeFormat(widget._building)
+                        ? Text(
+                            widget._room.toUpperCase(),
+                            style: const TextStyle(
+                                fontSize: 22.0, fontWeight: FontWeight.bold),
+                          )
+                        : Text(
+                            RoomHelpers().formatTitle(widget._room),
+                            style: const TextStyle(
+                                fontSize: 22.0, fontWeight: FontWeight.bold),
+                          ),
                   ),
                   CapacityWidget(details['capacity']),
                   AmenitiesTable(details['amenities']),
                   Calendar(_currentDate, changeDate),
                   Expanded(
-                      child: RoomBookings(refresh, widget._building, widget._room,
-                          _selectedDate, bookings))
+                      child: RoomBookings(refresh, widget._building,
+                          widget._room, _selectedDate, bookings))
                 ],
               );
             }

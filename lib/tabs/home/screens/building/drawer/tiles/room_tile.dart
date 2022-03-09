@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/tabs/home/functions/helpers.dart';
 import 'package:project/tabs/home/screens/room/room.dart';
 
 class RoomTile extends StatelessWidget {
@@ -19,11 +20,17 @@ class RoomTile extends StatelessWidget {
         _changeRoom(true, room: Room(_building, _room));
         Navigator.of(_drawerContext).pop();
       },
-      title: Text(_room.toUpperCase(),
-          style: const TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 18.0,
-              color: Colors.black)),
+      title: !RoomHelpers().doAlternativeFormat(_building)
+          ? Text(_room.toUpperCase(),
+              style: const TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 18.0,
+                  color: Colors.black))
+          : Text(RoomHelpers().formatTitle(_room),
+              style: const TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 18.0,
+                  color: Colors.black)),
       trailing: const Icon(Icons.navigate_next),
     );
   }

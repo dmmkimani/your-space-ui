@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/tabs/provider.dart';
 
 class LogoutBtn extends StatefulWidget {
   const LogoutBtn({Key? key}) : super(key: key);
@@ -14,7 +15,9 @@ class _LogoutBtnState extends State<LogoutBtn> {
       width: double.infinity,
       height: 50.0,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          GlobalData.server.createRoom();
+        },
         child: const Text(
           'SIGN OUT',
           style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),

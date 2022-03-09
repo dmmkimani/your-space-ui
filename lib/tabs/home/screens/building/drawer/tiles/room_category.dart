@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/tabs/home/functions/helpers.dart';
 import 'package:project/tabs/home/screens/building/drawer/tiles/room_tile.dart';
 
 class RoomCategory extends StatelessWidget {
@@ -19,7 +20,7 @@ class RoomCategory extends StatelessWidget {
     return Column(
       children: [
         ListTile(
-          title: Text(formatTitle(_category),
+          title: Text(RoomHelpers().formatTitle(_category),
               style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18.0,
@@ -42,13 +43,5 @@ class RoomCategory extends StatelessWidget {
             }),
       ],
     );
-  }
-
-  String formatTitle(String category) {
-    return category
-        .replaceAll('_', ' ')
-        .split(' ')
-        .map((string) =>  string.replaceFirst(string[0], string[0].toUpperCase()))
-        .join(' ');
   }
 }

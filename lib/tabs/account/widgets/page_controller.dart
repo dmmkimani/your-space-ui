@@ -16,40 +16,35 @@ class _AccountViewControllerState extends State<AccountViewController> {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      top: 79.0,
-      left: 0.0,
-      right: 0.0,
-      child: Container(
-          decoration: const BoxDecoration(
-              color: Colors.white,
-              border:
-              Border(bottom: BorderSide(color: Colors.grey, width: 0.25))),
-          padding: const EdgeInsets.only(top: 10.0, bottom: 15.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                  child: InkWell(
-                    onTap: () {
-                      if (!isSelected) {
-                        changePage();
-                      }
-                    },
-                    child: YourBookingsBtn(isSelected),
-                  )),
-              Expanded(
-                  child: InkWell(
-                    onTap: () {
-                      if (isSelected) {
-                        changePage();
-                      }
-                    },
-                    child: AccountInfoBtn(!isSelected),
-                  )),
-            ],
-          )),
-    );
+    return Container(
+        decoration: const BoxDecoration(
+            color: Colors.white,
+            border:
+                Border(bottom: BorderSide(color: Colors.grey, width: 0.25))),
+        padding: const EdgeInsets.only(top: 10.0, bottom: 15.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+                child: InkWell(
+              onTap: () {
+                if (!isSelected) {
+                  changePage();
+                }
+              },
+              child: YourBookingsBtn(isSelected),
+            )),
+            Expanded(
+                child: InkWell(
+              onTap: () {
+                if (isSelected) {
+                  changePage();
+                }
+              },
+              child: AccountInfoBtn(!isSelected),
+            )),
+          ],
+        ));
   }
 
   void changePage() {
