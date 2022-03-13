@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const SingletonCampus(),
+                    const SingletonWidget(),
                     Container(
                       padding: const EdgeInsets.only(bottom: 10.0),
                       child: const Divider(thickness: 0.75),

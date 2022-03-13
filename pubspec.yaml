@@ -78,6 +78,10 @@ flutter:
     - images/buildings/y_twyni.jpg
     - images/buildings/esri.jpg
     - images/buildings/college_of_engineering.jpg
+    - images/buildings/fulton_house.jpg
+    - images/buildings/faraday.jpg
+    - images/buildings/james_callaghan.jpg
+    - images/buildings/keir_hardie.jpg
 
   fonts:
     - family: CustomIcons

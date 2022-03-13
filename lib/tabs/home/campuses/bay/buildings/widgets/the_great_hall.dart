@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project/tabs/home/screens/building/building.dart';
 
-class TheGreatHallWidget extends StatelessWidget {
-  const TheGreatHallWidget({Key? key}) : super(key: key);
+class TheGreatHall extends StatelessWidget {
+  const TheGreatHall({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -15,9 +15,7 @@ class _LogoutBtnState extends State<LogoutBtn> {
       width: double.infinity,
       height: 50.0,
       child: ElevatedButton(
-        onPressed: () {
-          GlobalData.server.createRoom();
-        },
+        onPressed: () {},
         child: const Text(
           'SIGN OUT',
           style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),

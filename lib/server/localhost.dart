@@ -3,11 +3,6 @@ import 'dart:io';
 import 'package:http/http.dart';
 
 class LocalHost {
-  Future<void> createRoom() async {
-    await post(Uri.parse(localhost() + '/createRoom'),
-        body: json.encode({'name': 'room_west', 'capacity': '60'}));
-  }
-
   Future<Map<String, dynamic>> createAccount(
       Map<String, dynamic> accountInfo) async {
     Response response = await post(Uri.parse(localhost() + '/create_account'),

@@ -1,30 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:project/tabs/home/campuses/singleton/buildings/widgets/faraday.dart';
+import 'package:project/tabs/home/campuses/singleton/buildings/widgets/fulton_house.dart';
+import 'package:project/tabs/home/campuses/singleton/buildings/widgets/james_callaghan.dart';
+import 'package:project/tabs/home/campuses/singleton/buildings/widgets/keir_hardie.dart';
 
 import 'package:project/tabs/widgets/app_bar_pop.dart';
 import 'package:project/tabs/widgets/bottom_nav_bar.dart';
 
-import 'widgets/college_of_engineering.dart';
-import 'widgets/esri.dart';
-import 'widgets/school_of_management.dart';
-import 'widgets/the_college.dart';
-import 'widgets/the_great_hall.dart';
-import 'widgets/y_twyni.dart';
-
-class BayCampus extends StatefulWidget {
-  const BayCampus({Key? key}) : super(key: key);
+class SingletonCampus extends StatefulWidget {
+  const SingletonCampus({Key? key}) : super(key: key);
 
   @override
-  _BayCampusState createState() => _BayCampusState();
+  _SingletonCampusState createState() => _SingletonCampusState();
 }
 
-class _BayCampusState extends State<BayCampus> {
+class _SingletonCampusState extends State<SingletonCampus> {
   final List<Widget> _buildings = [
-    const TheGreatHall(),
-    const SchoolOfManagement(),
-    const TheCollege(),
-    const YTwyni(),
-    const ESRI(),
-    const CollegeOfEngineering()
+    const FultonHouse(),
+    const Faraday(),
+    const JamesCallaghan(),
+    const KeirHardie(),
   ];
 
   @override
@@ -40,7 +35,7 @@ class _BayCampusState extends State<BayCampus> {
                 itemBuilder: (BuildContext context, int position) {
                   return Container(
                     padding:
-                        const EdgeInsets.only(left: 15, right: 15, bottom: 15),
+                    const EdgeInsets.only(left: 15, right: 15, bottom: 15),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -48,13 +43,13 @@ class _BayCampusState extends State<BayCampus> {
                         (position != (_buildings.length - 1))
                             ? const Divider(thickness: 0.75)
                             : const Padding(
-                                padding: EdgeInsets.only(bottom: 5.0))
+                            padding: EdgeInsets.only(bottom: 5.0))
                       ],
                     ),
                   );
                 }),
           ),
-          PopAppBar(context, 'Bay Campus')
+          PopAppBar(context, 'Singleton Park Campus')
         ],
       ),
       bottomNavigationBar: BottomNavBar(0),
