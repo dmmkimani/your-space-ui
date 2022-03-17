@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/tabs/provider.dart';
+import 'package:project/tabs/account/splash_screen_account.dart';
 import 'package:project/tabs/home/screens/room/widgets/dialog_book.dart';
 
 class BookSlotBtn extends StatefulWidget {
@@ -25,7 +26,9 @@ class _BookSlotBtnState extends State<BookSlotBtn> {
     return ElevatedButton(
       onPressed: () {
         if (GlobalData.currentUser == null) {
-          // Go to login page but keep this page alive
+          Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (context) => const AccountSplashScreen()));
+          return;
         }
         showDialog(
             context: context,

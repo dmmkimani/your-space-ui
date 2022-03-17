@@ -22,7 +22,17 @@ class BuildingDrawer extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         padding: EdgeInsets.zero,
         children: [
-          const DrawerHeader(child: null),
+          SizedBox(
+            height: 300.0,
+            child: DrawerHeader(
+                padding: EdgeInsets.zero,
+                child: Image.asset(
+                  'images/buildings/' + _building + '.jpg',
+                  width: double.infinity,
+                  height: double.infinity,
+                  fit: BoxFit.cover,
+                )),
+          ),
           ListTile(
             onTap: () {
               _updatePage(false);

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:project/tabs/provider.dart';
-
 import 'package:project/tabs/account/widgets/btn_create_account.dart';
 import 'package:project/tabs/account/widgets/textfield_fname.dart';
 import 'package:project/tabs/account/widgets/textfield_lname.dart';
@@ -12,6 +9,7 @@ import 'package:project/tabs/account/widgets/textfield_email.dart';
 import 'package:project/tabs/account/widgets/textfield_password.dart';
 import 'package:project/tabs/account/widgets/logo.dart';
 import 'package:project/tabs/widgets/app_bar.dart';
+import 'package:project/tabs/widgets/bottom_nav_bar.dart';
 
 import 'account.dart';
 
@@ -27,19 +25,6 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
   final PasswordInput _passwordInput = const PasswordInput();
   final FNameInput _fNameInput = const FNameInput();
   final LNameInput _lNameInput = const LNameInput();
-
-  @override
-  void initState() {
-    GlobalData.auth!.authStateChanges().listen((User? _user) {
-      if (_user != null) {
-        setState(() {
-          goToAccountPage();
-        });
-      }
-    });
-
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,6 +65,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
           const DefaultAppBar('Create an Account'),
         ],
       ),
+      bottomNavigationBar: BottomNavBar(1),
     );
   }
 

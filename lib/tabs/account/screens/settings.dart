@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project/tabs/account/widgets/btn_logout.dart';
 import 'package:project/tabs/widgets/app_bar_pop.dart';
+import 'package:project/tabs/widgets/bottom_nav_bar.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -10,35 +11,26 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  bool areNotificationsOn = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
           Container(
-              padding:
-                  const EdgeInsets.only(top: 90.0),
+              padding: const EdgeInsets.only(top: 90.0),
               child: Column(
                 children: [
                   ListTile(
                     onTap: () {},
                     leading: Container(
                       padding: const EdgeInsets.only(left: 10.0),
-                      child: const Icon(Icons.notifications_active, color: Colors.blue),
+                      child: const Icon(Icons.notifications_active,
+                          color: Colors.blue),
                     ),
                     title: const Text('Notifications',
                         style: TextStyle(
                             fontSize: 16.0, fontWeight: FontWeight.normal)),
-                    trailing: Switch(
-                      value: areNotificationsOn,
-                      onChanged: (value) {
-                        setState(() {
-                          areNotificationsOn = value;
-                        });
-                      },
-                    ),
+                    trailing: const Icon(Icons.navigate_next),
                   ),
                   const Divider(),
                   ListTile(
@@ -77,6 +69,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           PopAppBar(context, 'Settings')
         ],
       ),
+      bottomNavigationBar: BottomNavBar(1),
     );
   }
 }

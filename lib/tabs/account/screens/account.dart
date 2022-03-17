@@ -24,7 +24,8 @@ class _AccountPageState extends State<AccountPage> {
         children: [
           FutureBuilder(
               future: loadPageData(),
-              builder: (BuildContext context, AsyncSnapshot<Map<String, dynamic>> snapshot) {
+              builder: (BuildContext context,
+                  AsyncSnapshot<Map<String, dynamic>> snapshot) {
                 if (snapshot.data == null) {
                   return Center(
                     child: Container(
@@ -37,12 +38,12 @@ class _AccountPageState extends State<AccountPage> {
                     controller: _controller,
                     physics: const NeverScrollableScrollPhysics(),
                     children: [
-                      YourBookings(snapshot.requireData['response']),
+                      YourBookings(snapshot.requireData['response'], refresh),
                       AccountInfo(snapshot.requireData['accountInfo'])
                     ],
                   );
                 }
-          }),
+              }),
           AccountAppBar(_controller),
         ],
       ),
@@ -50,10 +51,16 @@ class _AccountPageState extends State<AccountPage> {
     );
   }
 
+  void refresh() {
+    setState(() {});
+  }
+
   Future<Map<String, dynamic>> loadPageData() async {
     return {
-      'response': await GlobalData.server.getUserBookings(GlobalData.currentUser!.email!),
-      'accountInfo': await GlobalData.server.getUserInfo(GlobalData.currentUser!.email!)
+      'response': await GlobalData.server
+          .getUserBookings(GlobalData.currentUser!.email!),
+      'accountInfo':
+          await GlobalData.server.getUserInfo(GlobalData.currentUser!.email!)
     };
   }
 

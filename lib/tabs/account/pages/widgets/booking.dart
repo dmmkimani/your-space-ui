@@ -47,13 +47,11 @@ class _BookingState extends State<Booking> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    !RoomHelpers().doAlternativeFormat(widget._details['building'])
-                        ? Text(room.toUpperCase() + ' in ' + buildingName,
-                        style: const TextStyle(
-                          fontSize: 17.0,
-                          fontWeight: FontWeight.bold,
-                        ))
-                        : Text(RoomHelpers().formatTitle(room) + ' in ' + buildingName,
+                    Text(
+                        RoomHelpers()
+                                .formatRoom(widget._details['building'], room) +
+                            ' in ' +
+                            buildingName,
                         style: const TextStyle(
                           fontSize: 17.0,
                           fontWeight: FontWeight.bold,
@@ -83,7 +81,8 @@ class _BookingState extends State<Booking> {
                       ? DeleteBtn(widget._position, widget._details,
                           widget._removeFromList)
                       : Container()
-                  : AmendBtn(widget._position, widget._details, widget._refresh, widget._removeFromList),
+                  : AmendBtn(widget._position, widget._details, widget._refresh,
+                      widget._removeFromList),
             ],
           ),
         ],

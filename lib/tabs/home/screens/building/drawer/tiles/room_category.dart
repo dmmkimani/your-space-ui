@@ -20,7 +20,7 @@ class RoomCategory extends StatelessWidget {
     return Column(
       children: [
         ListTile(
-          title: Text(RoomHelpers().formatTitle(_category),
+          title: Text(RoomHelpers().formatRoomCategory(_category),
               style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18.0,

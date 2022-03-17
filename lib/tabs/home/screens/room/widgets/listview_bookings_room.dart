@@ -68,7 +68,7 @@ class _RoomBookingsState extends State<RoomBookings> {
                     ],
                   ),
                   isLastTimeSlot(timeSlots, position)
-                      ? const Padding(padding: EdgeInsets.only(bottom: 5.0))
+                      ? const Padding(padding: EdgeInsets.only(bottom: 10.0))
                       : const Divider(),
                 ],
               ),

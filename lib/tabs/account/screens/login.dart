@@ -9,6 +9,7 @@ import 'package:project/tabs/account/widgets/text_forgot_password.dart';
 import 'package:project/tabs/account/widgets/textfield_email.dart';
 import 'package:project/tabs/account/widgets/logo.dart';
 import 'package:project/tabs/widgets/app_bar.dart';
+import 'package:project/tabs/widgets/bottom_nav_bar.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -19,7 +20,6 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage>
     with AutomaticKeepAliveClientMixin<LoginPage> {
-  final int _selectedPageIndex = 1;
   final EmailInput _emailInput = const EmailInput();
   final PasswordInput _passwordInput = const PasswordInput();
 
@@ -50,24 +50,7 @@ class _LoginPageState extends State<LoginPage>
           const DefaultAppBar('Login')
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-              backgroundColor: Colors.white),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle),
-              label: 'Account',
-              backgroundColor: Colors.white),
-        ],
-        currentIndex: _selectedPageIndex,
-        selectedItemColor: Colors.blue,
-        onTap: (selectedPageIndex) {
-          FocusManager.instance.primaryFocus?.unfocus();
-          // Go to home page
-        },
-      ),
+      bottomNavigationBar: BottomNavBar(1),
     );
   }
 

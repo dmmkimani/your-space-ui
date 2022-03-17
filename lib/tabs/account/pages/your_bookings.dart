@@ -7,8 +7,10 @@ import 'package:project/tabs/account/pages/widgets/no_bookings.dart';
 
 class YourBookings extends StatefulWidget {
   final Map<String, dynamic> _response;
+  final Function _refresh;
 
-  const YourBookings(this._response, {Key? key}) : super(key: key);
+  const YourBookings(this._response, this._refresh, {Key? key})
+      : super(key: key);
 
   @override
   _YourBookingsState createState() => _YourBookingsState();
@@ -23,7 +25,6 @@ class _YourBookingsState extends State<YourBookings>
       Map<String, dynamic> bookings = widget._response['response'];
       List<String> bookingDates = bookings.keys.toList();
       bookingDates.sort((b, a) => sortBookings(a, b));
-
       return Container(
         padding: const EdgeInsets.only(top: 205.0, left: 20.0, right: 20.0),
         child: UserBookings(bookings, bookingDates, refresh),
@@ -36,12 +37,12 @@ class _YourBookingsState extends State<YourBookings>
     }
   }
 
-  void refresh(String message) {
+  void refresh(int bookings, String message, {bool? isCancelling}) {
     Future.delayed(const Duration(milliseconds: 500), () {
-      setState(() {});
-      if (message.isNotEmpty) {
-        HelperFunctions().showSnackBar(context, message);
+      if (bookings == 0 || isCancelling!) {
+        widget._refresh();
       }
+      HelperFunctions().showSnackBar(context, message);
     });
   }
 

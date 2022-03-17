@@ -16,7 +16,7 @@ class _AccountInfoState extends State<AccountInfo>
   Widget build(BuildContext context) {
     super.build(context);
     return Container(
-      padding: const EdgeInsets.only(top: 205.0),
+      padding: const EdgeInsets.only(top: 200.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,

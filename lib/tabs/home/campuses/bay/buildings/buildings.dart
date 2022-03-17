@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:project/tabs/widgets/app_bar_pop.dart';
 import 'package:project/tabs/widgets/bottom_nav_bar.dart';
 
-import 'widgets/college_of_engineering.dart';
-import 'widgets/esri.dart';
 import 'widgets/school_of_management.dart';
 import 'widgets/the_college.dart';
 import 'widgets/the_great_hall.dart';
@@ -23,8 +21,6 @@ class _BayCampusState extends State<BayCampus> {
     const SchoolOfManagement(),
     const TheCollege(),
     const YTwyni(),
-    const ESRI(),
-    const CollegeOfEngineering()
   ];
 
   @override

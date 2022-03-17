@@ -4,6 +4,7 @@ import 'package:project/tabs/account/widgets/text_reset_password.dart';
 import 'package:project/tabs/account/widgets/icon_lock.dart';
 import 'package:project/tabs/account/widgets/btn_reset_password.dart';
 import 'package:project/tabs/widgets/app_bar_pop.dart';
+import 'package:project/tabs/widgets/bottom_nav_bar.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({Key? key}) : super(key: key);
@@ -37,6 +38,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           PopAppBar(context, 'Forgot Your Password?')
         ],
       ),
+      bottomNavigationBar: BottomNavBar(1),
     );
   }
 }

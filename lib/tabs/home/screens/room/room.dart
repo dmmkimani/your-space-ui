@@ -51,18 +51,12 @@ class _RoomState extends State<Room> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    padding: const EdgeInsets.only(top: 15.0, bottom: 10.0),
-                    child: !RoomHelpers().doAlternativeFormat(widget._building)
-                        ? Text(
-                            widget._room.toUpperCase(),
-                            style: const TextStyle(
-                                fontSize: 22.0, fontWeight: FontWeight.bold),
-                          )
-                        : Text(
-                            RoomHelpers().formatTitle(widget._room),
-                            style: const TextStyle(
-                                fontSize: 22.0, fontWeight: FontWeight.bold),
-                          ),
+                    padding: const EdgeInsets.only(top: 7.5, bottom: 10.0),
+                    child: Text(
+                      RoomHelpers().formatRoom(widget._building, widget._room),
+                      style: const TextStyle(
+                          fontSize: 22.0, fontWeight: FontWeight.bold),
+                    ),
                   ),
                   CapacityWidget(details['capacity']),
                   AmenitiesTable(details['amenities']),

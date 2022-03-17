@@ -26,14 +26,14 @@ class _SplashScreenState extends State<SplashScreen> {
           future: Firebase.initializeApp(),
           builder: (BuildContext context, AsyncSnapshot<FirebaseApp> snapshot) {
             if (snapshot.data != null) {
-              FirebaseAuth _auth = FirebaseAuth.instance;
-              User? _user = _auth.currentUser;
-              GlobalData.auth = _auth;
+              FirebaseAuth auth = FirebaseAuth.instance;
+              User? user = auth.currentUser;
+              GlobalData.auth = auth;
               WidgetsBinding.instance!.addPostFrameCallback((_) {
                 Navigator.of(context)
                     .pushReplacement(MaterialPageRoute(builder: (context) {
-                  if (_user != null) {
-                    GlobalData.currentUser = _user;
+                  if (user != null) {
+                    GlobalData.currentUser = user;
                   }
                   return const HomePage();
                 }));

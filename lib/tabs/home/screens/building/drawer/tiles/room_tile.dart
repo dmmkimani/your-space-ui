@@ -20,17 +20,11 @@ class RoomTile extends StatelessWidget {
         _changeRoom(true, room: Room(_building, _room));
         Navigator.of(_drawerContext).pop();
       },
-      title: !RoomHelpers().doAlternativeFormat(_building)
-          ? Text(_room.toUpperCase(),
-              style: const TextStyle(
-                  fontWeight: FontWeight.normal,
-                  fontSize: 18.0,
-                  color: Colors.black))
-          : Text(RoomHelpers().formatTitle(_room),
-              style: const TextStyle(
-                  fontWeight: FontWeight.normal,
-                  fontSize: 18.0,
-                  color: Colors.black)),
+      title: Text(RoomHelpers().formatRoom(_building, _room),
+          style: const TextStyle(
+              fontWeight: FontWeight.normal,
+              fontSize: 18.0,
+              color: Colors.black)),
       trailing: const Icon(Icons.navigate_next),
     );
   }

@@ -6,7 +6,7 @@ class LockIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container (
-      padding: const EdgeInsets.all(35.0),
+      padding: const EdgeInsets.all(10.0),
       child: const Icon(
         Icons.lock_outline,
         size: 125.0,

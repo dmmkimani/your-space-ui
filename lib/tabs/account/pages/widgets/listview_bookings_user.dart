@@ -69,13 +69,11 @@ class _UserBookingsState extends State<UserBookings> {
     widget._bookingDates.removeAt(position);
     key.currentState!.removeItem(position,
         (context, animation) => buildBooking(position, details, animation));
-    if (widget._bookingDates.isEmpty) {
-      widget._refresh('');
-    }
     if (isCancelling) {
-      widget._refresh('Booking cancelled.');
+      widget._refresh(widget._bookingDates.length, 'Booking cancelled.', isCancelling: isCancelling);
     } else {
-      widget._refresh('Booking deleted from your booking history.');
+      widget._refresh(widget._bookingDates.length,
+          'Booking deleted from your booking history.');
     }
   }
 }

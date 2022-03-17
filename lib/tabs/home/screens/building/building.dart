@@ -24,17 +24,20 @@ class _BuildingState extends State<Building> {
         builder: (BuildContext context,
             AsyncSnapshot<Map<String, dynamic>> snapshot) {
           if (snapshot.data == null) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return Container(
+                color: Colors.white,
+                child: const Center(child: CircularProgressIndicator()));
           } else {
             _body ??= Container(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: BuildingHome(snapshot.requireData),
+              child: BuildingHome(widget._building, snapshot.requireData),
             );
             return Scaffold(
-              drawer: BuildingDrawer(widget._building, snapshot.requireData['name'],
-                  snapshot.requireData['rooms'], updatePage),
+              drawer: BuildingDrawer(
+                  widget._building,
+                  snapshot.requireData['name'],
+                  snapshot.requireData['rooms'],
+                  updatePage),
               extendBodyBehindAppBar: false,
               body: Stack(
                 children: [
