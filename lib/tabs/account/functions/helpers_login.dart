@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:project/main.dart';
 import 'package:project/tabs/provider.dart';
 
 import 'package:project/tabs/account/functions/helpers_input.dart';
 import 'package:project/tabs/function_helpers.dart';
-
-import '../splash_screen_account.dart';
 
 class LoginHelpers {
   final BuildContext _context;
@@ -43,6 +42,7 @@ class LoginHelpers {
       'email': userInputs['email'].toString(),
       'password': userInputs['password'].toString()
     });
+
     switch (response['success']) {
       case true:
         String token = response['token'];
@@ -59,8 +59,8 @@ class LoginHelpers {
   void signIn(String token) async {
     GlobalData.auth!.authStateChanges().listen((User? user) {
       GlobalData.currentUser == user!;
-      Navigator.of(_context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const AccountSplashScreen()));
+      Navigator.of(_context).pushReplacement(MaterialPageRoute(
+          builder: (context) => const MyApp(isLoggingIn: true)));
     });
     GlobalData.auth!.signInWithCustomToken(token);
   }

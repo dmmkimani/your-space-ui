@@ -6,7 +6,9 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final bool? isLoggingIn;
+
+  const MyApp({Key? key, this.isLoggingIn = false}) : super(key: key);
 
   @override
   _AppState createState() => _AppState();
@@ -16,13 +18,13 @@ class _AppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Wall Mounted Room Calendar',
+      title: 'Your Space',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
       ),
-      home: const SplashScreen(),
+      home: SplashScreen(widget.isLoggingIn!),
     );
   }
 }

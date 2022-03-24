@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:project/tabs/account/screens/account.dart';
 
 import 'package:project/tabs/provider.dart';
 
 import 'package:project/tabs/home/home.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+  final bool isLoggingIn;
+
+  const SplashScreen(this.isLoggingIn, {Key? key}) : super(key: key);
 
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -35,7 +38,11 @@ class _SplashScreenState extends State<SplashScreen> {
                   if (user != null) {
                     GlobalData.currentUser = user;
                   }
-                  return const HomePage();
+                  if (widget.isLoggingIn) {
+                    return const AccountPage();
+                  } else {
+                    return const HomePage();
+                  }
                 }));
               });
             }

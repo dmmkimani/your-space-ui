@@ -15,6 +15,7 @@ class Building extends StatefulWidget {
 }
 
 class _BuildingState extends State<Building> {
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
   Widget? _body;
 
   @override
@@ -33,6 +34,7 @@ class _BuildingState extends State<Building> {
               child: BuildingHome(widget._building, snapshot.requireData),
             );
             return Scaffold(
+              key: _key,
               drawer: BuildingDrawer(
                   widget._building,
                   snapshot.requireData['name'],
@@ -45,7 +47,7 @@ class _BuildingState extends State<Building> {
                     padding: const EdgeInsets.only(top: 90),
                     child: _body,
                   ),
-                  BuildingAppBar(context, snapshot.requireData['name'])
+                  BuildingAppBar(context, _key, snapshot.requireData['name'])
                 ],
               ),
               bottomNavigationBar: BottomNavBar(0),
