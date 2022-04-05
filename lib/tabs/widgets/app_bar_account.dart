@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:project/server/server.dart';
 import 'package:project/tabs/account/screens/settings.dart';
 import 'package:project/tabs/account/widgets/page_controller.dart';
 
 class AccountAppBar extends StatefulWidget {
+  final Server _server;
   final PageController _controller;
 
-  const AccountAppBar(this._controller, {Key? key}) : super(key: key);
+  const AccountAppBar(this._server, this._controller, {Key? key})
+      : super(key: key);
 
   @override
   _AccountAppBarState createState() => _AccountAppBarState();
@@ -34,7 +37,7 @@ class _AccountAppBarState extends State<AccountAppBar> {
                   highlightColor: Colors.transparent,
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const SettingsScreen()));
+                        builder: (context) => SettingsScreen(widget._server)));
                   },
                   child: Container(
                     padding: const EdgeInsets.only(right: 15.0),

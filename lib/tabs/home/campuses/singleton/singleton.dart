@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:project/server/server.dart';
 import 'package:project/tabs/home/campuses/singleton/buildings/buildings.dart';
 
 class SingletonWidget extends StatelessWidget {
-  const SingletonWidget({Key? key}) : super(key: key);
+  final Server _server;
+
+  const SingletonWidget(this._server, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => const SingletonCampus()));
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => SingletonCampus(_server)));
       },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

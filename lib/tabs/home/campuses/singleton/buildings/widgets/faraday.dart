@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:project/server/server.dart';
 import 'package:project/tabs/home/screens/building/building.dart';
 
 class Faraday extends StatelessWidget {
-  const Faraday({Key? key}) : super(key: key);
+  final Server _server;
+
+  const Faraday(this._server, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => const Building('faraday')));
+            builder: (context) => Building(_server, 'faraday')));
       },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

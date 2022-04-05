@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:project/server/server.dart';
 import 'package:project/tabs/home/functions/helpers.dart';
 import 'package:project/tabs/home/screens/building/drawer/tiles/room_tile.dart';
 
 class RoomCategory extends StatelessWidget {
+  final Server _server;
   final BuildContext _drawerContext;
   final String _building;
   final String _category;
   final List<dynamic> _rooms;
   final Function _changeRoom;
 
-  const RoomCategory(this._drawerContext, this._building, this._category,
-      this._rooms, this._changeRoom,
+  const RoomCategory(this._server, this._drawerContext, this._building,
+      this._category, this._rooms, this._changeRoom,
       {Key? key})
       : super(key: key);
 
@@ -35,8 +37,8 @@ class RoomCategory extends StatelessWidget {
             itemBuilder: (BuildContext context, int position) {
               return Column(
                 children: [
-                  RoomTile(
-                      _drawerContext, _building, _rooms[position], _changeRoom),
+                  RoomTile(_server, _drawerContext, _building, _rooms[position],
+                      _changeRoom),
                   const Divider()
                 ],
               );

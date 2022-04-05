@@ -21,9 +21,7 @@ class RoomHelpers {
   }
 
   String formatRoom(String building, String room) {
-    if (building == 'pc_labs') {
-      return 'PC Labs';
-    } else if (building == 'james_callaghan' || building == 'keir_hardie') {
+    if (building == 'james_callaghan' || building == 'keir_hardie') {
       if (room == 'james_lecture_theatre') {
         return 'James Lecture Theatre';
       } else {

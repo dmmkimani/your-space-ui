@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:project/server/server.dart';
 import 'package:project/tabs/account/screens/account.dart';
 
 import 'package:project/tabs/provider.dart';
@@ -9,9 +9,11 @@ import 'package:project/tabs/provider.dart';
 import 'package:project/tabs/home/home.dart';
 
 class SplashScreen extends StatefulWidget {
-  final bool isLoggingIn;
+  final Server _server;
+  final bool _isLoggingIn;
 
-  const SplashScreen(this.isLoggingIn, {Key? key}) : super(key: key);
+  const SplashScreen(this._server, this._isLoggingIn, {Key? key})
+      : super(key: key);
 
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -38,10 +40,10 @@ class _SplashScreenState extends State<SplashScreen> {
                   if (user != null) {
                     GlobalData.currentUser = user;
                   }
-                  if (widget.isLoggingIn) {
-                    return const AccountPage();
+                  if (widget._isLoggingIn) {
+                    return AccountPage(widget._server);
                   } else {
-                    return const HomePage();
+                    return HomePage(widget._server);
                   }
                 }));
               });

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-
+import 'package:project/server/server.dart';
 import 'package:project/tabs/account/functions/helpers_input.dart';
 import 'package:project/tabs/account/screens/create_account.dart';
 
 class CreateAccountWidget extends StatelessWidget {
-  const CreateAccountWidget({Key? key}) : super(key: key);
+  final Server _server;
+
+  const CreateAccountWidget(this._server, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class CreateAccountWidget extends StatelessWidget {
           InputHelpers().clearInputs();
           Navigator.of(context).push(
               MaterialPageRoute(
-                  builder: (context) => const CreateAccountPage()
+                  builder: (context) => CreateAccountPage(_server)
               )
           );
         },

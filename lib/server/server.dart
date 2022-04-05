@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart';
 
-class LocalHost {
+class Server {
   Future<Map<String, dynamic>> createAccount(
       Map<String, dynamic> accountInfo) async {
     Response response = await post(Uri.parse(localhost() + '/create_account'),

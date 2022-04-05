@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:project/server/server.dart';
 import 'package:project/tabs/account/pages/widgets/booking.dart';
 
-import '../../../provider.dart';
-
 class UserBookings extends StatefulWidget {
+  final Server _server;
   final Map<String, dynamic> _bookings;
   final List<String> _bookingDates;
   final Function _refresh;
 
-  const UserBookings(this._bookings, this._bookingDates, this._refresh,
+  const UserBookings(
+      this._server, this._bookings, this._bookingDates, this._refresh,
       {Key? key})
       : super(key: key);
 
@@ -30,7 +31,7 @@ class _UserBookingsState extends State<UserBookings> {
           String bookingDate = widget._bookingDates[position];
           Map<String, dynamic> details = widget._bookings[bookingDate];
           return FutureBuilder(
-              future: GlobalData.server.getBuildingDetails(details['building']),
+              future: widget._server.getBuildingDetails(details['building']),
               builder: (BuildContext context,
                   AsyncSnapshot<Map<String, dynamic>> snapshot) {
                 if (snapshot.data == null) {
@@ -62,7 +63,8 @@ class _UserBookingsState extends State<UserBookings> {
 
   Widget buildBooking(int position, Map<String, dynamic> details,
           Animation<double> animation) =>
-      Booking(position, details, removeFromList, widget._refresh, animation);
+      Booking(widget._server, position, details, removeFromList,
+          widget._refresh, animation);
 
   void removeFromList(
       int position, Map<String, dynamic> details, bool isCancelling) {
@@ -70,7 +72,8 @@ class _UserBookingsState extends State<UserBookings> {
     key.currentState!.removeItem(position,
         (context, animation) => buildBooking(position, details, animation));
     if (isCancelling) {
-      widget._refresh(widget._bookingDates.length, 'Booking cancelled.', isCancelling: isCancelling);
+      widget._refresh(widget._bookingDates.length, 'Booking cancelled.',
+          isCancelling: isCancelling);
     } else {
       widget._refresh(widget._bookingDates.length,
           'Booking deleted from your booking history.');

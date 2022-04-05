@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:project/server/server.dart';
 import 'package:project/tabs/home/campuses/bay/buildings/buildings.dart';
 
 class BayWidget extends StatelessWidget {
-  const BayWidget({Key? key}) : super(key: key);
+  final Server _server;
+
+  const BayWidget(this._server, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
         Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => const BayCampus()));
+            .push(MaterialPageRoute(builder: (context) => BayCampus(_server)));
       },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

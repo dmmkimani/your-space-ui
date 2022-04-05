@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/server/server.dart';
 import 'package:project/tabs/splash_screen.dart';
 
 void main() {
@@ -24,7 +25,7 @@ class _AppState extends State<MyApp> {
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
       ),
-      home: SplashScreen(widget.isLoggingIn!),
+      home: SplashScreen(Server(), widget.isLoggingIn!),
     );
   }
 }

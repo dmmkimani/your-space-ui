@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:project/server/server.dart';
 import 'package:project/tabs/home/screens/building/building.dart';
 
 class YTwyni extends StatelessWidget {
-  const YTwyni({Key? key}) : super(key: key);
+  final Server _server;
+
+  const YTwyni(this._server, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => const Building('y_twyni')));
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => Building(_server, 'y_twyni')));
       },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

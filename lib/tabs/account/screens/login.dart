@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/server/server.dart';
 
 import 'package:project/tabs/account/screens/account.dart';
 import 'package:project/tabs/account/widgets/btn_login.dart';
@@ -12,7 +13,9 @@ import 'package:project/tabs/widgets/app_bar.dart';
 import 'package:project/tabs/widgets/bottom_nav_bar.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  final Server _server;
+
+  const LoginPage(this._server, {Key? key}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -40,9 +43,9 @@ class _LoginPageState extends State<LoginPage>
                   const LogoWidget(),
                   _emailInput,
                   _passwordInput,
-                  const ForgotPasswordWidget(),
-                  const LoginBtn(),
-                  const CreateAccountWidget(),
+                  ForgotPasswordWidget(widget._server),
+                  LoginBtn(widget._server),
+                  CreateAccountWidget(widget._server),
                 ],
               ),
             ),
@@ -50,13 +53,13 @@ class _LoginPageState extends State<LoginPage>
           const DefaultAppBar('Login')
         ],
       ),
-      bottomNavigationBar: BottomNavBar(1),
+      bottomNavigationBar: BottomNavBar(widget._server, 1),
     );
   }
 
   void goToAccountPage() {
     Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const AccountPage()));
+        MaterialPageRoute(builder: (context) => AccountPage(widget._server)));
   }
 
   @override

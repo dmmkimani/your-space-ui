@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:project/server/server.dart';
+
 import 'package:project/tabs/widgets/app_bar_pop.dart';
 import 'package:project/tabs/widgets/bottom_nav_bar.dart';
 
@@ -9,22 +11,23 @@ import 'widgets/the_great_hall.dart';
 import 'widgets/y_twyni.dart';
 
 class BayCampus extends StatefulWidget {
-  const BayCampus({Key? key}) : super(key: key);
+  final Server _server;
+
+  const BayCampus(this._server, {Key? key}) : super(key: key);
 
   @override
   _BayCampusState createState() => _BayCampusState();
 }
 
 class _BayCampusState extends State<BayCampus> {
-  final List<Widget> _buildings = [
-    const TheGreatHall(),
-    const SchoolOfManagement(),
-    const TheCollege(),
-    const YTwyni(),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final List<Widget> _buildings = [
+      TheGreatHall(widget._server),
+      SchoolOfManagement(widget._server),
+      TheCollege(widget._server),
+      YTwyni(widget._server),
+    ];
     return Scaffold(
       body: Stack(
         children: [
@@ -53,7 +56,7 @@ class _BayCampusState extends State<BayCampus> {
           PopAppBar(context, 'Bay Campus')
         ],
       ),
-      bottomNavigationBar: BottomNavBar(0),
+      bottomNavigationBar: BottomNavBar(widget._server, 0),
     );
   }
 }

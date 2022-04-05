@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:project/server/server.dart';
 import 'package:project/tabs/home/screens/building/building.dart';
 
 class SchoolOfManagement extends StatelessWidget {
-  const SchoolOfManagement({Key? key}) : super(key: key);
+  final Server _server;
+
+  const SchoolOfManagement(this._server, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => const Building('school_of_management')));
+            builder: (context) =>
+                Building(_server, 'school_of_management')));
       },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

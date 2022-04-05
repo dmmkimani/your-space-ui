@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:project/server/server.dart';
 
 import 'package:project/tabs/account/pages/widgets/dialog_delete.dart';
 
 class DeleteBtn extends StatefulWidget {
+  final Server _server;
   final int _position;
   final Map<String, dynamic> _details;
   final Function _deleteBooking;
 
-  const DeleteBtn(this._position, this._details, this._deleteBooking, {Key? key})
+  const DeleteBtn(
+      this._server, this._position, this._details, this._deleteBooking,
+      {Key? key})
       : super(key: key);
 
   @override
@@ -23,7 +27,7 @@ class _DeleteBtnState extends State<DeleteBtn> {
         onTap: () {
           showDialog(
               context: context,
-              builder: (context) => DeleteDialog(
+              builder: (context) => DeleteDialog(widget._server,
                   widget._position, widget._details, widget._deleteBooking));
         },
         splashColor: Colors.transparent,

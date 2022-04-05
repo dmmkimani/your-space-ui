@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:project/server/server.dart';
 import 'package:project/tabs/account/widgets/btn_logout.dart';
 import 'package:project/tabs/widgets/app_bar_pop.dart';
 import 'package:project/tabs/widgets/bottom_nav_bar.dart';
 
 class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+  final Server _server;
+
+  const SettingsScreen(this._server, {Key? key}) : super(key: key);
 
   @override
   _SettingsScreenState createState() => _SettingsScreenState();
@@ -58,10 +61,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   Container(
                     padding: const EdgeInsets.only(top: 30.0),
-                    child: const SizedBox(
+                    child: SizedBox(
                       width: 150.0,
                       height: 47.5,
-                      child: LogoutBtn(),
+                      child: LogoutBtn(widget._server),
                     ),
                   )
                 ],
@@ -69,7 +72,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           PopAppBar(context, 'Settings')
         ],
       ),
-      bottomNavigationBar: BottomNavBar(1),
+      bottomNavigationBar: BottomNavBar(widget._server, 1),
     );
   }
 }

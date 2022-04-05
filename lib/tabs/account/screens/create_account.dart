@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/server/server.dart';
 
 import 'package:project/tabs/account/widgets/btn_create_account.dart';
 import 'package:project/tabs/account/widgets/textfield_fname.dart';
@@ -14,7 +15,9 @@ import 'package:project/tabs/widgets/bottom_nav_bar.dart';
 import 'account.dart';
 
 class CreateAccountPage extends StatefulWidget {
-  const CreateAccountPage({Key? key}) : super(key: key);
+  final Server _server;
+
+  const CreateAccountPage(this._server, {Key? key}) : super(key: key);
 
   @override
   _CreateAccountPageState createState() => _CreateAccountPageState();
@@ -56,7 +59,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                   ),
                   _emailInput,
                   _passwordInput,
-                  const CreateAccountBtn(),
+                  CreateAccountBtn(widget._server),
                   const LoginWidget(),
                 ],
               ),
@@ -65,13 +68,13 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
           const DefaultAppBar('Create an Account'),
         ],
       ),
-      bottomNavigationBar: BottomNavBar(1),
+      bottomNavigationBar: BottomNavBar(widget._server, 1),
     );
   }
 
   void goToAccountPage() {
     Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const AccountPage()));
+        MaterialPageRoute(builder: (context) => AccountPage(widget._server)));
   }
 
   double get deviceWidth {

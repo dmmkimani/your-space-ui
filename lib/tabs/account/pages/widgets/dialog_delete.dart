@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:project/server/server.dart';
 import 'package:project/tabs/provider.dart';
 
 class DeleteDialog extends StatefulWidget {
+  final Server _server;
   final int _position;
   final Map<String, dynamic> _details;
   final Function _removeFromList;
 
-  const DeleteDialog(this._position, this._details, this._removeFromList,
+  const DeleteDialog(
+      this._server, this._position, this._details, this._removeFromList,
       {Key? key})
       : super(key: key);
 
@@ -54,13 +57,14 @@ class _DeleteDialogState extends State<DeleteDialog> {
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () {
-                  GlobalData.server.deleteFromHistory({
+                  widget._server.deleteFromHistory({
                     'userEmail': GlobalData.currentUser!.email,
                     'id': widget._details['id'],
                     'date': widget._details['bookingDate']
                   });
                   Navigator.of(context).pop();
-                  widget._removeFromList(widget._position, widget._details, false);
+                  widget._removeFromList(
+                      widget._position, widget._details, false);
                 },
                 child: const Text(
                   'DELETE',

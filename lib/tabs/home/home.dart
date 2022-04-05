@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:project/server/server.dart';
+
 import 'package:project/tabs/widgets/app_bar.dart';
 import 'package:project/tabs/widgets/bottom_nav_bar.dart';
 
@@ -7,7 +9,9 @@ import 'package:project/tabs/home/campuses/bay/bay.dart';
 import 'package:project/tabs/home/campuses/singleton/singleton.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final Server _server;
+
+  const HomePage(this._server, {Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -28,12 +32,12 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const SingletonWidget(),
+                    SingletonWidget(widget._server),
                     Container(
                       padding: const EdgeInsets.only(bottom: 10.0),
                       child: const Divider(thickness: 0.75),
                     ),
-                    const BayWidget(),
+                    BayWidget(widget._server),
                   ],
                 ),
               )
@@ -42,7 +46,7 @@ class _HomePageState extends State<HomePage> {
           const DefaultAppBar('Home')
         ],
       ),
-      bottomNavigationBar: BottomNavBar(0),
+      bottomNavigationBar: BottomNavBar(widget._server, 0),
     );
   }
 }

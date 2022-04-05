@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+
+import 'package:project/server/server.dart';
+
 import 'package:project/tabs/home/functions/helpers.dart';
 import 'package:project/tabs/home/screens/room/widgets/widget_date.dart';
 import 'package:project/tabs/home/screens/room/widgets/widget_duration.dart';
@@ -12,6 +15,7 @@ import 'package:project/tabs/home/screens/room/widgets/dd_time_slots.dart';
 import 'package:project/tabs/home/screens/room/widgets/widget_num_people.dart';
 
 class BookDialog extends StatefulWidget {
+  final Server _server;
   final Function _reload;
   final String _building;
   final String _room;
@@ -19,16 +23,16 @@ class BookDialog extends StatefulWidget {
   final List<String> _timeSlots;
   final String _selectedTimeSlot;
 
-  const BookDialog(this._reload, this._building, this._room, this._date,
-      this._timeSlots, this._selectedTimeSlot,
+  const BookDialog(this._server, this._reload, this._building, this._room,
+      this._date, this._timeSlots, this._selectedTimeSlot,
       {Key? key})
       : super(key: key);
 
   @override
-  _BookDialogState createState() => _BookDialogState();
+  BookDialogState createState() => BookDialogState();
 }
 
-class _BookDialogState extends State<BookDialog> {
+class BookDialogState extends State<BookDialog> {
   final ScrollController _controller = ScrollController();
   late TimeSlotsDropDown _from;
   late TimeSlotsDropDown _to;
@@ -106,7 +110,7 @@ class _BookDialogState extends State<BookDialog> {
   }
 
   void book(BuildContext dialogContext) async {
-    Map<String, dynamic> response = await GlobalData.server.book({
+    Map<String, dynamic> response = await widget._server.book({
       'userEmail': GlobalData.currentUser!.email,
       'date': RoomHelpers().formatDate(widget._date),
       'building': widget._building,
@@ -127,14 +131,6 @@ class _BookDialogState extends State<BookDialog> {
         HelperFunctions().showSnackBar(dialogContext, response['message']);
         break;
     }
-  }
-
-  String get date {
-    return widget._date.day.toString() +
-        '.' +
-        widget._date.month.toString() +
-        '.' +
-        widget._date.year.toString();
   }
 
   String get startTime {

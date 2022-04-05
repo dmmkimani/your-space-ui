@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-
+import 'package:project/server/server.dart';
 import 'package:project/tabs/account/functions/helpers_login.dart';
 
 class CreateAccountBtn extends StatefulWidget {
-  const CreateAccountBtn({Key? key}) : super(key: key);
+  final Server _server;
+
+  const CreateAccountBtn(this._server, {Key? key}) : super(key: key);
 
   @override
   _CreateAccountBtnState createState() => _CreateAccountBtnState();
@@ -20,19 +22,17 @@ class _CreateAccountBtnState extends State<CreateAccountBtn> {
         child: ElevatedButton(
           child: const Text(
             'Create Account',
-            style: TextStyle(
-                fontWeight: FontWeight.normal, fontSize: 18.0),
+            style: TextStyle(fontWeight: FontWeight.normal, fontSize: 18.0),
           ),
           onPressed: () {
             FocusManager.instance.primaryFocus?.unfocus();
-            LoginHelpers(context)
-                .createAccount();
+            LoginHelpers(widget._server, context).createAccount();
           },
           style: ButtonStyle(
-              shape: MaterialStateProperty.all<
-                  RoundedRectangleBorder>(RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(18.0),
-              ))),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18.0),
+          ))),
         ),
       ),
     );

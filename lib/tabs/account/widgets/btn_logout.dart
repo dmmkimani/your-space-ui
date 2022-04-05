@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:project/server/server.dart';
 import 'package:project/tabs/account/splash_screen_account.dart';
 import 'package:project/tabs/provider.dart';
 
 class LogoutBtn extends StatefulWidget {
-  const LogoutBtn({Key? key}) : super(key: key);
+  final Server _server;
+
+  const LogoutBtn(this._server, {Key? key}) : super(key: key);
 
   @override
   _LogoutBtnState createState() => _LogoutBtnState();
@@ -19,9 +22,8 @@ class _LogoutBtnState extends State<LogoutBtn> {
         onPressed: () {
           GlobalData.auth!.signOut().whenComplete(() {
             GlobalData.currentUser = null;
-            Navigator.of(context)
-                .pushReplacement(MaterialPageRoute(
-                builder: (context) => const AccountSplashScreen()));
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (context) => AccountSplashScreen(widget._server)));
           });
         },
         child: const Text(

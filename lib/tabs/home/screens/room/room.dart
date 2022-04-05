@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:project/server/server.dart';
 import 'package:project/tabs/home/functions/helpers.dart';
-
-import 'package:project/tabs/provider.dart';
 
 import 'package:project/tabs/home/screens/room/widgets/table_amenities.dart';
 import 'package:project/tabs/home/screens/room/widgets/listview_bookings_room.dart';
@@ -10,16 +9,18 @@ import 'package:project/tabs/home/screens/room/widgets/widget_capacity.dart';
 import 'package:project/tabs/account/screens/account.dart';
 
 class Room extends StatefulWidget {
+  final Server _server;
   final String _building;
   final String _room;
 
-  const Room(this._building, this._room, {Key? key}) : super(key: key);
+  const Room(this._server, this._building, this._room, {Key? key})
+      : super(key: key);
 
   @override
-  _RoomState createState() => _RoomState();
+  RoomState createState() => RoomState();
 }
 
-class _RoomState extends State<Room> {
+class RoomState extends State<Room> {
   final DateTime _currentDate = DateTime.now();
   late DateTime _selectedDate;
 
@@ -53,7 +54,7 @@ class _RoomState extends State<Room> {
                   Container(
                     padding: const EdgeInsets.only(top: 7.5, bottom: 10.0),
                     child: Text(
-                      RoomHelpers().formatRoom(widget._building, widget._room),
+                      room,
                       style: const TextStyle(
                           fontSize: 22.0, fontWeight: FontWeight.bold),
                     ),
@@ -62,8 +63,13 @@ class _RoomState extends State<Room> {
                   AmenitiesTable(details['amenities']),
                   Calendar(_currentDate, changeDate),
                   Expanded(
-                      child: RoomBookings(refresh, widget._building,
-                          widget._room, _selectedDate, bookings))
+                      child: RoomBookings(
+                          widget._server,
+                          refresh,
+                          widget._building,
+                          widget._room,
+                          _selectedDate,
+                          bookings))
                 ],
               );
             }
@@ -71,15 +77,20 @@ class _RoomState extends State<Room> {
     );
   }
 
+  String get room {
+    return RoomHelpers().formatRoom(widget._building, widget._room);
+  }
+
+  String get date {
+    return RoomHelpers().formatDate(_selectedDate);
+  }
+
   Future<Map<String, dynamic>> loadWidgetData() async {
     return {
-      'roomDetails': await GlobalData.server
+      'roomDetails': await widget._server
           .getRoomDetails({'building': widget._building, 'room': widget._room}),
-      'roomBookings': await GlobalData.server.getRoomBookings({
-        'building': widget._building,
-        'room': widget._room,
-        'date': RoomHelpers().formatDate(_selectedDate)
-      })
+      'roomBookings': await widget._server.getRoomBookings(
+          {'building': widget._building, 'room': widget._room, 'date': date})
     };
   }
 
@@ -96,8 +107,8 @@ class _RoomState extends State<Room> {
             // -- TEMPORARY --
             // THIS SHOULD CHANGE TABS NOT PUSH A NEW ROUTE
             //
-            Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => const AccountPage()));
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (context) => AccountPage(widget._server)));
           },
         ),
         duration: const Duration(seconds: 5),
