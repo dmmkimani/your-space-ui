@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:project/server/server.dart';
 import 'package:project/tabs/home/screens/building/building.dart';
+import 'package:project/tabs/provider.dart';
 
 class SchoolOfManagement extends StatelessWidget {
   final Server _server;
+  final UserData _userData;
 
-  const SchoolOfManagement(this._server, {Key? key}) : super(key: key);
+  const SchoolOfManagement(this._server, this._userData, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +16,7 @@ class SchoolOfManagement extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) =>
-                Building(_server, 'school_of_management')));
+                Building(_server, _userData, 'school_of_management')));
       },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

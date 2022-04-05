@@ -18,7 +18,7 @@ class HelperFunctions {
       month = '0$month';
     }
 
-    return DateTime.parse('$year-$month-$day $hour:00.000');
+    return DateTime.parse('$year-$month-$day $hour:00.000Z');
   }
 
   int timeSlotToInt(String timeSlot) {

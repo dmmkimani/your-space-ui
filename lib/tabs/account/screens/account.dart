@@ -10,8 +10,9 @@ import '../../provider.dart';
 
 class AccountPage extends StatefulWidget {
   final Server _server;
+  final UserData _userData;
 
-  const AccountPage(this._server, {Key? key}) : super(key: key);
+  const AccountPage(this._server, this._userData, {Key? key}) : super(key: key);
 
   @override
   _AccountPageState createState() => _AccountPageState();
@@ -41,17 +42,17 @@ class _AccountPageState extends State<AccountPage> {
                     controller: _controller,
                     physics: const NeverScrollableScrollPhysics(),
                     children: [
-                      YourBookings(widget._server,
+                      YourBookings(widget._server, widget._userData,
                           snapshot.requireData['response'], refresh),
                       AccountInfo(snapshot.requireData['accountInfo'])
                     ],
                   );
                 }
               }),
-          AccountAppBar(widget._server, _controller),
+          AccountAppBar(widget._server, widget._userData, _controller),
         ],
       ),
-      bottomNavigationBar: BottomNavBar(widget._server, 1),
+      bottomNavigationBar: BottomNavBar(widget._server, widget._userData, 1),
     );
   }
 
@@ -62,9 +63,9 @@ class _AccountPageState extends State<AccountPage> {
   Future<Map<String, dynamic>> loadPageData() async {
     return {
       'response':
-          await widget._server.getUserBookings(GlobalData.currentUser!.email!),
+          await widget._server.getUserBookings(widget._userData.user!.email!),
       'accountInfo':
-          await widget._server.getUserInfo(GlobalData.currentUser!.email!)
+          await widget._server.getUserInfo(widget._userData.user!.email!)
     };
   }
 

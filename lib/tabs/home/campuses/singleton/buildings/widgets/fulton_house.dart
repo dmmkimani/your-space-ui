@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:project/server/server.dart';
 import 'package:project/tabs/home/screens/building/building.dart';
+import 'package:project/tabs/provider.dart';
 
 class FultonHouse extends StatelessWidget {
   final Server _server;
+  final UserData _userData;
 
-  const FultonHouse(this._server, {Key? key}) : super(key: key);
+  const FultonHouse(this._server, this._userData, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => Building(_server, 'fulton_house')));
+            builder: (context) =>
+                Building(_server, _userData, 'fulton_house')));
       },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

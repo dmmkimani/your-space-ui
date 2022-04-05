@@ -9,6 +9,7 @@ import 'package:project/tabs/account/widgets/text_login.dart';
 import 'package:project/tabs/account/widgets/textfield_email.dart';
 import 'package:project/tabs/account/widgets/textfield_password.dart';
 import 'package:project/tabs/account/widgets/logo.dart';
+import 'package:project/tabs/provider.dart';
 import 'package:project/tabs/widgets/app_bar.dart';
 import 'package:project/tabs/widgets/bottom_nav_bar.dart';
 
@@ -16,8 +17,10 @@ import 'account.dart';
 
 class CreateAccountPage extends StatefulWidget {
   final Server _server;
+  final UserData _userData;
 
-  const CreateAccountPage(this._server, {Key? key}) : super(key: key);
+  const CreateAccountPage(this._server, this._userData, {Key? key})
+      : super(key: key);
 
   @override
   _CreateAccountPageState createState() => _CreateAccountPageState();
@@ -59,7 +62,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                   ),
                   _emailInput,
                   _passwordInput,
-                  CreateAccountBtn(widget._server),
+                  CreateAccountBtn(widget._server, widget._userData),
                   const LoginWidget(),
                 ],
               ),
@@ -68,13 +71,13 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
           const DefaultAppBar('Create an Account'),
         ],
       ),
-      bottomNavigationBar: BottomNavBar(widget._server, 1),
+      bottomNavigationBar: BottomNavBar(widget._server, widget._userData, 1),
     );
   }
 
   void goToAccountPage() {
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => AccountPage(widget._server)));
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) => AccountPage(widget._server, widget._userData)));
   }
 
   double get deviceWidth {

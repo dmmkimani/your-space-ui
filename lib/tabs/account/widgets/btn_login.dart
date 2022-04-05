@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:project/server/server.dart';
 
 import 'package:project/tabs/account/functions/helpers_login.dart';
+import 'package:project/tabs/provider.dart';
 
 class LoginBtn extends StatefulWidget {
   final Server _server;
+  final UserData _userData;
 
-  const LoginBtn(this._server, {Key? key}) : super(key: key);
+  const LoginBtn(this._server, this._userData, {Key? key}) : super(key: key);
 
   @override
   _LoginBtnState createState() => _LoginBtnState();
@@ -27,7 +29,7 @@ class _LoginBtnState extends State<LoginBtn> {
           ),
           onPressed: () {
             FocusManager.instance.primaryFocus?.unfocus();
-            LoginHelpers(widget._server, context).login();
+            LoginHelpers(widget._server, widget._userData, context).login();
           },
           style: ButtonStyle(
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(

@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:project/server/server.dart';
-import 'package:project/tabs/home/functions/helpers.dart';
+import 'package:project/tabs/home/functions/room_helpers.dart';
+import 'package:project/tabs/provider.dart';
 
-import '../../../function_helpers.dart';
+import '../../../helpers.dart';
 
 import 'package:project/tabs/account/pages/widgets/btn_delete.dart';
 import 'package:project/tabs/account/pages/widgets/btn_amend.dart';
 
 class Booking extends StatefulWidget {
   final Server _server;
+  final UserData _userData;
   final int _position;
   final Map<String, dynamic> _details;
   final Function _removeFromList;
   final Function _refresh;
   final Animation<double> _animation;
 
-  const Booking(this._server, this._position, this._details,
+  const Booking(this._server, this._userData, this._position, this._details,
       this._removeFromList, this._refresh, this._animation,
       {Key? key})
       : super(key: key);
@@ -50,7 +52,7 @@ class _BookingState extends State<Booking> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                        RoomHelpers()
+                        RoomHelperFunctions()
                                 .formatRoom(widget._details['building'], room) +
                             ' in ' +
                             buildingName,
@@ -80,11 +82,15 @@ class _BookingState extends State<Booking> {
               ),
               hasBookingStarted(bookingDate, startTime)
                   ? hasBookingExpired(bookingDate, endTime)
-                      ? DeleteBtn(widget._server, widget._position,
-                          widget._details, widget._removeFromList)
+                      ? DeleteBtn(
+                          widget._server,
+                          widget._userData,
+                          widget._position,
+                          widget._details,
+                          widget._removeFromList)
                       : Container()
-                  : AmendBtn(widget._server, widget._position, widget._details,
-                      widget._refresh, widget._removeFromList),
+                  : AmendBtn(widget._server, widget._userData, widget._position,
+                      widget._details, widget._refresh, widget._removeFromList),
             ],
           ),
         ],

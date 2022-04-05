@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:project/server/server.dart';
-import 'package:project/tabs/home/functions/helpers.dart';
+import 'package:project/tabs/home/functions/room_helpers.dart';
 
 import 'package:project/tabs/home/screens/room/widgets/table_amenities.dart';
 import 'package:project/tabs/home/screens/room/widgets/listview_bookings_room.dart';
 import 'package:project/tabs/home/screens/room/widgets/widget_calendar.dart';
 import 'package:project/tabs/home/screens/room/widgets/widget_capacity.dart';
 import 'package:project/tabs/account/screens/account.dart';
+import 'package:project/tabs/provider.dart';
 
 class Room extends StatefulWidget {
   final Server _server;
+  final UserData _userData;
   final String _building;
   final String _room;
 
-  const Room(this._server, this._building, this._room, {Key? key})
+  const Room(this._server, this._userData, this._building, this._room,
+      {Key? key})
       : super(key: key);
 
   @override
@@ -65,6 +68,7 @@ class RoomState extends State<Room> {
                   Expanded(
                       child: RoomBookings(
                           widget._server,
+                          widget._userData,
                           refresh,
                           widget._building,
                           widget._room,
@@ -78,11 +82,11 @@ class RoomState extends State<Room> {
   }
 
   String get room {
-    return RoomHelpers().formatRoom(widget._building, widget._room);
+    return RoomHelperFunctions().formatRoom(widget._building, widget._room);
   }
 
   String get date {
-    return RoomHelpers().formatDate(_selectedDate);
+    return RoomHelperFunctions().formatDate(_selectedDate);
   }
 
   Future<Map<String, dynamic>> loadWidgetData() async {
@@ -103,12 +107,9 @@ class RoomState extends State<Room> {
         action: SnackBarAction(
           label: 'VIEW BOOKING',
           onPressed: () {
-            //
-            // -- TEMPORARY --
-            // THIS SHOULD CHANGE TABS NOT PUSH A NEW ROUTE
-            //
             Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (context) => AccountPage(widget._server)));
+                builder: (context) =>
+                    AccountPage(widget._server, widget._userData)));
           },
         ),
         duration: const Duration(seconds: 5),

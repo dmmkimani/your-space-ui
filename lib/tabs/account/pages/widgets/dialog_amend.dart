@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project/server/server.dart';
 import 'package:project/tabs/account/pages/widgets/btn_cancel.dart';
 import 'package:project/tabs/account/pages/widgets/btn_save.dart';
-import 'package:project/tabs/function_helpers.dart';
+import 'package:project/tabs/helpers.dart';
 
 import 'package:project/tabs/home/screens/room/widgets/dd_time_slots.dart';
 import 'package:project/tabs/home/screens/room/widgets/textfield_description.dart';
@@ -14,13 +14,14 @@ import '../../../provider.dart';
 
 class AmendDialog extends StatefulWidget {
   final Server _server;
+  final UserData _userData;
   final int _position;
   final Map<String, dynamic> _details;
   final Function _refresh;
   final Function _removeFromList;
 
-  const AmendDialog(this._server, this._position, this._details, this._refresh,
-      this._removeFromList,
+  const AmendDialog(this._server, this._userData, this._position, this._details,
+      this._refresh, this._removeFromList,
       {Key? key})
       : super(key: key);
 
@@ -120,7 +121,7 @@ class _AmendDialogState extends State<AmendDialog> {
   void amend(BuildContext dialogContext) async {
     FocusManager.instance.primaryFocus?.unfocus();
     Map<String, dynamic> response = await widget._server.amendBooking({
-      'userEmail': GlobalData.currentUser!.email,
+      'userEmail': widget._userData.user!.email,
       'id': widget._details['id'],
       'building': widget._details['building'],
       'room': widget._details['room'],
@@ -145,7 +146,7 @@ class _AmendDialogState extends State<AmendDialog> {
     Navigator.of(context).pop();
     clearInputs();
     await widget._server.cancelBooking({
-      'userEmail': GlobalData.currentUser!.email,
+      'userEmail': widget._userData.user!.email,
       'id': widget._details['id'],
       'building': widget._details['building'],
       'room': widget._details['room'],

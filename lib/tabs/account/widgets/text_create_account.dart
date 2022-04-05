@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:project/server/server.dart';
 import 'package:project/tabs/account/functions/helpers_input.dart';
 import 'package:project/tabs/account/screens/create_account.dart';
+import 'package:project/tabs/provider.dart';
 
 class CreateAccountWidget extends StatelessWidget {
   final Server _server;
+  final UserData _userData;
 
-  const CreateAccountWidget(this._server, {Key? key}) : super(key: key);
+  const CreateAccountWidget(this._server, this._userData, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +20,8 @@ class CreateAccountWidget extends StatelessWidget {
         onTap: () {
           FocusManager.instance.primaryFocus?.unfocus();
           InputHelpers().clearInputs();
-          Navigator.of(context).push(
-              MaterialPageRoute(
-                  builder: (context) => CreateAccountPage(_server)
-              )
-          );
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => CreateAccountPage(_server, _userData)));
         },
         child: const Text(
           'Create an account',

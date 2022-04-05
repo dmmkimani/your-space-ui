@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:project/server/server.dart';
 import 'package:project/tabs/account/functions/helpers_login.dart';
+import 'package:project/tabs/provider.dart';
 
 class CreateAccountBtn extends StatefulWidget {
   final Server _server;
+  final UserData _userData;
 
-  const CreateAccountBtn(this._server, {Key? key}) : super(key: key);
+  const CreateAccountBtn(this._server, this._userData, {Key? key})
+      : super(key: key);
 
   @override
   _CreateAccountBtnState createState() => _CreateAccountBtnState();
@@ -26,7 +29,8 @@ class _CreateAccountBtnState extends State<CreateAccountBtn> {
           ),
           onPressed: () {
             FocusManager.instance.primaryFocus?.unfocus();
-            LoginHelpers(widget._server, context).createAccount();
+            LoginHelpers(widget._server, widget._userData, context)
+                .createAccount();
           },
           style: ButtonStyle(
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(

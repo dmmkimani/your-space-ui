@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../function_helpers.dart';
+import '../../../../helpers.dart';
 
 class BookingDate extends StatelessWidget {
   final DateTime _date;

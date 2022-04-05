@@ -4,11 +4,13 @@ import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
 import 'package:project/server/server.dart';
 import 'package:project/tabs/home/screens/building/building.dart';
+import 'package:project/tabs/provider.dart';
 import 'building_page_test.mocks.dart';
 
-@GenerateMocks([Server])
+@GenerateMocks([Server, UserData])
 void main() {
   late MockServer mockServer;
+  late MockUserData mockUserData;
   var buildings = [
     'the_great_hall',
     'school_of_management',
@@ -22,6 +24,7 @@ void main() {
 
   setUp(() {
     mockServer = MockServer();
+    mockUserData = MockUserData();
     when(mockServer.getBuildingDetails(argThat(isIn(buildings))))
         .thenAnswer((_) async => responseOk());
     when(mockServer.getBuildingDetails(argThat(isNot(isIn(buildings)))))
@@ -31,7 +34,8 @@ void main() {
   group('building page tests', () {
     testWidgets('valid buildings test', (WidgetTester tester) async {
       for (var building in buildings) {
-        await tester.pumpWidget(MaterialApp(home: Building(mockServer, building)));
+        await tester.pumpWidget(
+            MaterialApp(home: Building(mockServer, mockUserData, building)));
         verify(mockServer.getBuildingDetails(building));
         Map<String, dynamic> response =
             await mockServer.getBuildingDetails(building);
@@ -39,12 +43,14 @@ void main() {
       }
     });
     testWidgets('invalid building test 1', (WidgetTester tester) async {
-      await tester.pumpWidget(MaterialApp(home: Building(mockServer, '')));
+      await tester.pumpWidget(
+          MaterialApp(home: Building(mockServer, mockUserData, '')));
       verify(mockServer.getBuildingDetails(''));
       expect(mockServer.getBuildingDetails(''), throwsArgumentError);
     });
     testWidgets('invalid building test 2', (WidgetTester tester) async {
-      await tester.pumpWidget(MaterialApp(home: Building(mockServer, 'invalid')));
+      await tester.pumpWidget(
+          MaterialApp(home: Building(mockServer, mockUserData, 'invalid')));
       verify(mockServer.getBuildingDetails('invalid'));
       expect(mockServer.getBuildingDetails('invalid'), throwsArgumentError);
     });

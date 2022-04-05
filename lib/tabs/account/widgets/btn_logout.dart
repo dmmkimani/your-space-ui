@@ -5,8 +5,9 @@ import 'package:project/tabs/provider.dart';
 
 class LogoutBtn extends StatefulWidget {
   final Server _server;
+  final UserData _userData;
 
-  const LogoutBtn(this._server, {Key? key}) : super(key: key);
+  const LogoutBtn(this._server, this._userData, {Key? key}) : super(key: key);
 
   @override
   _LogoutBtnState createState() => _LogoutBtnState();
@@ -20,10 +21,11 @@ class _LogoutBtnState extends State<LogoutBtn> {
       height: 50.0,
       child: ElevatedButton(
         onPressed: () {
-          GlobalData.auth!.signOut().whenComplete(() {
-            GlobalData.currentUser = null;
+          widget._userData.auth.signOut().whenComplete(() {
+            widget._userData.user = null;
             Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (context) => AccountSplashScreen(widget._server)));
+                builder: (context) =>
+                    AccountSplashScreen(widget._server, widget._userData)));
           });
         },
         child: const Text(

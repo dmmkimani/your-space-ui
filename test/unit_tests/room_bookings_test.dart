@@ -3,12 +3,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:project/server/server.dart';
 import 'package:project/tabs/home/screens/room/widgets/listview_bookings_room.dart';
+import 'package:project/tabs/provider.dart';
 
 import 'room_bookings_test.mocks.dart';
 
-@GenerateMocks([Server])
+@GenerateMocks([Server, UserData])
 void main() {
   late MockServer mockServer;
+  late MockUserData mockUserData;
   late String building;
   late String room;
   late DateTime today;
@@ -16,6 +18,7 @@ void main() {
 
   setUp(() {
     mockServer = MockServer();
+    mockUserData = MockUserData();
     building = 'the_great_hall';
     room = 'gh001';
     today = DateTime.now();
@@ -25,8 +28,8 @@ void main() {
   group('room bookings functions test', () {
     testWidgets('isAfterNow test', (WidgetTester tester) async {
       await tester.pumpWidget(MaterialApp(
-          home: RoomBookings(
-              mockServer, mockReload, building, room, today, mockBookings())));
+          home: RoomBookings(mockServer, mockUserData, mockReload, building,
+              room, today, mockBookings())));
 
       final RoomBookingsState state = tester.state(find.byType(RoomBookings));
 
@@ -37,8 +40,8 @@ void main() {
       expect(state.isAfterNow('00:00'), false);
 
       await tester.pumpWidget(MaterialApp(
-          home: RoomBookings(mockServer, mockReload, building, room, tomorrow,
-              mockBookings())));
+          home: RoomBookings(mockServer, mockUserData, mockReload, building,
+              room, tomorrow, mockBookings())));
 
       // Test tomorrow
       expect(state.isAfterNow('00:00'), true);
@@ -46,8 +49,8 @@ void main() {
 
     testWidgets('isAvailable test', (WidgetTester tester) async {
       await tester.pumpWidget(MaterialApp(
-          home: RoomBookings(
-              mockServer, mockReload, building, room, today, mockBookings())));
+          home: RoomBookings(mockServer, mockUserData, mockReload, building,
+              room, today, mockBookings())));
 
       final RoomBookingsState state = tester.state(find.byType(RoomBookings));
 
@@ -63,8 +66,8 @@ void main() {
 
     testWidgets('isBooked test', (WidgetTester tester) async {
       await tester.pumpWidget(MaterialApp(
-          home: RoomBookings(
-              mockServer, mockReload, building, room, today, mockBookings())));
+          home: RoomBookings(mockServer, mockUserData, mockReload, building,
+              room, today, mockBookings())));
 
       final RoomBookingsState state = tester.state(find.byType(RoomBookings));
 
@@ -77,8 +80,8 @@ void main() {
 
     testWidgets('isLastTimeSlot test', (WidgetTester tester) async {
       await tester.pumpWidget(MaterialApp(
-          home: RoomBookings(
-              mockServer, mockReload, building, room, today, mockBookings())));
+          home: RoomBookings(mockServer, mockUserData, mockReload, building,
+              room, today, mockBookings())));
 
       final RoomBookingsState state = tester.state(find.byType(RoomBookings));
 

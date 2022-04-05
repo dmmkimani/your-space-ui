@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:project/server/server.dart';
 
-import 'package:project/tabs/home/functions/helpers.dart';
+import 'package:project/tabs/home/functions/room_helpers.dart';
 import 'package:project/tabs/home/screens/room/widgets/widget_date.dart';
 import 'package:project/tabs/home/screens/room/widgets/widget_duration.dart';
 
 import 'package:project/tabs/provider.dart';
-import 'package:project/tabs/function_helpers.dart';
+import 'package:project/tabs/helpers.dart';
 
 import 'package:project/tabs/home/screens/room/widgets/btn_book.dart';
 import 'package:project/tabs/home/screens/room/widgets/textfield_description.dart';
@@ -16,15 +16,16 @@ import 'package:project/tabs/home/screens/room/widgets/widget_num_people.dart';
 
 class BookDialog extends StatefulWidget {
   final Server _server;
-  final Function _reload;
+  final UserData _userData;
+  final Function _refresh;
   final String _building;
   final String _room;
   final DateTime _date;
   final List<String> _timeSlots;
   final String _selectedTimeSlot;
 
-  const BookDialog(this._server, this._reload, this._building, this._room,
-      this._date, this._timeSlots, this._selectedTimeSlot,
+  const BookDialog(this._server, this._userData, this._refresh, this._building,
+      this._room, this._date, this._timeSlots, this._selectedTimeSlot,
       {Key? key})
       : super(key: key);
 
@@ -111,8 +112,8 @@ class BookDialogState extends State<BookDialog> {
 
   void book(BuildContext dialogContext) async {
     Map<String, dynamic> response = await widget._server.book({
-      'userEmail': GlobalData.currentUser!.email,
-      'date': RoomHelpers().formatDate(widget._date),
+      'userEmail': widget._userData.user!.email,
+      'date': RoomHelperFunctions().formatDate(widget._date),
       'building': widget._building,
       'room': widget._room,
       'people': numPeople,
@@ -125,7 +126,7 @@ class BookDialogState extends State<BookDialog> {
       case true:
         Navigator.of(context).pop();
         clearInputs();
-        widget._reload(response['message']);
+        widget._refresh(response['message']);
         break;
       case false:
         HelperFunctions().showSnackBar(dialogContext, response['message']);

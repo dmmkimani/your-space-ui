@@ -1,4 +1,4 @@
-class RoomHelpers {
+class RoomHelperFunctions {
   String formatDate(DateTime date) {
     return date.day.toString() +
         '.' +

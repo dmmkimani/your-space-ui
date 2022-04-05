@@ -4,14 +4,17 @@ import 'package:project/tabs/home/campuses/singleton/buildings/widgets/faraday.d
 import 'package:project/tabs/home/campuses/singleton/buildings/widgets/fulton_house.dart';
 import 'package:project/tabs/home/campuses/singleton/buildings/widgets/james_callaghan.dart';
 import 'package:project/tabs/home/campuses/singleton/buildings/widgets/keir_hardie.dart';
+import 'package:project/tabs/provider.dart';
 
 import 'package:project/tabs/widgets/app_bar_pop.dart';
 import 'package:project/tabs/widgets/bottom_nav_bar.dart';
 
 class SingletonCampus extends StatefulWidget {
   final Server _server;
+  final UserData _userData;
 
-  const SingletonCampus(this._server, {Key? key}) : super(key: key);
+  const SingletonCampus(this._server, this._userData, {Key? key})
+      : super(key: key);
 
   @override
   _SingletonCampusState createState() => _SingletonCampusState();
@@ -21,10 +24,10 @@ class _SingletonCampusState extends State<SingletonCampus> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> _buildings = [
-      FultonHouse(widget._server),
-      Faraday(widget._server),
-      JamesCallaghan(widget._server),
-      KeirHardie(widget._server),
+      FultonHouse(widget._server, widget._userData),
+      Faraday(widget._server, widget._userData),
+      JamesCallaghan(widget._server, widget._userData),
+      KeirHardie(widget._server, widget._userData),
     ];
     return Scaffold(
       body: Stack(
@@ -54,7 +57,7 @@ class _SingletonCampusState extends State<SingletonCampus> {
           PopAppBar(context, 'Singleton Park Campus')
         ],
       ),
-      bottomNavigationBar: BottomNavBar(widget._server, 0),
+      bottomNavigationBar: BottomNavBar(widget._server, widget._userData, 0),
     );
   }
 }

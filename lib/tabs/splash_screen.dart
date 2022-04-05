@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:project/server/server.dart';
-import 'package:project/tabs/account/screens/account.dart';
 
 import 'package:project/tabs/provider.dart';
 
@@ -10,9 +9,9 @@ import 'package:project/tabs/home/home.dart';
 
 class SplashScreen extends StatefulWidget {
   final Server _server;
-  final bool _isLoggingIn;
+  final UserData _userData;
 
-  const SplashScreen(this._server, this._isLoggingIn, {Key? key})
+  const SplashScreen(this._server, this._userData, {Key? key})
       : super(key: key);
 
   @override
@@ -33,18 +32,14 @@ class _SplashScreenState extends State<SplashScreen> {
             if (snapshot.data != null) {
               FirebaseAuth auth = FirebaseAuth.instance;
               User? user = auth.currentUser;
-              GlobalData.auth = auth;
+              widget._userData.auth = auth;
               WidgetsBinding.instance!.addPostFrameCallback((_) {
                 Navigator.of(context)
                     .pushReplacement(MaterialPageRoute(builder: (context) {
                   if (user != null) {
-                    GlobalData.currentUser = user;
+                    widget._userData.user = user;
                   }
-                  if (widget._isLoggingIn) {
-                    return AccountPage(widget._server);
-                  } else {
-                    return HomePage(widget._server);
-                  }
+                  return HomePage(widget._server, widget._userData);
                 }));
               });
             }

@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:project/server/server.dart';
-import 'package:project/tabs/function_helpers.dart';
+import 'package:project/tabs/helpers.dart';
 import 'package:project/tabs/home/screens/room/widgets/btn_reserved.dart';
 import 'package:project/tabs/home/screens/room/widgets/btn_book_slot.dart';
 import 'package:project/tabs/home/screens/room/widgets/btn_unavailable.dart';
+import 'package:project/tabs/provider.dart';
 
 class RoomBookings extends StatefulWidget {
   final Server _server;
+  final UserData _userData;
   final Function _reload;
   final String _building;
   final String _room;
   final DateTime _date;
   final Map<String, dynamic> _bookings;
 
-  const RoomBookings(this._server, this._reload, this._building, this._room,
-      this._date, this._bookings,
+  const RoomBookings(this._server, this._userData, this._reload, this._building,
+      this._room, this._date, this._bookings,
       {Key? key})
       : super(key: key);
 
@@ -59,6 +61,7 @@ class RoomBookingsState extends State<RoomBookings> {
                                       ? const UnavailableBtn()
                                       : BookSlotBtn(
                                           widget._server,
+                                          widget._userData,
                                           widget._reload,
                                           widget._building,
                                           widget._room,

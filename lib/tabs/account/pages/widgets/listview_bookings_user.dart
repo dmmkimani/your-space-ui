@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:project/server/server.dart';
 import 'package:project/tabs/account/pages/widgets/booking.dart';
+import 'package:project/tabs/provider.dart';
 
 class UserBookings extends StatefulWidget {
   final Server _server;
+  final UserData _userData;
   final Map<String, dynamic> _bookings;
   final List<String> _bookingDates;
   final Function _refresh;
 
-  const UserBookings(
-      this._server, this._bookings, this._bookingDates, this._refresh,
+  const UserBookings(this._server, this._userData, this._bookings,
+      this._bookingDates, this._refresh,
       {Key? key})
       : super(key: key);
 
@@ -63,8 +65,8 @@ class _UserBookingsState extends State<UserBookings> {
 
   Widget buildBooking(int position, Map<String, dynamic> details,
           Animation<double> animation) =>
-      Booking(widget._server, position, details, removeFromList,
-          widget._refresh, animation);
+      Booking(widget._server, widget._userData, position, details,
+          removeFromList, widget._refresh, animation);
 
   void removeFromList(
       int position, Map<String, dynamic> details, bool isCancelling) {

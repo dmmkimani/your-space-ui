@@ -4,12 +4,15 @@ import 'package:project/server/server.dart';
 
 import 'package:project/tabs/home/home.dart';
 import 'package:project/tabs/account/splash_screen_account.dart';
+import 'package:project/tabs/provider.dart';
 
 class BottomNavBar extends StatefulWidget {
   final Server _server;
+  final UserData _userData;
   int _selectedIndex;
 
-  BottomNavBar(this._server, this._selectedIndex, {Key? key}) : super(key: key);
+  BottomNavBar(this._server, this._userData, this._selectedIndex, {Key? key})
+      : super(key: key);
 
   @override
   _BottomNavBarState createState() => _BottomNavBarState();
@@ -40,12 +43,13 @@ class _BottomNavBarState extends State<BottomNavBar> {
       switch (index) {
         case 0:
           Navigator.of(context).pushReplacement(MaterialPageRoute(
-              builder: (context) => HomePage(widget._server)));
+              builder: (context) => HomePage(widget._server, widget._userData)));
           break;
 
         case 1:
           Navigator.of(context).pushReplacement(MaterialPageRoute(
-              builder: (context) => AccountSplashScreen(widget._server)));
+              builder: (context) =>
+                  AccountSplashScreen(widget._server, widget._userData)));
           break;
       }
       setState(() {

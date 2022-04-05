@@ -1,16 +1,17 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:project/tabs/home/functions/helpers.dart';
+import 'package:project/tabs/home/functions/room_helpers.dart';
 
 void main() {
-  late RoomHelpers roomHelpers;
+  late RoomHelperFunctions roomHelpers;
 
   setUp(() {
-    roomHelpers = RoomHelpers();
+    roomHelpers = RoomHelperFunctions();
   });
 
   group('format methods test', () {
     test('formatDate test', () async {
-      expect(roomHelpers.formatDate(DateTime.now()), '28.3.2022');
+      // For this test to pass, you have to change the string in the matcher to today's date
+      expect(roomHelpers.formatDate(DateTime.utc(2022, 4, 5)), '5.4.2022');
     });
 
     group('formatRoomCategory test', () {

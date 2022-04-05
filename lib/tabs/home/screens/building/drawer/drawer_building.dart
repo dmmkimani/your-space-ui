@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:project/server/server.dart';
 import 'package:project/tabs/home/screens/building/drawer/tiles/room_category.dart';
+import 'package:project/tabs/provider.dart';
 
 class BuildingDrawer extends StatelessWidget {
   final Server _server;
+  final UserData _userData;
   final String _building;
   final String _buildingName;
   final Map<String, dynamic> _categories;
   final Function _updatePage;
 
-  const BuildingDrawer(this._server, this._building, this._buildingName,
-      this._categories, this._updatePage,
+  const BuildingDrawer(this._server, this._userData, this._building,
+      this._buildingName, this._categories, this._updatePage,
       {Key? key})
       : super(key: key);
 
@@ -57,6 +59,7 @@ class BuildingDrawer extends StatelessWidget {
               itemBuilder: (BuildContext context, int position) {
                 return RoomCategory(
                     _server,
+                    _userData,
                     context,
                     _building,
                     categoriesList[position],

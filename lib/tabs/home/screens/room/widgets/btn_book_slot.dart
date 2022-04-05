@@ -6,15 +6,16 @@ import 'package:project/tabs/home/screens/room/widgets/dialog_book.dart';
 
 class BookSlotBtn extends StatefulWidget {
   final Server _server;
-  final Function _reload;
+  final UserData _userData;
+  final Function _refresh;
   final String _building;
   final String _room;
   final DateTime _date;
   final List<String> _timeSlots;
   final String _selectedTimeSlot;
 
-  const BookSlotBtn(this._server, this._reload, this._building, this._room,
-      this._date, this._timeSlots, this._selectedTimeSlot,
+  const BookSlotBtn(this._server, this._userData, this._refresh, this._building,
+      this._room, this._date, this._timeSlots, this._selectedTimeSlot,
       {Key? key})
       : super(key: key);
 
@@ -27,16 +28,18 @@ class _BookSlotBtnState extends State<BookSlotBtn> {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        if (GlobalData.currentUser == null) {
+        if (widget._userData.user == null) {
           Navigator.of(context).pushReplacement(MaterialPageRoute(
-              builder: (context) => AccountSplashScreen(widget._server)));
+              builder: (context) =>
+                  AccountSplashScreen(widget._server, widget._userData)));
           return;
         }
         showDialog(
             context: context,
             builder: (context) => BookDialog(
                 widget._server,
-                widget._reload,
+                widget._userData,
+                widget._refresh,
                 widget._building,
                 widget._room,
                 widget._date,
