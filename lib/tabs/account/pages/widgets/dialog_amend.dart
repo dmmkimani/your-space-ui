@@ -155,7 +155,6 @@ class _AmendDialogState extends State<AmendDialog> {
       'duration': duration
     });
     widget._removeFromList(widget._position, widget._details, true);
-    widget._refresh('');
   }
 
   int get duration {

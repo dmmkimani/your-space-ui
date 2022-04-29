@@ -14,30 +14,36 @@ class BuildingHome extends StatefulWidget {
 class _BuildingHomeState extends State<BuildingHome> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Image.asset(
-            'images/buildings/' + widget._building + '.jpg',
-            width: double.infinity,
-            height: 300.0,
-            fit: BoxFit.cover,
+    return Stack(
+      children: [
+        SingleChildScrollView(
+          padding: const EdgeInsets.only(top: 10.0, left: 20.0, right: 20.0),
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Image.asset(
+                'images/buildings/' + widget._building + '.jpg',
+                width: double.infinity,
+                height: 300.0,
+                fit: BoxFit.cover,
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                    vertical: 15.0, horizontal: 10.0),
+                child: Text(
+                  widget._details['description'],
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.normal,
+                      fontSize: 16,
+                      color: Colors.black),
+                ),
+              ),
+            ],
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),
-            child: Text(
-              widget._details['description'],
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                  fontWeight: FontWeight.normal,
-                  fontSize: 16,
-                  color: Colors.black),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

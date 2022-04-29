@@ -34,17 +34,17 @@ void main() {
       final RoomBookingsState state = tester.state(find.byType(RoomBookings));
 
       // Test the same day, but a later time
-      expect(state.isAfterNow('23:00'), true);
+      expect(state.hasTimeSlotElapsed('23:00'), true);
 
       // Test the same day, but an earlier time
-      expect(state.isAfterNow('00:00'), false);
+      expect(state.hasTimeSlotElapsed('00:00'), false);
 
       await tester.pumpWidget(MaterialApp(
           home: RoomBookings(mockServer, mockUserData, mockReload, building,
               room, tomorrow, mockBookings())));
 
       // Test tomorrow
-      expect(state.isAfterNow('00:00'), true);
+      expect(state.hasTimeSlotElapsed('00:00'), true);
     });
 
     testWidgets('isAvailable test', (WidgetTester tester) async {

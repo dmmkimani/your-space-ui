@@ -39,6 +39,8 @@ dependencies:
   image_picker: ^0.8.4+4
   date_picker_timeline: ^1.2.3
   intl: ^0.17.0
+  shared_preferences: ^2.0.13
+  popup_menu: ^1.0.5
 
 dev_dependencies:
   flutter_test:

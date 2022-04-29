@@ -32,7 +32,8 @@ class _AccountAppBarState extends State<AccountAppBar> {
               backgroundColor: Colors.white,
               title: const Text(
                 'Account',
-                style: TextStyle(color: Colors.black),
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
               ),
               actions: <Widget>[
                 InkWell(

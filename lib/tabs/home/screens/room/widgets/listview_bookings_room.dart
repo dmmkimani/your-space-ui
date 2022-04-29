@@ -53,7 +53,7 @@ class RoomBookingsState extends State<RoomBookings> {
                       ),
                       SizedBox(
                           width: 125.0,
-                          child: isAfterNow(timeSlots[position]) &&
+                          child: hasTimeSlotElapsed(timeSlots[position]) &&
                                   isAvailable(timeSlots[position])
                               ? isBooked(timeSlots[position])
                                   ? const ReservedBtn()
@@ -81,14 +81,17 @@ class RoomBookingsState extends State<RoomBookings> {
     );
   }
 
-  bool isAfterNow(String timeSlot) {
+  bool hasTimeSlotElapsed(String timeSlot) {
     String date = widget._date.day.toString() +
         '.' +
         widget._date.month.toString() +
         '.' +
         widget._date.year.toString();
 
-    return DateTime.now().isBefore(HelperFunctions().parseDate(date, timeSlot));
+    int endTime = HelperFunctions().timeSlotToInt(timeSlot) + 1;
+    String timeSlotEnd = HelperFunctions().intToTimeSlot(endTime);
+
+    return DateTime.now().isBefore(HelperFunctions().parseDate(date, timeSlotEnd));
   }
 
   bool isAvailable(String timeSlot) {

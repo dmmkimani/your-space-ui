@@ -45,7 +45,6 @@ class _LoginPageState extends State<LoginPage>
                   const LogoWidget(),
                   _emailInput,
                   _passwordInput,
-                  ForgotPasswordWidget(widget._server, widget._userData),
                   LoginBtn(widget._server, widget._userData),
                   CreateAccountWidget(widget._server, widget._userData),
                 ],

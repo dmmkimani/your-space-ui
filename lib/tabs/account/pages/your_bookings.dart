@@ -44,12 +44,14 @@ class _YourBookingsState extends State<YourBookings>
     }
   }
 
-  void refresh(int bookings, String message, {bool? isCancelling}) {
+  void refresh(String message, {int? bookings}) {
     Future.delayed(const Duration(milliseconds: 500), () {
-      if (bookings == 0 || isCancelling!) {
+      if (bookings! > 0) {
+        HelperFunctions().showSnackBar(context, message);
+      } else {
         widget._refresh();
+        HelperFunctions().showSnackBar(context, message);
       }
-      HelperFunctions().showSnackBar(context, message);
     });
   }
 
