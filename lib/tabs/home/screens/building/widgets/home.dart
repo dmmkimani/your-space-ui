@@ -12,12 +12,37 @@ class BuildingHome extends StatefulWidget {
 }
 
 class _BuildingHomeState extends State<BuildingHome> {
+  bool _tipVisible = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      Future.delayed(const Duration(milliseconds: 3000), () {
+        setState(() {
+          _tipVisible = true;
+        });
+      });
+      Future.delayed(const Duration(milliseconds: 10000), () {
+        setState(() {
+          _tipVisible = false;
+        });
+      });
+    });
+  }
+
+  @override
+  void setState(VoidCallback fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         SingleChildScrollView(
-          padding: const EdgeInsets.only(top: 10.0, left: 20.0, right: 20.0),
           physics: const BouncingScrollPhysics(),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -42,6 +67,49 @@ class _BuildingHomeState extends State<BuildingHome> {
               ),
             ],
           ),
+        ),
+        Container(
+          padding: const EdgeInsets.only(bottom: 10.0),
+          child: Align(
+              alignment: FractionalOffset.bottomCenter,
+              child: AnimatedOpacity(
+                opacity: _tipVisible ? 1.0 : 0.0,
+                duration: const Duration(milliseconds: 1000),
+                child: Container(
+                  width: 250.0,
+                  height: 50.0,
+                  decoration: BoxDecoration(
+                      color: Colors.deepPurple,
+                      border: Border.all(color: Colors.transparent),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(10.0))),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: const [
+                      Text(
+                        'Tap  ',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                      Icon(Icons.menu, color: Colors.white),
+                      Text(
+                        ' to view the list of rooms',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )),
         ),
       ],
     );

@@ -46,12 +46,18 @@ class _YourBookingsState extends State<YourBookings>
 
   void refresh(String message, {int? bookings}) {
     Future.delayed(const Duration(milliseconds: 500), () {
-      if (bookings! > 0) {
-        HelperFunctions().showSnackBar(context, message);
-      } else {
-        widget._refresh();
-        HelperFunctions().showSnackBar(context, message);
+      if (bookings != null) {
+        if (bookings > 0) {
+          HelperFunctions().showSnackBar(context, message);
+          return;
+        } else {
+          widget._refresh();
+          HelperFunctions().showSnackBar(context, message);
+          return;
+        }
       }
+      widget._refresh();
+      HelperFunctions().showSnackBar(context, message);
     });
   }
 

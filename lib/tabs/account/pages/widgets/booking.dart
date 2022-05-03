@@ -35,6 +35,7 @@ class _BookingState extends State<Booking> {
     String startTime = widget._details['startTime'];
     String endTime = widget._details['endTime'];
     String description = widget._details['description'];
+    String people = widget._details['people'];
 
     return SizeTransition(
       sizeFactor: widget._animation,
@@ -72,6 +73,17 @@ class _BookingState extends State<Booking> {
                           fontSize: 14.0,
                           fontWeight: FontWeight.normal,
                         )),
+                    int.parse(people) > 1
+                        ? Text('For $people people',
+                            style: const TextStyle(
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.normal,
+                                fontStyle: FontStyle.normal))
+                        : Text('For $people person',
+                            style: const TextStyle(
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.normal,
+                                fontStyle: FontStyle.normal)),
                     Text('"' + description + '"',
                         style: const TextStyle(
                             fontSize: 14.0,

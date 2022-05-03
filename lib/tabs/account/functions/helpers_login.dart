@@ -60,7 +60,7 @@ class LoginHelpers {
   void signIn(String token, bool login) async {
     _userData.auth.authStateChanges().listen((User? user) {
       _userData.auth.signInWithCustomToken(token);
-      _userData.user = user!;
+      _userData.user = user;
       Navigator.of(_context).pushReplacement(MaterialPageRoute(
           builder: (context) => AccountPage(_server, _userData)));
     });

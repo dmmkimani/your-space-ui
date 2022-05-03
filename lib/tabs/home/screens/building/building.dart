@@ -33,7 +33,10 @@ class _BuildingState extends State<Building> {
                 color: Colors.white,
                 child: const Center(child: CircularProgressIndicator()));
           } else {
-            _body ??= BuildingHome(widget._building, snapshot.requireData);
+            _body ??= Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: BuildingHome(widget._building, snapshot.requireData),
+            );
             return Scaffold(
               key: _key,
               drawer: BuildingDrawer(
@@ -47,10 +50,11 @@ class _BuildingState extends State<Building> {
               body: Stack(
                 children: [
                   Container(
-                    padding: const EdgeInsets.only(top: 80),
+                    padding: const EdgeInsets.only(top: 90),
                     child: _body,
                   ),
-                  BuildingAppBar(context, widget._userData, _key, snapshot.requireData['name'])
+                  BuildingAppBar(context, _key,
+                      snapshot.requireData['name'])
                 ],
               ),
               bottomNavigationBar:
