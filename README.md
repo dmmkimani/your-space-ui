@@ -1,4 +1,4 @@
-# Meeting Room Booking Application - Presentation Tier
+# YourSpace (Meeting Room Booking Application) - Presentation Tier
 
 This is the presentation tier for my meeting room booking appplication.
 
