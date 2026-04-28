@@ -4,7 +4,10 @@ A mobile application that enables users to discover, book, and manage university
 
 Built with Flutter to provide cross-platform mobile access for Android and iOS users, ensuring consistent, mobile-first availability for students and staff who rely on phones for real-time room booking.
 
-**YourSpace Backend:** https://github.com/dmmkimani/your-space-server/
+## Related Resources
+
+- ⚙️ **YourSpace Backend:** [github.com/dmmkimani/your-space-server](https://github.com/dmmkimani/your-space-server)
+- 🌐 **Product-Level Walkthrough:** [dmmkimani.com/your-space](https://dmmkimani.com/projects/your-space)
 
 ## Problem Context
 
@@ -21,6 +24,19 @@ The system required a unified, actionable booking layer.
 ## System Overview
 
 The mobile client serves as a thin interaction layer, rendering room availability in real time and translating user actions into API requests, while deferring all booking logic and state authority to the backend.
+
+<p align="center">
+  <img src="images/screenshots/make_1.png" height="350" />
+  <img src="images/screenshots/make_2.png" height="350" />
+  <img src="images/screenshots/make_3.png" height="350" />
+  <br>
+  <br>
+  <img src="images/screenshots/bookings.png" height="350" />
+  <br>
+  <br>
+  <strong>Making and Managing Bookings</strong><br>
+  <em>(click to view full size)</em>
+</p>
 
 ## Core Design Decisions
 
@@ -63,5 +79,5 @@ This simplifies UI rendering into a deterministic state-to-view mapping, reducin
 ## Technology Stack
 
 **Client:** Flutter
-
+<br>
 **Platform:** Android, iOS
