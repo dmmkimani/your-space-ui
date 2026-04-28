@@ -40,7 +40,7 @@ The mobile client serves as a thin interaction layer, rendering room availabilit
 
 ## Core Design Decisions
 
-#### 1. Runtime UI Generation
+### 1. Runtime UI Generation
 
 Buildings and rooms are rendered dynamically based on backend data rather than static screens.
 
@@ -50,7 +50,7 @@ This enables:
 
 **Trade-off:** Shifts structural validation to runtime, reducing compile-time safety and increasing susceptibility to UI failures when backend data is inconsistent or malformed.
 
-#### 2. Centralised Service Layer
+### 2. Centralised Service Layer
 
 A shared service abstraction handles:
 - request construction
@@ -60,14 +60,14 @@ A shared service abstraction handles:
 
 This prevents API logic from leaking into UI components.
 
-#### 3. Slot-Based Availability Model
+### 3. Room Availability State Model
 
 Room availability is represented as three states:
 - available
 - reserved (booked by a user)
 - unavailable (not open for booking)
 
-This simplifies UI rendering into a deterministic state-to-view mapping, reducing ambiguity in booking status interpretation.
+This enables deterministic state-to-view mapping, eliminating ambiguity in booking status at the UI layer.
 
 ## Impact on Booking Workflow
 
